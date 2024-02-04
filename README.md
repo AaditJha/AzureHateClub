@@ -1,5 +1,4 @@
-# Welcome to the Project
+# Assignment 1
+## Distributed Communication
 
-Please head over to the appropriate branches for each assignment. You will find detailed instructions in the README.md file of each branch.
-
-Happy coding!
+### Youtube-like Application using RabbitMQ
