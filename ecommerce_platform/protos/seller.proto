@@ -3,11 +3,27 @@ syntax = "proto3";
 package ecommerce;
 
 service Seller {
-  rpc RegisterSeller (SellerRequest) returns (RegisterResponse);
+  rpc RegisterSeller(SellerRequest) returns (RegisterResponse);
+  rpc AddProduct(SellerItemRequest) returns (RegisterResponse);
 }
 
 message SellerRequest {
   string seller_id = 1;
+}
+
+enum Category {
+  ELECTRONICS = 0;
+  FASHION = 1;
+  OTHERS = 2;
+}
+
+message SellerItemRequest {
+  string product_name = 1;
+  Category category = 2;
+  int32 qty = 3;
+  string desc = 4;
+  double price = 5;
+  string seller_id = 6;
 }
 
 message RegisterResponse {

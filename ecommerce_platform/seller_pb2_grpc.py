@@ -19,6 +19,11 @@ class SellerStub(object):
                 request_serializer=seller__pb2.SellerRequest.SerializeToString,
                 response_deserializer=seller__pb2.RegisterResponse.FromString,
                 )
+        self.AddProduct = channel.unary_unary(
+                '/ecommerce.Seller/AddProduct',
+                request_serializer=seller__pb2.SellerItemRequest.SerializeToString,
+                response_deserializer=seller__pb2.RegisterResponse.FromString,
+                )
 
 
 class SellerServicer(object):
@@ -30,12 +35,23 @@ class SellerServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def AddProduct(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_SellerServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'RegisterSeller': grpc.unary_unary_rpc_method_handler(
                     servicer.RegisterSeller,
                     request_deserializer=seller__pb2.SellerRequest.FromString,
+                    response_serializer=seller__pb2.RegisterResponse.SerializeToString,
+            ),
+            'AddProduct': grpc.unary_unary_rpc_method_handler(
+                    servicer.AddProduct,
+                    request_deserializer=seller__pb2.SellerItemRequest.FromString,
                     response_serializer=seller__pb2.RegisterResponse.SerializeToString,
             ),
     }
@@ -61,6 +77,23 @@ class Seller(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ecommerce.Seller/RegisterSeller',
             seller__pb2.SellerRequest.SerializeToString,
+            seller__pb2.RegisterResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def AddProduct(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ecommerce.Seller/AddProduct',
+            seller__pb2.SellerItemRequest.SerializeToString,
             seller__pb2.RegisterResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
