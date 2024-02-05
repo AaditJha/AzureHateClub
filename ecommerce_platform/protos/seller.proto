@@ -32,7 +32,6 @@ message UpdateProductRequest {
   double price = 2;
   int32 qty = 3;
   string seller_id = 4;
-  string seller_addr = 5;
 }
 
 message RegisterResponse {
