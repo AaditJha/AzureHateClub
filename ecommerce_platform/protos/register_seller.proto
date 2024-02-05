@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package ecommerce;
+
+service RegisterSeller {
+  rpc Register (SellerRequest) returns (RegisterResponse);
+}
+
+message SellerRequest {
+  string seller_id = 1;
+}
+
+message RegisterResponse {
+  string status = 1;
+}
