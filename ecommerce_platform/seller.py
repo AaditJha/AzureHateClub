@@ -27,7 +27,18 @@ def add_product(seller: Seller, product_name: str, category: seller_pb2.Category
     ))
     print(response.status)
 
+def update_product(seller: Seller, product_id: str, qty : int, price: float):
+    response = seller.stub.UpdateProduct(seller_pb2.SellerUpdateProductRequest(
+        seller_id=str(seller.seller_id),
+        product_id=product_id,
+        price=price,
+        qty=qty
+    ))
+    print(response.status)
+
 if __name__ == "__main__":
     seller = Seller()
     register_seller(seller)
     add_product(seller, "Kurti", "FASHION", 10, "V Neck deep cut, purple/blue/black 100% cotton", 1500.0)
+    product_id = input("Enter the product id to update: ")
+    update_product(seller, product_id, 20, 2000.0)

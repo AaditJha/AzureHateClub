@@ -26,7 +26,7 @@ class SellerStub(object):
                 )
         self.UpdateProduct = channel.unary_unary(
                 '/ecommerce.Seller/UpdateProduct',
-                request_serializer=seller__pb2.UpdateProductRequest.SerializeToString,
+                request_serializer=seller__pb2.SellerUpdateProductRequest.SerializeToString,
                 response_deserializer=seller__pb2.RegisterResponse.FromString,
                 )
 
@@ -67,7 +67,7 @@ def add_SellerServicer_to_server(servicer, server):
             ),
             'UpdateProduct': grpc.unary_unary_rpc_method_handler(
                     servicer.UpdateProduct,
-                    request_deserializer=seller__pb2.UpdateProductRequest.FromString,
+                    request_deserializer=seller__pb2.SellerUpdateProductRequest.FromString,
                     response_serializer=seller__pb2.RegisterResponse.SerializeToString,
             ),
     }
@@ -126,7 +126,7 @@ class Seller(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ecommerce.Seller/UpdateProduct',
-            seller__pb2.UpdateProductRequest.SerializeToString,
+            seller__pb2.SellerUpdateProductRequest.SerializeToString,
             seller__pb2.RegisterResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

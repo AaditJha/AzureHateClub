@@ -5,7 +5,7 @@ package ecommerce;
 service Seller {
   rpc RegisterSeller(SellerRequest) returns (RegisterResponse);
   rpc AddProduct(SellerProductRequest) returns (RegisterResponse);
-  rpc UpdateProduct(UpdateProductRequest) returns (RegisterResponse);
+  rpc UpdateProduct(SellerUpdateProductRequest) returns (RegisterResponse);
 }
 
 message SellerRequest {
@@ -27,7 +27,7 @@ message SellerProductRequest {
   string seller_id = 6;
 }
 
-message UpdateProductRequest {
+message SellerUpdateProductRequest {
   string product_id = 1;
   double price = 2;
   int32 qty = 3;

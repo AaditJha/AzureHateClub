@@ -80,9 +80,18 @@ class SellerServicer(seller_pb2_grpc.SellerServicer):
                 status="FAIL: Product not found.",
             )
         product = items[request.product_id]
+        if product['seller_id'] != seller_id:
+            return seller_pb2.RegisterResponse(
+                status="FAIL: Not authorized to update product.",
+            )
         product['price_per_unit'] = request.price
         product['quantity'] = request.qty
         items[request.product_id] = product
+        self.server_state.save_to_state('items', items)
+        print(f"Update product {request.product_id} request from {client_ip_port}")
+        return seller_pb2.RegisterResponse(
+            status="SUCCESS",
+        )
 
 def register_all_services(server):
     seller_pb2_grpc.add_SellerServicer_to_server(SellerServicer(), server)
