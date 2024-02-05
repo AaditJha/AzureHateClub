@@ -2,8 +2,8 @@ syntax = "proto3";
 
 package ecommerce;
 
-service RegisterSeller {
-  rpc Register (SellerRequest) returns (RegisterResponse);
+service Seller {
+  rpc RegisterSeller (SellerRequest) returns (RegisterResponse);
 }
 
 message SellerRequest {
