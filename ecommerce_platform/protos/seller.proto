@@ -6,6 +6,7 @@ service Seller {
   rpc RegisterSeller(SellerRequest) returns (RegisterResponse);
   rpc AddProduct(SellerProductRequest) returns (RegisterResponse);
   rpc UpdateProduct(SellerUpdateProductRequest) returns (RegisterResponse);
+  rpc DeleteProduct(SellerDeleteProductRequest) returns (RegisterResponse);
 }
 
 message SellerRequest {
@@ -32,6 +33,11 @@ message SellerUpdateProductRequest {
   double price = 2;
   int32 qty = 3;
   string seller_id = 4;
+}
+
+message SellerDeleteProductRequest {
+  string product_id = 1;
+  string seller_id = 2;
 }
 
 message RegisterResponse {

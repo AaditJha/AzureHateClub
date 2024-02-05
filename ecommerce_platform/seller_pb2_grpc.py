@@ -29,6 +29,11 @@ class SellerStub(object):
                 request_serializer=seller__pb2.SellerUpdateProductRequest.SerializeToString,
                 response_deserializer=seller__pb2.RegisterResponse.FromString,
                 )
+        self.DeleteProduct = channel.unary_unary(
+                '/ecommerce.Seller/DeleteProduct',
+                request_serializer=seller__pb2.SellerDeleteProductRequest.SerializeToString,
+                response_deserializer=seller__pb2.RegisterResponse.FromString,
+                )
 
 
 class SellerServicer(object):
@@ -52,6 +57,12 @@ class SellerServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def DeleteProduct(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_SellerServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -68,6 +79,11 @@ def add_SellerServicer_to_server(servicer, server):
             'UpdateProduct': grpc.unary_unary_rpc_method_handler(
                     servicer.UpdateProduct,
                     request_deserializer=seller__pb2.SellerUpdateProductRequest.FromString,
+                    response_serializer=seller__pb2.RegisterResponse.SerializeToString,
+            ),
+            'DeleteProduct': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteProduct,
+                    request_deserializer=seller__pb2.SellerDeleteProductRequest.FromString,
                     response_serializer=seller__pb2.RegisterResponse.SerializeToString,
             ),
     }
@@ -127,6 +143,23 @@ class Seller(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ecommerce.Seller/UpdateProduct',
             seller__pb2.SellerUpdateProductRequest.SerializeToString,
+            seller__pb2.RegisterResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def DeleteProduct(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ecommerce.Seller/DeleteProduct',
+            seller__pb2.SellerDeleteProductRequest.SerializeToString,
             seller__pb2.RegisterResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

@@ -92,6 +92,33 @@ class SellerServicer(seller_pb2_grpc.SellerServicer):
         return seller_pb2.RegisterResponse(
             status="SUCCESS",
         )
+    
+    def DeleteProduct(self, request, context):
+        client_ip_port = context.peer()
+        seller_id = uuid.UUID(request.seller_id)
+        if not self.verify_seller(seller_id, client_ip_port):
+            return seller_pb2.RegisterResponse(
+                status="FAIL: Credential Mismatch.",
+            )        
+        items = self.server_state.state.get('items', [])
+        if request.product_id not in items:
+            return seller_pb2.RegisterResponse(
+                status="FAIL: Product not found.",
+            )
+        product = items[request.product_id]
+        if product['seller_id'] != seller_id:
+            return seller_pb2.RegisterResponse(
+                status="FAIL: Not authorized to delete product.",
+            )
+        del items[request.product_id]
+        ratings = self.server_state.state.get('ratings', None)
+        if ratings is not None:
+            del ratings[request.product_id]
+        self.server_state.save_to_state('items', items)
+        print(f"Delete product {request.product_id} request from {client_ip_port}")
+        return seller_pb2.RegisterResponse(
+            status="SUCCESS",
+        )
 
 def register_all_services(server):
     seller_pb2_grpc.add_SellerServicer_to_server(SellerServicer(), server)

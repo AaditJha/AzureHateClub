@@ -1,9 +1,15 @@
 {
     "seller_ids": [
-        "b194b5e0-8830-4fc7-8afa-2e76bff2df22"
+        "b194b5e0-8830-4fc7-8afa-2e76bff2df22",
+        "00917691-375c-4562-8d92-eee3c53336a0",
+        "d9a327d0-d341-442d-bb41-be6cf6340e0d",
+        "3a2b6db3-95ba-41f8-a051-2815a2149cf4"
     ],
     "seller_addr": {
-        "b194b5e0-8830-4fc7-8afa-2e76bff2df22": "ipv6:%5B::1%5D:41082"
+        "b194b5e0-8830-4fc7-8afa-2e76bff2df22": "ipv6:%5B::1%5D:41082",
+        "00917691-375c-4562-8d92-eee3c53336a0": "ipv6:%5B::1%5D:59330",
+        "d9a327d0-d341-442d-bb41-be6cf6340e0d": "ipv6:%5B::1%5D:54888",
+        "3a2b6db3-95ba-41f8-a051-2815a2149cf4": "ipv6:%5B::1%5D:48814"
     },
     "items": {
         "5b4d4dd6-d5ef-4e23-a559-1ba53193448f": {
@@ -13,9 +19,27 @@
             "description": "V Neck deep cut, purple/blue/black 100% cotton",
             "price_per_unit": 2000.0,
             "seller_id": "b194b5e0-8830-4fc7-8afa-2e76bff2df22"
+        },
+        "c1865452-a93f-4d25-9895-4df28cb3245a": {
+            "product_name": "Kurti",
+            "category": 1,
+            "quantity": 10,
+            "description": "V Neck deep cut, purple/blue/black 100% cotton",
+            "price_per_unit": 1500.0,
+            "seller_id": "00917691-375c-4562-8d92-eee3c53336a0"
+        },
+        "d6e4421e-c8d0-41bf-b5d1-f12463cddb9c": {
+            "product_name": "Kurti",
+            "category": 1,
+            "quantity": 10,
+            "description": "V Neck deep cut, purple/blue/black 100% cotton",
+            "price_per_unit": 1500.0,
+            "seller_id": "d9a327d0-d341-442d-bb41-be6cf6340e0d"
         }
     },
     "ratings": {
-        "5b4d4dd6-d5ef-4e23-a559-1ba53193448f": {}
+        "5b4d4dd6-d5ef-4e23-a559-1ba53193448f": {},
+        "c1865452-a93f-4d25-9895-4df28cb3245a": {},
+        "d6e4421e-c8d0-41bf-b5d1-f12463cddb9c": {}
     }
 }

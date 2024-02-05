@@ -36,9 +36,18 @@ def update_product(seller: Seller, product_id: str, qty : int, price: float):
     ))
     print(response.status)
 
+def delete_product(seller: Seller, product_id: str):
+    response = seller.stub.DeleteProduct(seller_pb2.SellerDeleteProductRequest(
+        seller_id=str(seller.seller_id),
+        product_id=product_id
+    ))
+    print(response.status)
+
 if __name__ == "__main__":
     seller = Seller()
     register_seller(seller)
     add_product(seller, "Kurti", "FASHION", 10, "V Neck deep cut, purple/blue/black 100% cotton", 1500.0)
-    product_id = input("Enter the product id to update: ")
-    update_product(seller, product_id, 20, 2000.0)
+    product_id = input("Enter the product id to delete: ")
+    # update_product(seller, product_id, 20, 2000.0)
+    delete_product(seller, product_id)
+    
