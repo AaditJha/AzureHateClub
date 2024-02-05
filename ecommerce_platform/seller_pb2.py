@@ -14,21 +14,23 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0cseller.proto\x12\tecommerce\"\"\n\rSellerRequest\x12\x11\n\tseller_id\x18\x01 \x01(\t\"\x8d\x01\n\x11SellerItemRequest\x12\x14\n\x0cproduct_name\x18\x01 \x01(\t\x12%\n\x08\x63\x61tegory\x18\x02 \x01(\x0e\x32\x13.ecommerce.Category\x12\x0b\n\x03qty\x18\x03 \x01(\x05\x12\x0c\n\x04\x64\x65sc\x18\x04 \x01(\t\x12\r\n\x05price\x18\x05 \x01(\x01\x12\x11\n\tseller_id\x18\x06 \x01(\t\"\"\n\x10RegisterResponse\x12\x0e\n\x06status\x18\x01 \x01(\t*4\n\x08\x43\x61tegory\x12\x0f\n\x0b\x45LECTRONICS\x10\x00\x12\x0b\n\x07\x46\x41SHION\x10\x01\x12\n\n\x06OTHERS\x10\x02\x32\x9a\x01\n\x06Seller\x12G\n\x0eRegisterSeller\x12\x18.ecommerce.SellerRequest\x1a\x1b.ecommerce.RegisterResponse\x12G\n\nAddProduct\x12\x1c.ecommerce.SellerItemRequest\x1a\x1b.ecommerce.RegisterResponseb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0cseller.proto\x12\tecommerce\"\"\n\rSellerRequest\x12\x11\n\tseller_id\x18\x01 \x01(\t\"\x90\x01\n\x14SellerProductRequest\x12\x14\n\x0cproduct_name\x18\x01 \x01(\t\x12%\n\x08\x63\x61tegory\x18\x02 \x01(\x0e\x32\x13.ecommerce.Category\x12\x0b\n\x03qty\x18\x03 \x01(\x05\x12\x0c\n\x04\x64\x65sc\x18\x04 \x01(\t\x12\r\n\x05price\x18\x05 \x01(\x01\x12\x11\n\tseller_id\x18\x06 \x01(\t\"n\n\x14UpdateProductRequest\x12\x12\n\nproduct_id\x18\x01 \x01(\t\x12\r\n\x05price\x18\x02 \x01(\x01\x12\x0b\n\x03qty\x18\x03 \x01(\x05\x12\x11\n\tseller_id\x18\x04 \x01(\t\x12\x13\n\x0bseller_addr\x18\x05 \x01(\t\"\"\n\x10RegisterResponse\x12\x0e\n\x06status\x18\x01 \x01(\t*4\n\x08\x43\x61tegory\x12\x0f\n\x0b\x45LECTRONICS\x10\x00\x12\x0b\n\x07\x46\x41SHION\x10\x01\x12\n\n\x06OTHERS\x10\x02\x32\xec\x01\n\x06Seller\x12G\n\x0eRegisterSeller\x12\x18.ecommerce.SellerRequest\x1a\x1b.ecommerce.RegisterResponse\x12J\n\nAddProduct\x12\x1f.ecommerce.SellerProductRequest\x1a\x1b.ecommerce.RegisterResponse\x12M\n\rUpdateProduct\x12\x1f.ecommerce.UpdateProductRequest\x1a\x1b.ecommerce.RegisterResponseb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'seller_pb2', _globals)
 if _descriptor._USE_C_DESCRIPTORS == False:
   DESCRIPTOR._options = None
-  _globals['_CATEGORY']._serialized_start=243
-  _globals['_CATEGORY']._serialized_end=295
+  _globals['_CATEGORY']._serialized_start=358
+  _globals['_CATEGORY']._serialized_end=410
   _globals['_SELLERREQUEST']._serialized_start=27
   _globals['_SELLERREQUEST']._serialized_end=61
-  _globals['_SELLERITEMREQUEST']._serialized_start=64
-  _globals['_SELLERITEMREQUEST']._serialized_end=205
-  _globals['_REGISTERRESPONSE']._serialized_start=207
-  _globals['_REGISTERRESPONSE']._serialized_end=241
-  _globals['_SELLER']._serialized_start=298
-  _globals['_SELLER']._serialized_end=452
+  _globals['_SELLERPRODUCTREQUEST']._serialized_start=64
+  _globals['_SELLERPRODUCTREQUEST']._serialized_end=208
+  _globals['_UPDATEPRODUCTREQUEST']._serialized_start=210
+  _globals['_UPDATEPRODUCTREQUEST']._serialized_end=320
+  _globals['_REGISTERRESPONSE']._serialized_start=322
+  _globals['_REGISTERRESPONSE']._serialized_end=356
+  _globals['_SELLER']._serialized_start=413
+  _globals['_SELLER']._serialized_end=649
 # @@protoc_insertion_point(module_scope)

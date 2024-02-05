@@ -4,7 +4,8 @@ package ecommerce;
 
 service Seller {
   rpc RegisterSeller(SellerRequest) returns (RegisterResponse);
-  rpc AddProduct(SellerItemRequest) returns (RegisterResponse);
+  rpc AddProduct(SellerProductRequest) returns (RegisterResponse);
+  rpc UpdateProduct(UpdateProductRequest) returns (RegisterResponse);
 }
 
 message SellerRequest {
@@ -17,13 +18,21 @@ enum Category {
   OTHERS = 2;
 }
 
-message SellerItemRequest {
+message SellerProductRequest {
   string product_name = 1;
   Category category = 2;
   int32 qty = 3;
   string desc = 4;
   double price = 5;
   string seller_id = 6;
+}
+
+message UpdateProductRequest {
+  string product_id = 1;
+  double price = 2;
+  int32 qty = 3;
+  string seller_id = 4;
+  string seller_addr = 5;
 }
 
 message RegisterResponse {

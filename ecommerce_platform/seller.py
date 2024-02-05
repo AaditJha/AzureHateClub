@@ -3,18 +3,22 @@ import uuid
 import seller_pb2_grpc, seller_pb2
 import enum
 
-def register_seller(seller_id: uuid.UUID):
+class Seller:
+    def __init__(self) -> None:
+        self.channel = grpc.insecure_channel("localhost:42483")
+        self.stub = seller_pb2_grpc.SellerStub(self.channel)
+        self.seller_id = uuid.uuid4()
+
+def register_seller(seller: Seller):
     channel = grpc.insecure_channel("localhost:42483")
     stub = seller_pb2_grpc.SellerStub(channel)
-    seller_id = str(seller_id)
-    response = stub.RegisterSeller(seller_pb2.SellerRequest(seller_id=seller_id))
+    seller_id = str(seller.seller_id)
+    response = seller.stub.RegisterSeller(seller_pb2.SellerRequest(seller_id=seller_id))
     print(response.status)
 
-def add_product(seller_id: uuid.UUID, product_name: str, category: seller_pb2.Category, qty: int, desc: str, price: float):
-    channel = grpc.insecure_channel("localhost:42483")
-    stub = seller_pb2_grpc.SellerStub(channel)
-    response = stub.AddProduct(seller_pb2.SellerItemRequest(
-        seller_id=str(seller_id),
+def add_product(seller: Seller, product_name: str, category: seller_pb2.Category, qty: int, desc: str, price: float):
+    response = seller.stub.AddProduct(seller_pb2.SellerProductRequest(
+        seller_id=str(seller.seller_id),
         product_name=product_name,
         category=category,
         qty=qty,
@@ -24,6 +28,6 @@ def add_product(seller_id: uuid.UUID, product_name: str, category: seller_pb2.Ca
     print(response.status)
 
 if __name__ == "__main__":
-    seller_id = uuid.uuid4()
-    register_seller(seller_id)
-    add_product(seller_id, "Laptop", "ELECTRONICS", 10, "Dell XPS 15", 1500.0)
+    seller = Seller()
+    register_seller(seller)
+    add_product(seller, "Kurti", "FASHION", 10, "V Neck deep cut, purple/blue/black 100% cotton", 1500.0)

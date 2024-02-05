@@ -33,7 +33,13 @@ class SellerServicer(seller_pb2_grpc.SellerServicer):
         seller_ids = self.server_state.state.get('seller_ids', [])
         if seller_id not in seller_ids:
             return seller_pb2.RegisterResponse(
-                status="FAIL: Seller not registered.",
+                status="FAIL: Credential [Seller ID] Mismatch.",
+            )
+        seller_addr = self.server_state.state.get('seller_addr', {})
+        seller_addr = seller_addr.get(request.seller_id, None)
+        if seller_addr is None or seller_addr != client_ip_port:
+            return seller_pb2.RegisterResponse(
+                status="FAIL: Credential [Seller IP] Mismatch.",
             )
         product_id = uuid.uuid4()
         product = {
