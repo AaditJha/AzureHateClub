@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package ecommerce;
+
+service Buyer {
+    rpc RateProduct(RateProductRequest) returns (RateProductResponse);
+}
+
+message RateProductRequest {
+    string product_id = 1;
+    int32 rating = 2;
+}
+/*
+message SearchProductRequest {
+    string seller_id = 1;
+}
+
+message ProductDetails {
+  string product_id = 1;
+  string desc = 2;
+  int32 qty = 3;
+  double rating = 4;
+  string product_name = 5;
+  Category category = 6;
+  double price = 7;
+  string seller_addr = 8;
+}
+
+message ProductResponse {
+  repeated ProductDetails products = 2;
+}
+*/
+message RateProductResponse {
+    string status = 1;
+}
