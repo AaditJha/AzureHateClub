@@ -1,45 +1,83 @@
 {
     "seller_ids": [
-        "b194b5e0-8830-4fc7-8afa-2e76bff2df22",
-        "00917691-375c-4562-8d92-eee3c53336a0",
-        "d9a327d0-d341-442d-bb41-be6cf6340e0d",
-        "3a2b6db3-95ba-41f8-a051-2815a2149cf4"
+        "262639bc-b424-4506-a7a2-a8630c58c88e",
+        "eb6b4063-eaec-4fee-8836-635e37f5fe39",
+        "997fd764-3b7f-48c7-a011-c5b16127a13f",
+        "e1bedc44-fccf-427c-8c65-2e8882e6b896",
+        "48647546-cc52-4541-9f5c-efc033225cdb"
     ],
     "seller_addr": {
-        "b194b5e0-8830-4fc7-8afa-2e76bff2df22": "ipv6:%5B::1%5D:41082",
-        "00917691-375c-4562-8d92-eee3c53336a0": "ipv6:%5B::1%5D:59330",
-        "d9a327d0-d341-442d-bb41-be6cf6340e0d": "ipv6:%5B::1%5D:54888",
-        "3a2b6db3-95ba-41f8-a051-2815a2149cf4": "ipv6:%5B::1%5D:48814"
+        "262639bc-b424-4506-a7a2-a8630c58c88e": "ipv6:%5B::1%5D:58310",
+        "eb6b4063-eaec-4fee-8836-635e37f5fe39": "ipv6:%5B::1%5D:43040",
+        "997fd764-3b7f-48c7-a011-c5b16127a13f": "ipv6:%5B::1%5D:49028",
+        "e1bedc44-fccf-427c-8c65-2e8882e6b896": "ipv6:%5B::1%5D:38666",
+        "48647546-cc52-4541-9f5c-efc033225cdb": "ipv6:%5B::1%5D:36040"
     },
     "items": {
-        "5b4d4dd6-d5ef-4e23-a559-1ba53193448f": {
-            "product_name": "Kurti",
-            "category": 1,
-            "quantity": 20,
-            "description": "V Neck deep cut, purple/blue/black 100% cotton",
-            "price_per_unit": 2000.0,
-            "seller_id": "b194b5e0-8830-4fc7-8afa-2e76bff2df22"
-        },
-        "c1865452-a93f-4d25-9895-4df28cb3245a": {
+        "21606be5-68d5-46b7-80b0-463ed2365fdd": {
             "product_name": "Kurti",
             "category": 1,
             "quantity": 10,
             "description": "V Neck deep cut, purple/blue/black 100% cotton",
             "price_per_unit": 1500.0,
-            "seller_id": "00917691-375c-4562-8d92-eee3c53336a0"
+            "seller_id": "262639bc-b424-4506-a7a2-a8630c58c88e"
         },
-        "d6e4421e-c8d0-41bf-b5d1-f12463cddb9c": {
-            "product_name": "Kurti",
+        "a2f30ea4-01e7-406b-ba65-22ebb7c93c49": {
+            "product_name": "iPhone 14",
+            "category": 0,
+            "quantity": 7,
+            "description": "Black iPhone 14 next gen blah blah",
+            "price_per_unit": 150000.0,
+            "seller_id": "262639bc-b424-4506-a7a2-a8630c58c88e"
+        },
+        "bb687531-53f2-4148-a771-ff82ae8b0bc4": {
+            "product_name": "Top",
             "category": 1,
             "quantity": 10,
             "description": "V Neck deep cut, purple/blue/black 100% cotton",
             "price_per_unit": 1500.0,
-            "seller_id": "d9a327d0-d341-442d-bb41-be6cf6340e0d"
+            "seller_id": "eb6b4063-eaec-4fee-8836-635e37f5fe39"
+        },
+        "d19a92ec-5d05-45f5-bc56-39c3977b48e5": {
+            "product_name": "iPhone 15",
+            "category": 0,
+            "quantity": 7,
+            "description": "Black iPhone 14 next gen blah blah",
+            "price_per_unit": 150000.0,
+            "seller_id": "eb6b4063-eaec-4fee-8836-635e37f5fe39"
+        },
+        "4cf511bb-23d2-4bce-95cc-7854608a4481": {
+            "product_name": "Top",
+            "category": 1,
+            "quantity": 10,
+            "description": "V Neck deep cut, purple/blue/black 100% cotton",
+            "price_per_unit": 1500.0,
+            "seller_id": "e1bedc44-fccf-427c-8c65-2e8882e6b896"
+        },
+        "9a752522-54af-42a3-8c23-25c5056a9486": {
+            "product_name": "Top",
+            "category": 1,
+            "quantity": 10,
+            "description": "V Neck deep cut, purple/blue/black 100% cotton",
+            "price_per_unit": 1500.0,
+            "seller_id": "48647546-cc52-4541-9f5c-efc033225cdb"
+        },
+        "545172ed-dfe4-4a63-b333-ce7e0fc4a077": {
+            "product_name": "iPhone 15",
+            "category": 0,
+            "quantity": 7,
+            "description": "Black iPhone 14 next gen blah blah",
+            "price_per_unit": 150000.0,
+            "seller_id": "48647546-cc52-4541-9f5c-efc033225cdb"
         }
     },
     "ratings": {
-        "5b4d4dd6-d5ef-4e23-a559-1ba53193448f": {},
-        "c1865452-a93f-4d25-9895-4df28cb3245a": {},
-        "d6e4421e-c8d0-41bf-b5d1-f12463cddb9c": {}
+        "21606be5-68d5-46b7-80b0-463ed2365fdd": {},
+        "a2f30ea4-01e7-406b-ba65-22ebb7c93c49": {},
+        "bb687531-53f2-4148-a771-ff82ae8b0bc4": {},
+        "d19a92ec-5d05-45f5-bc56-39c3977b48e5": {},
+        "4cf511bb-23d2-4bce-95cc-7854608a4481": {},
+        "9a752522-54af-42a3-8c23-25c5056a9486": {},
+        "545172ed-dfe4-4a63-b333-ce7e0fc4a077": {}
     }
 }

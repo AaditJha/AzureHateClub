@@ -7,6 +7,7 @@ service Seller {
   rpc AddProduct(SellerProductRequest) returns (RegisterResponse);
   rpc UpdateProduct(SellerUpdateProductRequest) returns (RegisterResponse);
   rpc DeleteProduct(SellerDeleteProductRequest) returns (RegisterResponse);
+  rpc DisplaySellerProducts(SellerDisplayProductRequest) returns (ProductResponse);
 }
 
 message SellerRequest {
@@ -14,9 +15,9 @@ message SellerRequest {
 }
 
 enum Category {
-  ELECTRONICS = 0;
-  FASHION = 1;
-  OTHERS = 2;
+  Electronics = 0;
+  Fashion = 1;
+  Others = 2;
 }
 
 message SellerProductRequest {
@@ -38,6 +39,25 @@ message SellerUpdateProductRequest {
 message SellerDeleteProductRequest {
   string product_id = 1;
   string seller_id = 2;
+}
+
+message SellerDisplayProductRequest {
+  string seller_id = 1;
+}
+
+message ProductDetails {
+  string product_id = 1;
+  string desc = 2;
+  int32 qty = 3;
+  double rating = 4;
+  string product_name = 5;
+  Category category = 6;
+  double price = 7;
+}
+
+message ProductResponse {
+  string seller_addr = 1;
+  repeated ProductDetails products = 2;
 }
 
 message RegisterResponse {

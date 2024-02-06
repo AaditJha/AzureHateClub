@@ -119,6 +119,42 @@ class SellerServicer(seller_pb2_grpc.SellerServicer):
         return seller_pb2.RegisterResponse(
             status="SUCCESS",
         )
+    
+    def compute_rating(self, product_id):
+        ratings = self.server_state.state.get('ratings', {})
+        product_ratings = ratings.get(str(product_id), {})
+        rating = 0.0
+        for rating in product_ratings.values():
+            rating += rating['rating']
+        if len(product_ratings) > 0:
+            rating /= len(product_ratings)
+        return rating
+    
+    def DisplaySellerProducts(self, request, context):
+        client_ip_port = context.peer()
+        seller_id = uuid.UUID(request.seller_id)
+        if not self.verify_seller(seller_id, client_ip_port):
+            return seller_pb2.ProductResponse(
+                seller_id=request.seller_id,
+                products=[],
+            )
+        items = self.server_state.state.get('items', [])
+        seller_items = []
+        for item_id, item in items.items():
+            if item['seller_id'] == seller_id:
+                seller_items.append(seller_pb2.ProductDetails(
+                    product_id=item_id,
+                    product_name=item['product_name'],
+                    category=item['category'],
+                    qty=item['quantity'],
+                    desc=item['description'],
+                    price=item['price_per_unit'],
+                    rating=self.compute_rating(item_id),
+                ))
+        return seller_pb2.ProductResponse(
+            seller_addr=client_ip_port,
+            products=seller_items,
+        )
 
 def register_all_services(server):
     seller_pb2_grpc.add_SellerServicer_to_server(SellerServicer(), server)
