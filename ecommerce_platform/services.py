@@ -15,7 +15,7 @@ class SellerServicer(seller_pb2_grpc.SellerServicer):
             print('Seller not registered')
             return False
         seller_addr = self.server_state.state.get('seller_addr', {})
-        seller_addr = seller_addr.get(str(seller_id), None)
+        seller_addr = seller_addr.get(seller_id, None)
         if seller_addr is None or seller_addr != seller_ip_port:
             print(seller_addr, seller_ip_port)
             print('Seller IP mismatch')
@@ -24,7 +24,7 @@ class SellerServicer(seller_pb2_grpc.SellerServicer):
 
     def RegisterSeller(self, request, context):
         client_ip_port = context.peer()
-        seller_id = uuid.UUID(request.seller_id)
+        seller_id = request.seller_id
         seller_ids = self.server_state.state.get('seller_ids', [])
         if seller_id in seller_ids:
             return seller_pb2.RegisterResponse(
@@ -42,12 +42,12 @@ class SellerServicer(seller_pb2_grpc.SellerServicer):
     
     def AddProduct(self, request, context):
         client_ip_port = context.peer()
-        seller_id = uuid.UUID(request.seller_id)
+        seller_id = request.seller_id
         if not self.verify_seller(seller_id, client_ip_port):
             return seller_pb2.RegisterResponse(
                 status="FAIL: Credential Mismatch.",
             )
-        product_id = uuid.uuid4()
+        product_id = str(uuid.uuid4())
         product = {
             'product_name' : request.product_name,
             'category' : request.category,
@@ -57,11 +57,16 @@ class SellerServicer(seller_pb2_grpc.SellerServicer):
             'seller_id' : seller_id,
         }
         items = self.server_state.state.get('items', {})
-        items[str(product_id)] = product
+        items[product_id] = product
         self.server_state.save_to_state('items', items)
         ratings = self.server_state.state.get('ratings', {})
-        ratings[str(product_id)] = {}
+        ratings[product_id] = {}
         self.server_state.save_to_state('ratings', ratings)
+        all_seller_items = self.server_state.state.get('seller_items', {})
+        seller_items = all_seller_items.get(seller_id, [])
+        seller_items.append(product_id)
+        all_seller_items[seller_id] = seller_items
+        self.server_state.save_to_state('seller_items', all_seller_items)
         print(f'Sell item request from {client_ip_port}')
         return seller_pb2.RegisterResponse(
             status="SUCCESS",
@@ -69,13 +74,13 @@ class SellerServicer(seller_pb2_grpc.SellerServicer):
     
     def UpdateProduct(self, request, context):
         client_ip_port = context.peer()
-        seller_id = uuid.UUID(request.seller_id)
+        seller_id = request.seller_id
         if not self.verify_seller(seller_id, client_ip_port):
             return seller_pb2.RegisterResponse(
                 status="FAIL: Credential Mismatch.",
             )        
         items = self.server_state.state.get('items', [])
-        if request.product_id not in items:
+        if request.product_id not in items.keys():
             return seller_pb2.RegisterResponse(
                 status="FAIL: Product not found.",
             )
@@ -95,13 +100,13 @@ class SellerServicer(seller_pb2_grpc.SellerServicer):
     
     def DeleteProduct(self, request, context):
         client_ip_port = context.peer()
-        seller_id = uuid.UUID(request.seller_id)
+        seller_id = request.seller_id
         if not self.verify_seller(seller_id, client_ip_port):
             return seller_pb2.RegisterResponse(
                 status="FAIL: Credential Mismatch.",
             )        
         items = self.server_state.state.get('items', [])
-        if request.product_id not in items:
+        if request.product_id not in items.keys():
             return seller_pb2.RegisterResponse(
                 status="FAIL: Product not found.",
             )
@@ -115,6 +120,15 @@ class SellerServicer(seller_pb2_grpc.SellerServicer):
         if ratings is not None:
             del ratings[request.product_id]
         self.server_state.save_to_state('items', items)
+        try:
+            all_seller_items = self.server_state.state.get('seller_items', {})
+            seller_items = all_seller_items.get(seller_id, [])
+            print(seller_id,seller_items)
+            seller_items.remove(request.product_id)
+            all_seller_items[seller_id] = seller_items
+            self.server_state.save_to_state('seller_items', all_seller_items)
+        except ValueError:
+            pass
         print(f"Delete product {request.product_id} request from {client_ip_port}")
         return seller_pb2.RegisterResponse(
             status="SUCCESS",
@@ -122,7 +136,7 @@ class SellerServicer(seller_pb2_grpc.SellerServicer):
     
     def compute_rating(self, product_id):
         ratings = self.server_state.state.get('ratings', {})
-        product_ratings = ratings.get(str(product_id), {})
+        product_ratings = ratings.get(product_id, {})
         rating = 0.0
         for rating in product_ratings.values():
             rating += rating['rating']
@@ -132,17 +146,20 @@ class SellerServicer(seller_pb2_grpc.SellerServicer):
     
     def DisplaySellerProducts(self, request, context):
         client_ip_port = context.peer()
-        seller_id = uuid.UUID(request.seller_id)
+        seller_id = request.seller_id
         if not self.verify_seller(seller_id, client_ip_port):
             return seller_pb2.ProductResponse(
                 seller_id=request.seller_id,
                 products=[],
             )
+        
         items = self.server_state.state.get('items', [])
         seller_items = []
-        for item_id, item in items.items():
-            if item['seller_id'] == seller_id:
-                seller_items.append(seller_pb2.ProductDetails(
+        all_seller_items = self.server_state.state.get('seller_items', {})
+        seller_item_ids = all_seller_items.get(seller_id, [])
+        for item_id in seller_item_ids:
+            item = items[item_id]
+            seller_items.append(seller_pb2.ProductDetails(
                     product_id=item_id,
                     product_name=item['product_name'],
                     category=item['category'],
