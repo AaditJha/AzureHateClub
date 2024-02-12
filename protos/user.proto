@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+message User {
+	string name = 1;
+	int64 last_logout_time = 2;
+	int64 last_login_time = 3;
+}

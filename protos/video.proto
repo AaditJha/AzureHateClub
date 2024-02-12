@@ -1,0 +1,6 @@
+syntax = "proto3";
+
+message Video {
+	string youtuber_name = 1;
+	string video_name = 2;
+}

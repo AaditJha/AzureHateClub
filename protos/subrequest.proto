@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+message SubRequest {
+    string name = 1;
+    enum Status {
+        SUBSCRIBE = 0;
+        UNSUBSCRIBE = 1;
+    }
+    Status status = 2;
+    string youtuber_name = 3;
+}
