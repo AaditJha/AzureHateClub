@@ -1,4 +1,2 @@
 IP Port fix
 Fetch server IP and wait for connection for client
-Add seller_id item_id map for better search
-convert all uuids to simple string
