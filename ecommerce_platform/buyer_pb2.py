@@ -12,21 +12,22 @@ from google.protobuf.internal import builder as _builder
 _sym_db = _symbol_database.Default()
 
 
+import shared_pb2 as shared__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0b\x62uyer.proto\x12\tecommerce\"4\n\x11\x42uyProductRequest\x12\x12\n\nproduct_id\x18\x01 \x01(\t\x12\x0b\n\x03qty\x18\x02 \x01(\x05\"8\n\x12RateProductRequest\x12\x12\n\nproduct_id\x18\x01 \x01(\t\x12\x0e\n\x06rating\x18\x02 \x01(\x05\"%\n\x13RateProductResponse\x12\x0e\n\x06status\x18\x01 \x01(\t2\xa1\x01\n\x05\x42uyer\x12J\n\nBuyProduct\x12\x1c.ecommerce.BuyProductRequest\x1a\x1e.ecommerce.RateProductResponse\x12L\n\x0bRateProduct\x12\x1d.ecommerce.RateProductRequest\x1a\x1e.ecommerce.RateProductResponseb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0b\x62uyer.proto\x12\tecommerce\x1a\x0cshared.proto\"4\n\x11\x42uyProductRequest\x12\x12\n\nproduct_id\x18\x01 \x01(\t\x12\x0b\n\x03qty\x18\x02 \x01(\x05\"8\n\x12RateProductRequest\x12\x12\n\nproduct_id\x18\x01 \x01(\t\x12\x0e\n\x06rating\x18\x02 \x01(\x05\"%\n\x13RateProductResponse\x12\x0e\n\x06status\x18\x01 \x01(\t2\xa1\x01\n\x05\x42uyer\x12J\n\nBuyProduct\x12\x1c.ecommerce.BuyProductRequest\x1a\x1e.ecommerce.RateProductResponse\x12L\n\x0bRateProduct\x12\x1d.ecommerce.RateProductRequest\x1a\x1e.ecommerce.RateProductResponseb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'buyer_pb2', _globals)
 if _descriptor._USE_C_DESCRIPTORS == False:
   DESCRIPTOR._options = None
-  _globals['_BUYPRODUCTREQUEST']._serialized_start=26
-  _globals['_BUYPRODUCTREQUEST']._serialized_end=78
-  _globals['_RATEPRODUCTREQUEST']._serialized_start=80
-  _globals['_RATEPRODUCTREQUEST']._serialized_end=136
-  _globals['_RATEPRODUCTRESPONSE']._serialized_start=138
-  _globals['_RATEPRODUCTRESPONSE']._serialized_end=175
-  _globals['_BUYER']._serialized_start=178
-  _globals['_BUYER']._serialized_end=339
+  _globals['_BUYPRODUCTREQUEST']._serialized_start=40
+  _globals['_BUYPRODUCTREQUEST']._serialized_end=92
+  _globals['_RATEPRODUCTREQUEST']._serialized_start=94
+  _globals['_RATEPRODUCTREQUEST']._serialized_end=150
+  _globals['_RATEPRODUCTRESPONSE']._serialized_start=152
+  _globals['_RATEPRODUCTRESPONSE']._serialized_end=189
+  _globals['_BUYER']._serialized_start=192
+  _globals['_BUYER']._serialized_end=353
 # @@protoc_insertion_point(module_scope)

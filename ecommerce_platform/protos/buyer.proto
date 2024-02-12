@@ -1,6 +1,6 @@
 syntax = "proto3";
-
 package ecommerce;
+import "shared.proto";
 
 service Buyer {
     rpc BuyProduct(BuyProductRequest) returns (RateProductResponse);

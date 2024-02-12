@@ -1,6 +1,6 @@
 import grpc
 import uuid
-import seller_pb2_grpc, seller_pb2
+import seller_pb2_grpc, seller_pb2, shared_pb2
 
 class Seller:
     def __init__(self) -> None:
@@ -14,7 +14,7 @@ class Seller:
         print(response.status)
         print('='*50)
 
-    def add_product(self, product_name: str, category: seller_pb2.Category, qty: int, desc: str, price: float):
+    def add_product(self, product_name: str, category: shared_pb2.Category, qty: int, desc: str, price: float):
         response = self.stub.AddProduct(seller_pb2.SellerProductRequest(
             seller_id=self.seller_id,
             product_name=product_name,
@@ -54,7 +54,7 @@ class Seller:
             print(f'Product ID: {product.product_id}')
             print(f'Name: {product.product_name}')
             print(f'Price: ${product.price}')
-            print(f'Category: {seller_pb2.Category.Name(product.category)}')
+            print(f'Category: {shared_pb2.Category.Name(product.category)}')
             print(f'Description: {product.desc}')
             print(f'Quantity Remaining: {product.qty}')
             print(f'Rating: {product.rating}/5')
@@ -64,8 +64,8 @@ class Seller:
 if __name__ == "__main__":
     seller = Seller()
     seller.register_seller()
-    seller.add_product("Top", seller_pb2.Category.Fashion, 10, "V Neck deep cut, purple/blue/black 100% cotton", 1500.0)
-    seller.add_product("iPhone 15", seller_pb2.Category.Electronics, 7, "Black iPhone 14 next gen blah blah", 150000.0)
+    seller.add_product("Top", shared_pb2.Category.Fashion, 10, "V Neck deep cut, purple/blue/black 100% cotton", 1500.0)
+    seller.add_product("iPhone 12", shared_pb2.Category.Electronics, 7, "Black iPhone 14 next gen blah blah", 150000.0)
     product_id = input('Enter product id to delete')
     seller.delete_product(product_id)
     seller.get_products()

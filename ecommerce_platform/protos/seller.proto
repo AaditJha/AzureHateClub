@@ -1,6 +1,6 @@
 syntax = "proto3";
-
 package ecommerce;
+import "shared.proto";
 
 service Seller {
   rpc RegisterSeller(SellerRequest) returns (RegisterResponse);
@@ -12,12 +12,6 @@ service Seller {
 
 message SellerRequest {
   string seller_id = 1;
-}
-
-enum Category {
-  Electronics = 0;
-  Fashion = 1;
-  Others = 2;
 }
 
 message SellerProductRequest {
