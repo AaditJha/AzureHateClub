@@ -1,2 +1,4 @@
 IP Port fix
 Fetch server IP and wait for connection for client
+Notification-1: Subscriber - Buyer (when AddToWishlist) Publisher - Market (when seller UpdateProduct or DeleteProduct)
+Notification-2: Subscriber - Seller (when AddProduct) Publisher - Market (when buyer BuyProduct)

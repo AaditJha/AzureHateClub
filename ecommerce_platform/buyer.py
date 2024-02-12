@@ -40,11 +40,19 @@ class Buyer:
         ))
         print(response.status)
         print('='*50)
+    
+    def add_to_wishlist(self, product_id):
+        response = self.stub.AddToWishlist(buyer_pb2.AddToWishlistRequest(
+            product_id=product_id,
+        ))
+        print(response.status)
+        print('='*50)
 
 if __name__ == "__main__":
     print()
     buyer = Buyer()
-    buyer.search_product('iphon', shared_pb2.Category.Any)
-    # product_id = input('Enter product id to buy: ')
+    # buyer.search_product('iphon', shared_pb2.Category.Any)
+    product_id = input('Enter product id to wishlist: ')
     # buyer.rate_product(product_id, 2)
     # buyer.buy_product(product_id,1)
+    buyer.add_to_wishlist(product_id)

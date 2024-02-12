@@ -62,6 +62,20 @@ class BuyerServicer(buyer_pb2_grpc.BuyerServicer):
             products=product_details,
         )
 
+    def AddToWishlist(self, request, context):
+        product_id = request.product_id
+        client_ip_port = context.peer()
+        products = self.server_state.state.get('items',{})
+        product = products.get(product_id,None)
+        if product is None:
+            return buyer_pb2.RateProductResponse(
+                status="FAIL: Product not found.",
+            )
+        #Subscribe to product notifications.
+        print(f'Wishlist request of {product_id}, from {client_ip_port}')
+        return buyer_pb2.RateProductResponse(
+            status="SUCCESS",
+        )
 
     def BuyProduct(self, request, context):
         if request.qty < 1:

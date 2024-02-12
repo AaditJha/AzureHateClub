@@ -29,6 +29,11 @@ class BuyerStub(object):
                 request_serializer=buyer__pb2.RateProductRequest.SerializeToString,
                 response_deserializer=buyer__pb2.RateProductResponse.FromString,
                 )
+        self.AddToWishlist = channel.unary_unary(
+                '/ecommerce.Buyer/AddToWishlist',
+                request_serializer=buyer__pb2.AddToWishlistRequest.SerializeToString,
+                response_deserializer=buyer__pb2.RateProductResponse.FromString,
+                )
 
 
 class BuyerServicer(object):
@@ -52,6 +57,12 @@ class BuyerServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def AddToWishlist(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_BuyerServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -68,6 +79,11 @@ def add_BuyerServicer_to_server(servicer, server):
             'RateProduct': grpc.unary_unary_rpc_method_handler(
                     servicer.RateProduct,
                     request_deserializer=buyer__pb2.RateProductRequest.FromString,
+                    response_serializer=buyer__pb2.RateProductResponse.SerializeToString,
+            ),
+            'AddToWishlist': grpc.unary_unary_rpc_method_handler(
+                    servicer.AddToWishlist,
+                    request_deserializer=buyer__pb2.AddToWishlistRequest.FromString,
                     response_serializer=buyer__pb2.RateProductResponse.SerializeToString,
             ),
     }
@@ -127,6 +143,23 @@ class Buyer(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ecommerce.Buyer/RateProduct',
             buyer__pb2.RateProductRequest.SerializeToString,
+            buyer__pb2.RateProductResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def AddToWishlist(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ecommerce.Buyer/AddToWishlist',
+            buyer__pb2.AddToWishlistRequest.SerializeToString,
             buyer__pb2.RateProductResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
