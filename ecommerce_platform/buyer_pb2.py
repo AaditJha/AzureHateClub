@@ -15,7 +15,7 @@ _sym_db = _symbol_database.Default()
 import shared_pb2 as shared__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0b\x62uyer.proto\x12\tecommerce\x1a\x0cshared.proto\"4\n\x11\x42uyProductRequest\x12\x12\n\nproduct_id\x18\x01 \x01(\t\x12\x0b\n\x03qty\x18\x02 \x01(\x05\"8\n\x12RateProductRequest\x12\x12\n\nproduct_id\x18\x01 \x01(\t\x12\x0e\n\x06rating\x18\x02 \x01(\x05\"%\n\x13RateProductResponse\x12\x0e\n\x06status\x18\x01 \x01(\t2\xa1\x01\n\x05\x42uyer\x12J\n\nBuyProduct\x12\x1c.ecommerce.BuyProductRequest\x1a\x1e.ecommerce.RateProductResponse\x12L\n\x0bRateProduct\x12\x1d.ecommerce.RateProductRequest\x1a\x1e.ecommerce.RateProductResponseb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0b\x62uyer.proto\x12\tecommerce\x1a\x0cshared.proto\"4\n\x11\x42uyProductRequest\x12\x12\n\nproduct_id\x18\x01 \x01(\t\x12\x0b\n\x03qty\x18\x02 \x01(\x05\"8\n\x12RateProductRequest\x12\x12\n\nproduct_id\x18\x01 \x01(\t\x12\x0e\n\x06rating\x18\x02 \x01(\x05\"S\n\x14SearchProductRequest\x12\x14\n\x0cproduct_name\x18\x01 \x01(\t\x12%\n\x08\x63\x61tegory\x18\x02 \x01(\x0e\x32\x13.ecommerce.Category\"\xb5\x01\n\x13\x42uyerProductDetails\x12\x12\n\nproduct_id\x18\x01 \x01(\t\x12\x0c\n\x04\x64\x65sc\x18\x02 \x01(\t\x12\x0b\n\x03qty\x18\x03 \x01(\x05\x12\x0e\n\x06rating\x18\x04 \x01(\x01\x12\x14\n\x0cproduct_name\x18\x05 \x01(\t\x12%\n\x08\x63\x61tegory\x18\x06 \x01(\x0e\x32\x13.ecommerce.Category\x12\r\n\x05price\x18\x07 \x01(\x01\x12\x13\n\x0bseller_addr\x18\x08 \x01(\t\"H\n\x14\x42uyerProductResponse\x12\x30\n\x08products\x18\x01 \x03(\x0b\x32\x1e.ecommerce.BuyerProductDetails\"%\n\x13RateProductResponse\x12\x0e\n\x06status\x18\x01 \x01(\t2\xf4\x01\n\x05\x42uyer\x12Q\n\rSearchProduct\x12\x1f.ecommerce.SearchProductRequest\x1a\x1f.ecommerce.BuyerProductResponse\x12J\n\nBuyProduct\x12\x1c.ecommerce.BuyProductRequest\x1a\x1e.ecommerce.RateProductResponse\x12L\n\x0bRateProduct\x12\x1d.ecommerce.RateProductRequest\x1a\x1e.ecommerce.RateProductResponseb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -26,8 +26,14 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _globals['_BUYPRODUCTREQUEST']._serialized_end=92
   _globals['_RATEPRODUCTREQUEST']._serialized_start=94
   _globals['_RATEPRODUCTREQUEST']._serialized_end=150
-  _globals['_RATEPRODUCTRESPONSE']._serialized_start=152
-  _globals['_RATEPRODUCTRESPONSE']._serialized_end=189
-  _globals['_BUYER']._serialized_start=192
-  _globals['_BUYER']._serialized_end=353
+  _globals['_SEARCHPRODUCTREQUEST']._serialized_start=152
+  _globals['_SEARCHPRODUCTREQUEST']._serialized_end=235
+  _globals['_BUYERPRODUCTDETAILS']._serialized_start=238
+  _globals['_BUYERPRODUCTDETAILS']._serialized_end=419
+  _globals['_BUYERPRODUCTRESPONSE']._serialized_start=421
+  _globals['_BUYERPRODUCTRESPONSE']._serialized_end=493
+  _globals['_RATEPRODUCTRESPONSE']._serialized_start=495
+  _globals['_RATEPRODUCTRESPONSE']._serialized_end=532
+  _globals['_BUYER']._serialized_start=535
+  _globals['_BUYER']._serialized_end=779
 # @@protoc_insertion_point(module_scope)

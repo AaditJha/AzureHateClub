@@ -14,7 +14,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0cshared.proto\x12\tecommerce*4\n\x08\x43\x61tegory\x12\x0f\n\x0b\x45lectronics\x10\x00\x12\x0b\n\x07\x46\x61shion\x10\x01\x12\n\n\x06Others\x10\x02\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0cshared.proto\x12\tecommerce*=\n\x08\x43\x61tegory\x12\x0f\n\x0b\x45lectronics\x10\x00\x12\x0b\n\x07\x46\x61shion\x10\x01\x12\n\n\x06Others\x10\x02\x12\x07\n\x03\x41ny\x10\x03\x62\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -22,5 +22,5 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'shared_pb2', _globals)
 if _descriptor._USE_C_DESCRIPTORS == False:
   DESCRIPTOR._options = None
   _globals['_CATEGORY']._serialized_start=27
-  _globals['_CATEGORY']._serialized_end=79
+  _globals['_CATEGORY']._serialized_end=88
 # @@protoc_insertion_point(module_scope)

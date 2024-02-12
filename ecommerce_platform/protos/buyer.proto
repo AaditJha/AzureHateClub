@@ -3,6 +3,7 @@ package ecommerce;
 import "shared.proto";
 
 service Buyer {
+    rpc SearchProduct(SearchProductRequest) returns (BuyerProductResponse);
     rpc BuyProduct(BuyProductRequest) returns (RateProductResponse);
     rpc RateProduct(RateProductRequest) returns (RateProductResponse);
 }
@@ -16,12 +17,13 @@ message RateProductRequest {
     string product_id = 1;
     int32 rating = 2;
 }
-/*
+
 message SearchProductRequest {
-    string seller_id = 1;
+    string product_name = 1;
+    Category category = 2;
 }
 
-message ProductDetails {
+message BuyerProductDetails {
   string product_id = 1;
   string desc = 2;
   int32 qty = 3;
@@ -32,10 +34,10 @@ message ProductDetails {
   string seller_addr = 8;
 }
 
-message ProductResponse {
-  repeated ProductDetails products = 2;
+message BuyerProductResponse {
+  repeated BuyerProductDetails products = 1;
 }
-*/
+
 message RateProductResponse {
     string status = 1;
 }
