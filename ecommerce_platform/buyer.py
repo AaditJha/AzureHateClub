@@ -44,7 +44,7 @@ class Buyer:
 if __name__ == "__main__":
     print()
     buyer = Buyer()
-    buyer.search_product('', shared_pb2.Category.Any)
+    buyer.search_product('iphon', shared_pb2.Category.Any)
     # product_id = input('Enter product id to buy: ')
     # buyer.rate_product(product_id, 2)
     # buyer.buy_product(product_id,1)

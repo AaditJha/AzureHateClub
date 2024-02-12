@@ -57,6 +57,7 @@ class BuyerServicer(buyer_pb2_grpc.BuyerServicer):
                 price=product['price_per_unit'],
                 seller_addr=seller_addrs.get(product['seller_id'],'')
             ))
+        print(f'Search request for Item name: {product_name}, Category: {shared_pb2.Category.Name(product_category)}.')
         return buyer_pb2.BuyerProductResponse(
             products=product_details,
         )
