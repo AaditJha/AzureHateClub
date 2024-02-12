@@ -30,13 +30,10 @@ class Server():
     def __init__(self):
         print('Starting server.')
         signal.signal(signal.SIGINT, self.signalHandler)
-        # Stores users:userID
+
         self.Users = dict()
-        # UserSubList[i] gives the set subs yter of Users[username]
         self.UserSubList = []
-        # Stores Youtubers:YoutuberID
         self.Youtubers = dict()
-        # YoutuberSubList[i] gives a set of all users that sub to Youtubers[youtuber_name]
         self.YoutuberSubList = []
 
         self.connection = pika.BlockingConnection(pika.ConnectionParameters(HOST))
@@ -63,7 +60,6 @@ class Server():
             self.UserSubList.append(set())
 
         print(f"{user_message.name} logged in.")
-        print(self.Users)
 
 
     def publishCallback(self, ch, method, properties, body):
@@ -75,9 +71,8 @@ class Server():
             self.YoutuberSubList.append(set())
         
         print(f"{video_message.youtuber_name} posted '{video_message.video_name}'.")
-        print(self.Youtubers)
 
-        self.sendNotifications(self, video_message.youtuber_name, video_message.video_name)
+        self.sendNotifications(video_message.youtuber_name, video_message.video_name)
 
     def subRequestCallback(self, ch, method, properties, body):
         
@@ -93,31 +88,43 @@ class Server():
             if youtuber not in self.UserSubList[user_id]:
                 self.UserSubList[user_id].add(youtuber)
                 self.YoutuberSubList[youtuber_id].add(user)
-                print(f"{user} subscribed to {youtuber}")
+                print(f"{user} subscribed to {youtuber}.")
             else:
-                print(f"{user} was already subscribed to {youtuber}")
+                print(f"{user} was already subscribed to {youtuber}.")
 
         else:
             
             if youtuber in self.UserSubList[user_id]:
                 self.UserSubList[user_id].remove(youtuber)
                 self.YoutuberSubList[youtuber_id].remove(user)
-                print(f"{user} unsubscribed to {youtuber}")
+                print(f"{user} unsubscribed to {youtuber}.")
             else:
-                print(f"{user} was not subscribed to {youtuber}")
+                print(f"{user} was not subscribed to {youtuber}.")
 
         print(self.UserSubList)
         print(self.YoutuberSubList)
 
-    def sendNotifications(self, youtuber:str, video:str):
-        pass
+    def sendNotifications(self, youtuber:str, video_name:str):
+        youtuber_id = self.Youtubers[youtuber]
+        subscribed_users = self.YoutuberSubList[youtuber_id]
+        message = self.createNotificationMessage(youtuber, video_name)
+        for user in subscribed_users:
+            self.channel.basic_publish(exchange='', routing_key=f"{user}_QUEUE", body=message,
+                                       properties=pika.BasicProperties(delivery_mode=2))
 
+    def createNotificationMessage(self, youtuber:str, video_name:str) -> str:
+        video = Video()
+        video.youtuber_name = youtuber
+        video.video_name = video_name
+        message = video.SerializeToString()
+        return message
+    
     def signalHandler(self, sig, _):
         print("\nShutting Server.")
         self.connection.close()
         sys.exit(0)
 
-
-s = Server()
+if __name__ == '__main__':
+    Server()
 
 

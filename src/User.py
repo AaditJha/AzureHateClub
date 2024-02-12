@@ -67,7 +67,17 @@ class User():
         )
 
     def getNotifications(self):
-        pass
+        QUEUE = f"{self.name}_QUEUE"
+        self.channel.queue_declare(queue=QUEUE, durable=True)
+        self.channel.basic_consume(queue=QUEUE, on_message_callback=self.notificationCallback, auto_ack=True)
+        self.channel.start_consuming()
+
+    def notificationCallback(self, ch, method, properties, body):
+        video_message = video_pb2.Video()
+        video_message.ParseFromString(body)
+        video = video_message.video_name
+        youtuber = video_message.youtuber_name
+        print(f"{youtuber} posted '{video}'.")
 
     def receiveNotifCallback(self, ch, method, properties, body):
         video_message = video_pb2.Video()
