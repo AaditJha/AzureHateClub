@@ -15,7 +15,7 @@ _sym_db = _symbol_database.Default()
 import shared_pb2 as shared__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0cseller.proto\x12\tecommerce\x1a\x0cshared.proto\"\"\n\rSellerRequest\x12\x11\n\tseller_id\x18\x01 \x01(\t\"\x90\x01\n\x14SellerProductRequest\x12\x14\n\x0cproduct_name\x18\x01 \x01(\t\x12%\n\x08\x63\x61tegory\x18\x02 \x01(\x0e\x32\x13.ecommerce.Category\x12\x0b\n\x03qty\x18\x03 \x01(\x05\x12\x0c\n\x04\x64\x65sc\x18\x04 \x01(\t\x12\r\n\x05price\x18\x05 \x01(\x01\x12\x11\n\tseller_id\x18\x06 \x01(\t\"_\n\x1aSellerUpdateProductRequest\x12\x12\n\nproduct_id\x18\x01 \x01(\t\x12\r\n\x05price\x18\x02 \x01(\x01\x12\x0b\n\x03qty\x18\x03 \x01(\x05\x12\x11\n\tseller_id\x18\x04 \x01(\t\"C\n\x1aSellerDeleteProductRequest\x12\x12\n\nproduct_id\x18\x01 \x01(\t\x12\x11\n\tseller_id\x18\x02 \x01(\t\"0\n\x1bSellerDisplayProductRequest\x12\x11\n\tseller_id\x18\x01 \x01(\t\"\x9b\x01\n\x0eProductDetails\x12\x12\n\nproduct_id\x18\x01 \x01(\t\x12\x0c\n\x04\x64\x65sc\x18\x02 \x01(\t\x12\x0b\n\x03qty\x18\x03 \x01(\x05\x12\x0e\n\x06rating\x18\x04 \x01(\x01\x12\x14\n\x0cproduct_name\x18\x05 \x01(\t\x12%\n\x08\x63\x61tegory\x18\x06 \x01(\x0e\x32\x13.ecommerce.Category\x12\r\n\x05price\x18\x07 \x01(\x01\"S\n\x0fProductResponse\x12\x13\n\x0bseller_addr\x18\x01 \x01(\t\x12+\n\x08products\x18\x02 \x03(\x0b\x32\x19.ecommerce.ProductDetails\"\"\n\x10RegisterResponse\x12\x0e\n\x06status\x18\x01 \x01(\t2\xa4\x03\n\x06Seller\x12G\n\x0eRegisterSeller\x12\x18.ecommerce.SellerRequest\x1a\x1b.ecommerce.RegisterResponse\x12J\n\nAddProduct\x12\x1f.ecommerce.SellerProductRequest\x1a\x1b.ecommerce.RegisterResponse\x12S\n\rUpdateProduct\x12%.ecommerce.SellerUpdateProductRequest\x1a\x1b.ecommerce.RegisterResponse\x12S\n\rDeleteProduct\x12%.ecommerce.SellerDeleteProductRequest\x1a\x1b.ecommerce.RegisterResponse\x12[\n\x15\x44isplaySellerProducts\x12&.ecommerce.SellerDisplayProductRequest\x1a\x1a.ecommerce.ProductResponseb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0cseller.proto\x12\tecommerce\x1a\x0cshared.proto\"7\n\rSellerRequest\x12\x11\n\tseller_id\x18\x01 \x01(\t\x12\x13\n\x0bseller_addr\x18\x02 \x01(\t\"\xa5\x01\n\x14SellerProductRequest\x12\x14\n\x0cproduct_name\x18\x01 \x01(\t\x12%\n\x08\x63\x61tegory\x18\x02 \x01(\x0e\x32\x13.ecommerce.Category\x12\x0b\n\x03qty\x18\x03 \x01(\x05\x12\x0c\n\x04\x64\x65sc\x18\x04 \x01(\t\x12\r\n\x05price\x18\x05 \x01(\x01\x12\x11\n\tseller_id\x18\x06 \x01(\t\x12\x13\n\x0bseller_addr\x18\x07 \x01(\t\"t\n\x1aSellerUpdateProductRequest\x12\x12\n\nproduct_id\x18\x01 \x01(\t\x12\r\n\x05price\x18\x02 \x01(\x01\x12\x0b\n\x03qty\x18\x03 \x01(\x05\x12\x11\n\tseller_id\x18\x04 \x01(\t\x12\x13\n\x0bseller_addr\x18\x05 \x01(\t\"X\n\x1aSellerDeleteProductRequest\x12\x12\n\nproduct_id\x18\x01 \x01(\t\x12\x11\n\tseller_id\x18\x02 \x01(\t\x12\x13\n\x0bseller_addr\x18\x03 \x01(\t\"E\n\x1bSellerDisplayProductRequest\x12\x11\n\tseller_id\x18\x01 \x01(\t\x12\x13\n\x0bseller_addr\x18\x02 \x01(\t\"\x9b\x01\n\x0eProductDetails\x12\x12\n\nproduct_id\x18\x01 \x01(\t\x12\x0c\n\x04\x64\x65sc\x18\x02 \x01(\t\x12\x0b\n\x03qty\x18\x03 \x01(\x05\x12\x0e\n\x06rating\x18\x04 \x01(\x01\x12\x14\n\x0cproduct_name\x18\x05 \x01(\t\x12%\n\x08\x63\x61tegory\x18\x06 \x01(\x0e\x32\x13.ecommerce.Category\x12\r\n\x05price\x18\x07 \x01(\x01\"S\n\x0fProductResponse\x12\x13\n\x0bseller_addr\x18\x01 \x01(\t\x12+\n\x08products\x18\x02 \x03(\x0b\x32\x19.ecommerce.ProductDetails\"\"\n\x10RegisterResponse\x12\x0e\n\x06status\x18\x01 \x01(\t2\xa4\x03\n\x06Seller\x12G\n\x0eRegisterSeller\x12\x18.ecommerce.SellerRequest\x1a\x1b.ecommerce.RegisterResponse\x12J\n\nAddProduct\x12\x1f.ecommerce.SellerProductRequest\x1a\x1b.ecommerce.RegisterResponse\x12S\n\rUpdateProduct\x12%.ecommerce.SellerUpdateProductRequest\x1a\x1b.ecommerce.RegisterResponse\x12S\n\rDeleteProduct\x12%.ecommerce.SellerDeleteProductRequest\x1a\x1b.ecommerce.RegisterResponse\x12[\n\x15\x44isplaySellerProducts\x12&.ecommerce.SellerDisplayProductRequest\x1a\x1a.ecommerce.ProductResponseb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -23,21 +23,21 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'seller_pb2', _globals)
 if _descriptor._USE_C_DESCRIPTORS == False:
   DESCRIPTOR._options = None
   _globals['_SELLERREQUEST']._serialized_start=41
-  _globals['_SELLERREQUEST']._serialized_end=75
-  _globals['_SELLERPRODUCTREQUEST']._serialized_start=78
-  _globals['_SELLERPRODUCTREQUEST']._serialized_end=222
-  _globals['_SELLERUPDATEPRODUCTREQUEST']._serialized_start=224
-  _globals['_SELLERUPDATEPRODUCTREQUEST']._serialized_end=319
-  _globals['_SELLERDELETEPRODUCTREQUEST']._serialized_start=321
-  _globals['_SELLERDELETEPRODUCTREQUEST']._serialized_end=388
-  _globals['_SELLERDISPLAYPRODUCTREQUEST']._serialized_start=390
-  _globals['_SELLERDISPLAYPRODUCTREQUEST']._serialized_end=438
-  _globals['_PRODUCTDETAILS']._serialized_start=441
-  _globals['_PRODUCTDETAILS']._serialized_end=596
-  _globals['_PRODUCTRESPONSE']._serialized_start=598
-  _globals['_PRODUCTRESPONSE']._serialized_end=681
-  _globals['_REGISTERRESPONSE']._serialized_start=683
-  _globals['_REGISTERRESPONSE']._serialized_end=717
-  _globals['_SELLER']._serialized_start=720
-  _globals['_SELLER']._serialized_end=1140
+  _globals['_SELLERREQUEST']._serialized_end=96
+  _globals['_SELLERPRODUCTREQUEST']._serialized_start=99
+  _globals['_SELLERPRODUCTREQUEST']._serialized_end=264
+  _globals['_SELLERUPDATEPRODUCTREQUEST']._serialized_start=266
+  _globals['_SELLERUPDATEPRODUCTREQUEST']._serialized_end=382
+  _globals['_SELLERDELETEPRODUCTREQUEST']._serialized_start=384
+  _globals['_SELLERDELETEPRODUCTREQUEST']._serialized_end=472
+  _globals['_SELLERDISPLAYPRODUCTREQUEST']._serialized_start=474
+  _globals['_SELLERDISPLAYPRODUCTREQUEST']._serialized_end=543
+  _globals['_PRODUCTDETAILS']._serialized_start=546
+  _globals['_PRODUCTDETAILS']._serialized_end=701
+  _globals['_PRODUCTRESPONSE']._serialized_start=703
+  _globals['_PRODUCTRESPONSE']._serialized_end=786
+  _globals['_REGISTERRESPONSE']._serialized_start=788
+  _globals['_REGISTERRESPONSE']._serialized_end=822
+  _globals['_SELLER']._serialized_start=825
+  _globals['_SELLER']._serialized_end=1245
 # @@protoc_insertion_point(module_scope)

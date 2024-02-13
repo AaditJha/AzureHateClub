@@ -23,7 +23,7 @@ class SellerServicer(seller_pb2_grpc.SellerServicer):
         return True
 
     def RegisterSeller(self, request, context):
-        client_ip_port = context.peer()
+        client_ip_port = request.seller_addr
         seller_id = request.seller_id
         seller_ids = self.server_state.state.get('seller_ids', [])
         if seller_id in seller_ids:
@@ -41,7 +41,7 @@ class SellerServicer(seller_pb2_grpc.SellerServicer):
         )
     
     def AddProduct(self, request, context):
-        client_ip_port = context.peer()
+        client_ip_port = request.seller_addr
         seller_id = request.seller_id
         if not self.verify_seller(seller_id, client_ip_port):
             return seller_pb2.RegisterResponse(
@@ -73,7 +73,7 @@ class SellerServicer(seller_pb2_grpc.SellerServicer):
         )
     
     def UpdateProduct(self, request, context):
-        client_ip_port = context.peer()
+        client_ip_port = request.seller_addr
         seller_id = request.seller_id
         if not self.verify_seller(seller_id, client_ip_port):
             return seller_pb2.RegisterResponse(
@@ -99,7 +99,7 @@ class SellerServicer(seller_pb2_grpc.SellerServicer):
         )
     
     def DeleteProduct(self, request, context):
-        client_ip_port = context.peer()
+        client_ip_port = request.seller_addr
         seller_id = request.seller_id
         if not self.verify_seller(seller_id, client_ip_port):
             return seller_pb2.RegisterResponse(
@@ -145,7 +145,7 @@ class SellerServicer(seller_pb2_grpc.SellerServicer):
         return rating
     
     def DisplaySellerProducts(self, request, context):
-        client_ip_port = context.peer()
+        client_ip_port = request.seller_addr
         seller_id = request.seller_id
         if not self.verify_seller(seller_id, client_ip_port):
             return seller_pb2.ProductResponse(

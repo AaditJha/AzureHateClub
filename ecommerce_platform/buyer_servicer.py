@@ -1,6 +1,9 @@
+import grpc
 import buyer_pb2
 import buyer_pb2_grpc
 import shared_pb2
+import notify_pb2
+import notify_pb2_grpc
 from server_state import ServerStateSingleton
 from fuzzywuzzy import fuzz
 
@@ -71,11 +74,30 @@ class BuyerServicer(buyer_pb2_grpc.BuyerServicer):
             return buyer_pb2.RateProductResponse(
                 status="FAIL: Product not found.",
             )
-        #Subscribe to product notifications.
+        #Subscribe to notifications.
         print(f'Wishlist request of {product_id}, from {client_ip_port}')
         return buyer_pb2.RateProductResponse(
             status="SUCCESS",
         )
+    
+    def notify_seller(self,product_id,product):
+        seller_addr = self.server_state.state.get('seller_addr',{}).get(product['seller_id'],'')
+        notify_stub = notify_pb2_grpc.NotifyStub(grpc.insecure_channel(seller_addr))
+        try:
+            notify_stub.SendNotification(
+            notify_pb2.Notification(
+                product_id = product_id,
+                price = product['price_per_unit'],
+                product_name = product['product_name'],
+                category = product['category'],
+                desc = product['description'],
+                qty = product['quantity'],
+                rating=self.compute_rating(product_id),
+                seller_addr = seller_addr
+            ))
+        except Exception as e:
+            pass
+
 
     def BuyProduct(self, request, context):
         if request.qty < 1:
@@ -96,6 +118,9 @@ class BuyerServicer(buyer_pb2_grpc.BuyerServicer):
                 status="FAIL: Insufficient quantity.",
             )
         product['quantity'] -= qty
+
+        self.notify_seller(product_id,product)
+
         all_products[product_id] = product
         self.server_state.save_to_state('items',all_products)
         print(f'Buy request {qty} of {product_id}, from {client_ip_port}')

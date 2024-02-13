@@ -1,0 +1,21 @@
+syntax = "proto3";
+package ecommerce;
+import "shared.proto";
+
+service Notify{
+    rpc SendNotification (Notification) returns (NotificationResponse);
+}
+
+message NotificationResponse {
+}
+
+message Notification {
+    string product_id = 1;
+    double price = 2;
+    string product_name = 3;
+    Category category = 4;
+    string desc = 5;
+    int32 qty = 6;
+    double rating = 7;
+    string seller_addr = 8;
+}

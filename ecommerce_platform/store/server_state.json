@@ -1,62 +1,36 @@
 {
     "seller_ids": [
-        "11014b4b-c7ac-41e7-88fe-c7f2b73abf79",
-        "c1031bf2-cd7e-4df4-bf58-91d72d55450a"
+        "01f17742-17d7-4127-91cd-9f821a4c2821"
     ],
     "seller_addr": {
-        "11014b4b-c7ac-41e7-88fe-c7f2b73abf79": "ipv6:%5B::1%5D:42154",
-        "c1031bf2-cd7e-4df4-bf58-91d72d55450a": "ipv6:%5B::1%5D:59038"
+        "01f17742-17d7-4127-91cd-9f821a4c2821": "[::]:35391"
     },
     "items": {
-        "b646c577-5350-424d-8504-46cd9856062d": {
-            "product_name": "Top",
+        "0743846f-6324-49e3-a9f8-993bb829c93e": {
+            "product_name": "Top 1",
             "category": 1,
-            "quantity": 10,
-            "description": "V Neck deep cut, purple/blue/black 100% cotton",
-            "price_per_unit": 1500.0,
-            "seller_id": "11014b4b-c7ac-41e7-88fe-c7f2b73abf79"
-        },
-        "5eab65a6-77da-4ecf-a8b2-992d80b302cd": {
-            "product_name": "iPhone 15",
-            "category": 0,
             "quantity": 0,
-            "description": "Black iPhone 14 next gen blah blah",
-            "price_per_unit": 150000.0,
-            "seller_id": "11014b4b-c7ac-41e7-88fe-c7f2b73abf79"
-        },
-        "acd2e79e-3a31-462c-8d62-8fa47444c8ef": {
-            "product_name": "Top",
-            "category": 1,
-            "quantity": 10,
             "description": "V Neck deep cut, purple/blue/black 100% cotton",
             "price_per_unit": 1500.0,
-            "seller_id": "c1031bf2-cd7e-4df4-bf58-91d72d55450a"
+            "seller_id": "01f17742-17d7-4127-91cd-9f821a4c2821"
         },
-        "a1a90618-ed4e-4b52-bc28-6ef8a08d3671": {
+        "ef3bf273-8442-402a-94e4-af3733e71b92": {
             "product_name": "iPhone 12",
             "category": 0,
-            "quantity": 7,
+            "quantity": 8,
             "description": "Black iPhone 14 next gen blah blah",
             "price_per_unit": 150000.0,
-            "seller_id": "c1031bf2-cd7e-4df4-bf58-91d72d55450a"
+            "seller_id": "01f17742-17d7-4127-91cd-9f821a4c2821"
         }
     },
     "ratings": {
-        "b646c577-5350-424d-8504-46cd9856062d": {},
-        "5eab65a6-77da-4ecf-a8b2-992d80b302cd": {
-            "ipv6:%5B::1%5D:51598": 2
-        },
-        "acd2e79e-3a31-462c-8d62-8fa47444c8ef": {},
-        "a1a90618-ed4e-4b52-bc28-6ef8a08d3671": {}
+        "0743846f-6324-49e3-a9f8-993bb829c93e": {},
+        "ef3bf273-8442-402a-94e4-af3733e71b92": {}
     },
     "seller_items": {
-        "11014b4b-c7ac-41e7-88fe-c7f2b73abf79": [
-            "b646c577-5350-424d-8504-46cd9856062d",
-            "5eab65a6-77da-4ecf-a8b2-992d80b302cd"
-        ],
-        "c1031bf2-cd7e-4df4-bf58-91d72d55450a": [
-            "acd2e79e-3a31-462c-8d62-8fa47444c8ef",
-            "a1a90618-ed4e-4b52-bc28-6ef8a08d3671"
+        "01f17742-17d7-4127-91cd-9f821a4c2821": [
+            "0743846f-6324-49e3-a9f8-993bb829c93e",
+            "ef3bf273-8442-402a-94e4-af3733e71b92"
         ]
     }
 }

@@ -12,6 +12,7 @@ service Seller {
 
 message SellerRequest {
   string seller_id = 1;
+  string seller_addr = 2;
 }
 
 message SellerProductRequest {
@@ -21,6 +22,7 @@ message SellerProductRequest {
   string desc = 4;
   double price = 5;
   string seller_id = 6;
+  string seller_addr = 7;
 }
 
 message SellerUpdateProductRequest {
@@ -28,15 +30,18 @@ message SellerUpdateProductRequest {
   double price = 2;
   int32 qty = 3;
   string seller_id = 4;
+  string seller_addr = 5;
 }
 
 message SellerDeleteProductRequest {
   string product_id = 1;
   string seller_id = 2;
+  string seller_addr = 3;
 }
 
 message SellerDisplayProductRequest {
   string seller_id = 1;
+  string seller_addr = 2;
 }
 
 message ProductDetails {
