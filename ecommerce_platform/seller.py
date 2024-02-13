@@ -82,12 +82,41 @@ class Seller:
             print('-'*50)
         print('='*50)
 
+def menu(seller:Seller):
+    print(f'Welcome Seller: {seller.seller_addr}')
+    seller.register_seller()
+    print(f'Seller registered with ID: {seller.seller_id}')
+    while(True):
+        print('_'* 50)
+        print('1. Add Product')
+        print('2. Update Product')
+        print('3. Delete Product')
+        print('4. Display Products')
+        print('5. Exit')
+        choice = input('Enter your choice: ')
+        if choice == '1':
+            product_name = input('Enter product name: ')
+            category = int(input('Enter category id (0-Electronics,1-Fashion,2-Others,3-Any): '))
+            qty = int(input('Enter quantity: '))
+            desc = input('Enter description: ')
+            price = float(input('Enter price: '))
+            seller.add_product(product_name, category, qty, desc, price)
+        elif choice == '2':
+            product_id = input('Enter product id: ')
+            qty = int(input('Enter quantity: '))
+            price = float(input('Enter price: '))
+            seller.update_product(product_id, qty, price)
+        elif choice == '3':
+            product_id = input('Enter product id: ')
+            seller.delete_product(product_id)
+        elif choice == '4':
+            seller.get_products()
+        elif choice == '5':
+            break
+        else:
+            print('Invalid choice')
+    seller.handle_termination()
+
 if __name__ == "__main__":
     seller = Seller()
-    seller.register_seller()
-    seller.add_product("Top 1", shared_pb2.Category.Fashion, 10, "V Neck deep cut, purple/blue/black 100% cotton", 1500.0)
-    seller.add_product("iPhone 12", shared_pb2.Category.Electronics, 7, "Black iPhone 14 next gen blah blah", 150000.0)
-    seller.get_products()
-    product_id = input('Enter product id to update')
-    seller.update_product(product_id, 5, 140000.0)
-    seller.notification_server.wait_for_termination()
+    menu(seller)

@@ -22,7 +22,7 @@ class Buyer:
         print(f'Notification server started on {self.buyer_addr}')
     
     def handle_termination(self):
-        print('Closing Notification Server...')
+        print('\nClosing Notification Server...')
         self.notification_server.stop(0)
 
     def search_product(self, product_name, category):
@@ -68,12 +68,38 @@ class Buyer:
         print(response.status)
         print('='*50)
 
+def menu(buyer: Buyer):
+    print(f'Welcome Buyer: {buyer.buyer_addr}')
+    while(True):
+        print('_'* 50)
+        print('1. Search Product')
+        print('2. Buy Product')
+        print('3. Rate Product')    
+        print('4. Add to Wishlist')
+        print('5. Exit')
+        choice = input('Enter your choice: ')
+        if choice == '1':
+            product_name = input('Enter product name: ')
+            category = int(input('Enter category id (0-Electronics,1-Fashion,2-Others,3-Any): '))
+            buyer.search_product(product_name, category)
+        elif choice == '2':
+            product_id = input('Enter product id: ')
+            qty = int(input('Enter quantity: '))
+            buyer.buy_product(product_id, qty)
+        elif choice == '3':
+            product_id = input('Enter product id: ')
+            rating = int(input('Enter rating (0-5): '))
+            buyer.rate_product(product_id, rating)
+        elif choice == '4':
+            product_id = input('Enter product id: ')
+            buyer.add_to_wishlist(product_id)
+        elif choice == '5':
+            break
+        else:
+            print('Invalid choice')
+    buyer.handle_termination()
+
 if __name__ == "__main__":
     print()
     buyer = Buyer()
-    # buyer.search_product('iphon', shared_pb2.Category.Any)
-    product_id = input('Enter product id to buy: ')
-    # buyer.rate_product(product_id, 2)
-    # buyer.buy_product(product_id,2)
-    buyer.add_to_wishlist(product_id)
-    buyer.notification_server.wait_for_termination()
+    menu(buyer)

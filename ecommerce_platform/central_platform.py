@@ -5,7 +5,7 @@ from services import register_all_services
 from server_state import ServerStateSingleton
 
 def handle_termination(server):
-    print('Closing Server...')
+    print('\nClosing Server...')
     server_state = ServerStateSingleton()
     server_state.save_state()
     server.stop(0)

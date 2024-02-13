@@ -1,42 +1,34 @@
 {
     "seller_ids": [
-        "784ffa5c-1539-4017-8636-fbf667ea6efa"
+        "8c6a3b54-d257-4470-a13b-51a0a1e2c072"
     ],
     "seller_addr": {
-        "784ffa5c-1539-4017-8636-fbf667ea6efa": "[::]:37665"
+        "8c6a3b54-d257-4470-a13b-51a0a1e2c072": "[::]:44149"
     },
     "items": {
-        "c9733976-232e-4881-b5a0-56d9bca3741d": {
-            "product_name": "Top 1",
-            "category": 1,
-            "quantity": 10,
-            "description": "V Neck deep cut, purple/blue/black 100% cotton",
-            "price_per_unit": 1500.0,
-            "seller_id": "784ffa5c-1539-4017-8636-fbf667ea6efa"
-        },
-        "fd9991f1-9b09-4e08-a323-1d01c269b9df": {
-            "product_name": "iPhone 12",
-            "category": 0,
-            "quantity": 5,
-            "description": "Black iPhone 14 next gen blah blah",
-            "price_per_unit": 140000.0,
-            "seller_id": "784ffa5c-1539-4017-8636-fbf667ea6efa"
+        "b0ccec7b-b7dd-46a4-8ad5-1c162622535e": {
+            "product_name": "Parle-G",
+            "category": 2,
+            "quantity": 180,
+            "description": "High glucose biscuit",
+            "price_per_unit": 20.0,
+            "seller_id": "8c6a3b54-d257-4470-a13b-51a0a1e2c072"
         }
     },
     "ratings": {
-        "c9733976-232e-4881-b5a0-56d9bca3741d": {},
-        "fd9991f1-9b09-4e08-a323-1d01c269b9df": {}
+        "b0ccec7b-b7dd-46a4-8ad5-1c162622535e": {
+            "[::]:41435": 4,
+            "[::]:37553": 2
+        }
     },
     "seller_items": {
-        "784ffa5c-1539-4017-8636-fbf667ea6efa": [
-            "c9733976-232e-4881-b5a0-56d9bca3741d",
-            "fd9991f1-9b09-4e08-a323-1d01c269b9df"
+        "8c6a3b54-d257-4470-a13b-51a0a1e2c072": [
+            "b0ccec7b-b7dd-46a4-8ad5-1c162622535e"
         ]
     },
     "wishlists": {
-        "fd9991f1-9b09-4e08-a323-1d01c269b9df": [
-            "[::]:43957",
-            "[::]:33129"
+        "b0ccec7b-b7dd-46a4-8ad5-1c162622535e": [
+            "[::]:37553"
         ]
     }
 }
