@@ -23,7 +23,7 @@ class Seller:
         print(f'Notification server started on {self.seller_addr}')
     
     def handle_termination(self):
-        print('Closing Server...')
+        print('Closing Notification Server...')
         self.notification_server.stop(0)
 
     def register_seller(self):
@@ -87,7 +87,7 @@ if __name__ == "__main__":
     seller.register_seller()
     seller.add_product("Top 1", shared_pb2.Category.Fashion, 10, "V Neck deep cut, purple/blue/black 100% cotton", 1500.0)
     seller.add_product("iPhone 12", shared_pb2.Category.Electronics, 7, "Black iPhone 14 next gen blah blah", 150000.0)
-    # product_id = input('Enter product id to delete')
-    # seller.delete_product(product_id)
     seller.get_products()
+    product_id = input('Enter product id to update')
+    seller.update_product(product_id, 5, 140000.0)
     seller.notification_server.wait_for_termination()

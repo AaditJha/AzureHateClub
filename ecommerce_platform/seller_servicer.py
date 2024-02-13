@@ -1,4 +1,7 @@
+import grpc
 import seller_pb2
+import notify_pb2
+import notify_pb2_grpc
 import uuid
 import seller_pb2_grpc
 from server_state import ServerStateSingleton
@@ -72,6 +75,26 @@ class SellerServicer(seller_pb2_grpc.SellerServicer):
             status="SUCCESS",
         )
     
+    def notify_buyer(self,product_id,product):
+        wishlisted_buyers = self.server_state.state.get('wishlists',{}).get(product_id,[])
+        seller_addr = self.server_state.state.get('seller_addr',{}).get(product['seller_id'],None)
+        for buyer_addr in wishlisted_buyers:
+            notify_stub = notify_pb2_grpc.NotifyStub(grpc.insecure_channel(buyer_addr))
+            try:
+                notify_stub.SendNotification(
+                notify_pb2.Notification(
+                    product_id = product_id,
+                    price = product['price_per_unit'],
+                    product_name = product['product_name'],
+                    category = product['category'],
+                    desc = product['description'],
+                    qty = product['quantity'],
+                    rating=self.compute_rating(product_id),
+                    seller_addr = seller_addr
+                ))
+            except Exception as e:
+                pass
+    
     def UpdateProduct(self, request, context):
         client_ip_port = request.seller_addr
         seller_id = request.seller_id
@@ -91,6 +114,7 @@ class SellerServicer(seller_pb2_grpc.SellerServicer):
             )
         product['price_per_unit'] = request.price
         product['quantity'] = request.qty
+        self.notify_buyer(request.product_id,product)
         items[request.product_id] = product
         self.server_state.save_to_state('items', items)
         print(f"Update product {request.product_id} request from {client_ip_port}")
@@ -119,6 +143,11 @@ class SellerServicer(seller_pb2_grpc.SellerServicer):
         ratings = self.server_state.state.get('ratings', None)
         if ratings is not None:
             del ratings[request.product_id]
+        self.server_state.save_to_state('ratings', ratings)
+        wishlists = self.server_state.state.get('wishlists', None)
+        if wishlists is not None:
+            del wishlists[request.product_id]
+        self.server_state.save_to_state('wishlists', wishlists)
         self.server_state.save_to_state('items', items)
         try:
             all_seller_items = self.server_state.state.get('seller_items', {})

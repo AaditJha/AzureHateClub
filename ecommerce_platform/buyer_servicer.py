@@ -7,6 +7,7 @@ import notify_pb2_grpc
 from server_state import ServerStateSingleton
 from fuzzywuzzy import fuzz
 
+# MARKET <-> BUYER Services
 class BuyerServicer(buyer_pb2_grpc.BuyerServicer):
     def __init__(self) -> None:
         super().__init__()
@@ -67,7 +68,7 @@ class BuyerServicer(buyer_pb2_grpc.BuyerServicer):
 
     def AddToWishlist(self, request, context):
         product_id = request.product_id
-        client_ip_port = context.peer()
+        client_ip_port = request.buyer_addr
         products = self.server_state.state.get('items',{})
         product = products.get(product_id,None)
         if product is None:
@@ -75,6 +76,12 @@ class BuyerServicer(buyer_pb2_grpc.BuyerServicer):
                 status="FAIL: Product not found.",
             )
         #Subscribe to notifications.
+        all_wishlists = self.server_state.state.get('wishlists',{})
+        wishlist = all_wishlists.get(product_id,[])
+        if client_ip_port not in wishlist:
+            wishlist.append(client_ip_port)
+        all_wishlists[product_id] = wishlist
+        self.server_state.save_to_state('wishlists',all_wishlists)
         print(f'Wishlist request of {product_id}, from {client_ip_port}')
         return buyer_pb2.RateProductResponse(
             status="SUCCESS",
@@ -104,7 +111,7 @@ class BuyerServicer(buyer_pb2_grpc.BuyerServicer):
             return buyer_pb2.RateProductResponse(
                 status="FAIL: Invalid quantity",
             )
-        client_ip_port = context.peer()
+        client_ip_port = request.buyer_addr
         product_id = request.product_id
         qty = request.qty
         all_products = self.server_state.state.get('items',{})
@@ -133,7 +140,7 @@ class BuyerServicer(buyer_pb2_grpc.BuyerServicer):
             return buyer_pb2.RateProductResponse(
                 status="FAIL: Invalid rating",
             )
-        client_ip_port = context.peer()
+        client_ip_port = request.buyer_addr
         product_id = request.product_id
         all_product_ratings = self.server_state.state.get('ratings', {})
         product_ratings = all_product_ratings.get(product_id, None)

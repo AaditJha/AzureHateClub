@@ -10,13 +10,15 @@ service Buyer {
 }
 
 message BuyProductRequest {
-  string product_id = 1;
-  int32 qty = 2;
+    string product_id = 1;
+    int32 qty = 2;
+    string buyer_addr = 3;
 }
 
 message RateProductRequest {
     string product_id = 1;
     int32 rating = 2;
+    string buyer_addr = 3;
 }
 
 message SearchProductRequest {
@@ -26,21 +28,22 @@ message SearchProductRequest {
 
 message AddToWishlistRequest {
     string product_id = 1; 
+    string buyer_addr = 2;
 }
 
 message BuyerProductDetails {
-  string product_id = 1;
-  string desc = 2;
-  int32 qty = 3;
-  double rating = 4;
-  string product_name = 5;
-  Category category = 6;
-  double price = 7;
-  string seller_addr = 8;
+    string product_id = 1;
+    string desc = 2;
+    int32 qty = 3;
+    double rating = 4;
+    string product_name = 5;
+    Category category = 6;
+    double price = 7;
+    string seller_addr = 8;
 }
 
 message BuyerProductResponse {
-  repeated BuyerProductDetails products = 1;
+    repeated BuyerProductDetails products = 1;
 }
 
 message RateProductResponse {

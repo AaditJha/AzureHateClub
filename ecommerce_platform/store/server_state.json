@@ -1,36 +1,42 @@
 {
     "seller_ids": [
-        "01f17742-17d7-4127-91cd-9f821a4c2821"
+        "784ffa5c-1539-4017-8636-fbf667ea6efa"
     ],
     "seller_addr": {
-        "01f17742-17d7-4127-91cd-9f821a4c2821": "[::]:35391"
+        "784ffa5c-1539-4017-8636-fbf667ea6efa": "[::]:37665"
     },
     "items": {
-        "0743846f-6324-49e3-a9f8-993bb829c93e": {
+        "c9733976-232e-4881-b5a0-56d9bca3741d": {
             "product_name": "Top 1",
             "category": 1,
-            "quantity": 0,
+            "quantity": 10,
             "description": "V Neck deep cut, purple/blue/black 100% cotton",
             "price_per_unit": 1500.0,
-            "seller_id": "01f17742-17d7-4127-91cd-9f821a4c2821"
+            "seller_id": "784ffa5c-1539-4017-8636-fbf667ea6efa"
         },
-        "ef3bf273-8442-402a-94e4-af3733e71b92": {
+        "fd9991f1-9b09-4e08-a323-1d01c269b9df": {
             "product_name": "iPhone 12",
             "category": 0,
-            "quantity": 8,
+            "quantity": 5,
             "description": "Black iPhone 14 next gen blah blah",
-            "price_per_unit": 150000.0,
-            "seller_id": "01f17742-17d7-4127-91cd-9f821a4c2821"
+            "price_per_unit": 140000.0,
+            "seller_id": "784ffa5c-1539-4017-8636-fbf667ea6efa"
         }
     },
     "ratings": {
-        "0743846f-6324-49e3-a9f8-993bb829c93e": {},
-        "ef3bf273-8442-402a-94e4-af3733e71b92": {}
+        "c9733976-232e-4881-b5a0-56d9bca3741d": {},
+        "fd9991f1-9b09-4e08-a323-1d01c269b9df": {}
     },
     "seller_items": {
-        "01f17742-17d7-4127-91cd-9f821a4c2821": [
-            "0743846f-6324-49e3-a9f8-993bb829c93e",
-            "ef3bf273-8442-402a-94e4-af3733e71b92"
+        "784ffa5c-1539-4017-8636-fbf667ea6efa": [
+            "c9733976-232e-4881-b5a0-56d9bca3741d",
+            "fd9991f1-9b09-4e08-a323-1d01c269b9df"
+        ]
+    },
+    "wishlists": {
+        "fd9991f1-9b09-4e08-a323-1d01c269b9df": [
+            "[::]:43957",
+            "[::]:33129"
         ]
     }
 }
