@@ -4,22 +4,21 @@ from concurrent import futures
 import seller_pb2_grpc, seller_pb2, shared_pb2
 import services
 import signal
-
+import address
 
 class Seller:
     def __init__(self) -> None:
         self.notification_server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
-        self.channel = grpc.insecure_channel("localhost:42483")
+        self.channel = grpc.insecure_channel(f"{address.MARKET_IP}:{address.MARKET_PORT}")
         self.stub = seller_pb2_grpc.SellerStub(self.channel)
         self.seller_id = str(uuid.uuid4())
         services.register_notify_service(self.notification_server)
         # Register the signal handler
         signal.signal(signal.SIGINT, lambda signum, frame : self.handle_termination())
         signal.signal(signal.SIGTERM, lambda signum, frame : self.handle_termination())
-        ip = "[::]"
-        port = self.notification_server.add_insecure_port(f"{ip}:0")
+        port = self.notification_server.add_insecure_port(f"{address.SELLER_INTERNAL_IP}:0")
         self.notification_server.start()
-        self.seller_addr = f"{ip}:{port}"
+        self.seller_addr = f"{address.SELLER_EXTERNAL_IP}:{port}"
         print(f'Notification server started on {self.seller_addr}')
     
     def handle_termination(self):
@@ -100,16 +99,20 @@ def menu(seller:Seller):
             qty = int(input('Enter quantity: '))
             desc = input('Enter description: ')
             price = float(input('Enter price: '))
+            print()
             seller.add_product(product_name, category, qty, desc, price)
         elif choice == '2':
             product_id = input('Enter product id: ')
             qty = int(input('Enter quantity: '))
             price = float(input('Enter price: '))
+            print()
             seller.update_product(product_id, qty, price)
         elif choice == '3':
             product_id = input('Enter product id: ')
+            print()
             seller.delete_product(product_id)
         elif choice == '4':
+            print()
             seller.get_products()
         elif choice == '5':
             break

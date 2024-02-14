@@ -3,6 +3,7 @@ from concurrent import futures
 import signal
 from services import register_all_services
 from server_state import ServerStateSingleton
+import address
 
 def handle_termination(server):
     print('\nClosing Server...')
@@ -18,10 +19,9 @@ def serve():
     signal.signal(signal.SIGINT, lambda signum, frame : handle_termination(server))
     signal.signal(signal.SIGTERM, lambda signum, frame : handle_termination(server))
 
-    ip = "[::]"
-    port = server.add_insecure_port(f"{ip}:42483")
+    server.add_insecure_port(f"{address.MARKET_IP}:{address.MARKET_PORT}")
     server.start()
-    print(f'Listening on {ip}:{port}')
+    print(f'Listening on {address.MARKET_IP}:{address.MARKET_PORT}')
     server.wait_for_termination()
 
 

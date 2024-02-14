@@ -1,34 +1,32 @@
 {
     "seller_ids": [
-        "8c6a3b54-d257-4470-a13b-51a0a1e2c072"
+        "d11641b1-83c3-4a43-aac0-36ed29d0a70d"
     ],
     "seller_addr": {
-        "8c6a3b54-d257-4470-a13b-51a0a1e2c072": "[::]:44149"
+        "d11641b1-83c3-4a43-aac0-36ed29d0a70d": "[::]:34937"
     },
     "items": {
-        "b0ccec7b-b7dd-46a4-8ad5-1c162622535e": {
-            "product_name": "Parle-G",
-            "category": 2,
-            "quantity": 180,
-            "description": "High glucose biscuit",
-            "price_per_unit": 20.0,
-            "seller_id": "8c6a3b54-d257-4470-a13b-51a0a1e2c072"
+        "39764cbf-2eb8-4a95-a719-c73e2c5a65a0": {
+            "product_name": "dasda",
+            "category": 0,
+            "quantity": 2,
+            "description": "asdrqw",
+            "price_per_unit": 123.0,
+            "seller_id": "d11641b1-83c3-4a43-aac0-36ed29d0a70d"
         }
     },
     "ratings": {
-        "b0ccec7b-b7dd-46a4-8ad5-1c162622535e": {
-            "[::]:41435": 4,
-            "[::]:37553": 2
-        }
+        "39764cbf-2eb8-4a95-a719-c73e2c5a65a0": {}
     },
     "seller_items": {
-        "8c6a3b54-d257-4470-a13b-51a0a1e2c072": [
-            "b0ccec7b-b7dd-46a4-8ad5-1c162622535e"
+        "d11641b1-83c3-4a43-aac0-36ed29d0a70d": [
+            "39764cbf-2eb8-4a95-a719-c73e2c5a65a0"
         ]
     },
     "wishlists": {
-        "b0ccec7b-b7dd-46a4-8ad5-1c162622535e": [
-            "[::]:37553"
+        "39764cbf-2eb8-4a95-a719-c73e2c5a65a0": [
+            "[::]:36347",
+            "[::]:37747"
         ]
     }
 }

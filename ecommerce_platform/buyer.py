@@ -5,20 +5,20 @@ import buyer_pb2_grpc
 from concurrent import futures
 import services
 import signal
+import address
 
 class Buyer:
     def __init__(self) -> None:
         self.notification_server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
-        self.channel = grpc.insecure_channel("localhost:42483")
+        self.channel = grpc.insecure_channel(f"{address.MARKET_IP}:{address.MARKET_PORT}")
         self.stub = buyer_pb2_grpc.BuyerStub(self.channel)
         services.register_notify_service(self.notification_server)
         # Register the signal handler
         signal.signal(signal.SIGINT, lambda signum, frame : self.handle_termination())
         signal.signal(signal.SIGTERM, lambda signum, frame : self.handle_termination())
-        ip = "[::]"
-        port = self.notification_server.add_insecure_port(f"{ip}:0")
+        port = self.notification_server.add_insecure_port(f"{address.BUYER_INTERNAL_IP}:0")
         self.notification_server.start()
-        self.buyer_addr = f"{ip}:{port}"
+        self.buyer_addr = f"{address.BUYER_EXTERNAL_IP}:{port}"
         print(f'Notification server started on {self.buyer_addr}')
     
     def handle_termination(self):
@@ -81,17 +81,21 @@ def menu(buyer: Buyer):
         if choice == '1':
             product_name = input('Enter product name: ')
             category = int(input('Enter category id (0-Electronics,1-Fashion,2-Others,3-Any): '))
+            print()
             buyer.search_product(product_name, category)
         elif choice == '2':
             product_id = input('Enter product id: ')
             qty = int(input('Enter quantity: '))
+            print()
             buyer.buy_product(product_id, qty)
         elif choice == '3':
             product_id = input('Enter product id: ')
             rating = int(input('Enter rating (0-5): '))
+            print()
             buyer.rate_product(product_id, rating)
         elif choice == '4':
             product_id = input('Enter product id: ')
+            print()
             buyer.add_to_wishlist(product_id)
         elif choice == '5':
             break
