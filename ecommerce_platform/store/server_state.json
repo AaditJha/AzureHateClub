@@ -1,32 +1,33 @@
 {
     "seller_ids": [
-        "d11641b1-83c3-4a43-aac0-36ed29d0a70d"
+        "5f95a674-d232-4955-b2c0-67e8a2d161ea",
+        "2cac20bc-f501-48aa-8fa3-82ee18ff9d92"
     ],
     "seller_addr": {
-        "d11641b1-83c3-4a43-aac0-36ed29d0a70d": "[::]:34937"
+        "5f95a674-d232-4955-b2c0-67e8a2d161ea": "[::]:33951",
+        "2cac20bc-f501-48aa-8fa3-82ee18ff9d92": "[::]:39569"
     },
     "items": {
-        "39764cbf-2eb8-4a95-a719-c73e2c5a65a0": {
-            "product_name": "dasda",
+        "9132e1f2-89b9-47f7-a59b-c9d6a2a5536e": {
+            "product_name": "Anindya",
             "category": 0,
-            "quantity": 2,
-            "description": "asdrqw",
-            "price_per_unit": 123.0,
-            "seller_id": "d11641b1-83c3-4a43-aac0-36ed29d0a70d"
+            "quantity": 20,
+            "description": "seed lover",
+            "price_per_unit": 50000000.0,
+            "seller_id": "5f95a674-d232-4955-b2c0-67e8a2d161ea"
         }
     },
     "ratings": {
-        "39764cbf-2eb8-4a95-a719-c73e2c5a65a0": {}
+        "9132e1f2-89b9-47f7-a59b-c9d6a2a5536e": {}
     },
     "seller_items": {
-        "d11641b1-83c3-4a43-aac0-36ed29d0a70d": [
-            "39764cbf-2eb8-4a95-a719-c73e2c5a65a0"
+        "5f95a674-d232-4955-b2c0-67e8a2d161ea": [
+            "9132e1f2-89b9-47f7-a59b-c9d6a2a5536e"
         ]
     },
     "wishlists": {
-        "39764cbf-2eb8-4a95-a719-c73e2c5a65a0": [
-            "[::]:36347",
-            "[::]:37747"
+        "9132e1f2-89b9-47f7-a59b-c9d6a2a5536e": [
+            "[::]:46685"
         ]
     }
 }

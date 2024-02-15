@@ -87,13 +87,16 @@ def menu(seller:Seller):
     print(f'Seller registered with ID: {seller.seller_id}')
     while(True):
         print('_'* 50)
+        print('0. Register Seller')
         print('1. Add Product')
         print('2. Update Product')
         print('3. Delete Product')
         print('4. Display Products')
         print('5. Exit')
         choice = input('Enter your choice: ')
-        if choice == '1':
+        if choice == '0':
+            seller.register_seller()
+        elif choice == '1':
             product_name = input('Enter product name: ')
             category = int(input('Enter category id (0-Electronics,1-Fashion,2-Others,3-Any): '))
             qty = int(input('Enter quantity: '))
