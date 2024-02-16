@@ -41,6 +41,7 @@ def handle_user_requests():
         return
 
 def main():
+    print("Message server running!")
     while True:
         if group_server_socket.poll(timeout=100):
             print("\n")

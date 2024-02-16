@@ -1,8 +1,12 @@
 import zmq
+import threading
 from datetime import datetime
 
-message_server_ip = "34.131.40.10"
-group_server_ip = "34.131.87.117"
+message_server_ip = "34.131.87.117"
+group_server_ip = "34.131.40.10"
+
+# message_server_ip = "localhost"
+# group_server_ip = "localhost"
 
 context = zmq.Context()
 
@@ -23,6 +27,7 @@ def bind_socket_to_random_port(socket, min_port=5557, max_port=5600):
 port_number = bind_socket_to_random_port(user_socket)
 usertele = set()
 messages = [] #user, time (iso), message
+message_lock = threading.Lock() 
 
 def register_group():
     server_name = input("Enter group server name: ")
@@ -88,10 +93,37 @@ def handle_message_send(request):
         user_socket.send_json({'status':'FAIL'})
         return
 
-    messages.append([request['uuid'], request['time'], request['message']])
+    with message_lock:
+        messages.append([request['uuid'], request['time'], request['message']])
     user_socket.send_json({'status':'SUCCESS'})
     return
-    
+
+def handle_request(request):
+    if request['action'] == "JOIN":
+        handle_join_request(request)
+    elif request['action'] == "LEAVE":
+        handle_leave_request(request)
+    elif request['action'] == "GET":
+        handle_message_request(request)
+    elif request['action'] == "SEND":
+        handle_message_send(request)
+    else:
+        print("ERROR! Wrong request action. Try again.")
+        user_socket.send_json({'status': "FAIL"})
+    return
+
+def handle_requests():
+    while True:
+        try:
+            if user_socket.poll(timeout=100):
+                print("\n")
+                request = user_socket.recv_json()
+                threading.Thread(target=handle_request, args=(request,)).start()
+        except KeyboardInterrupt:
+            print("Exiting...")
+            break
+
+
 def main():
     action = input("Do you want to register? [y/n] ").upper()
     if action == "N":
@@ -99,27 +131,12 @@ def main():
     elif action != 'Y':
         print("ERROR! Wrong input!")
         return
-    
+
     if register_group() == "FAIL":
-        print("ERROR! Same group name exists!")
         return
 
-    while True:
-        if user_socket.poll(timeout=100):
-            print("\n")
-            request = user_socket.recv_json()
-            if request['action'] == "JOIN":
-                handle_join_request(request)
-            elif request['action'] == "LEAVE":
-                handle_leave_request(request)
-            elif request['action'] == "GET":
-                handle_message_request(request)
-            elif request['action'] == "SEND":
-                handle_message_send(request)
-            else:
-                print("ERROR! Wrong request action. Try again.")
-                user_socket.send_json({'status':"FAIL"})
-                return
+    handle_requests()
+
         
 if __name__ == "__main__":
     main()

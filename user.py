@@ -2,7 +2,9 @@ import zmq
 import uuid
 from datetime import datetime, time
 
-message_server_ip = "34.131.40.10"
+message_server_ip = "34.131.87.117"
+
+# message_server_ip = "localhost"
 
 context = zmq.Context()
 
