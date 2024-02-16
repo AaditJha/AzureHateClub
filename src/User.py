@@ -16,7 +16,7 @@ LOGOUT_FLAG = False
 SERVER_AUTH_ROUTING_KEY = 'auth_queue'
 SERVER_PUBLISH_ROUTING_KEY = 'pub_queue'
 SERVER_SUBREQ_ROUTING_KEY = 'subreq_queue'
-HOST = '35.192.48.213'
+HOST = '34.31.25.112'
 
 def signalHandler(sig, _):
     print("\nShutting Server")
@@ -27,7 +27,7 @@ class User():
         signal.signal(signal.SIGINT, self.signalHandler)
 
         self.connection = pika.BlockingConnection(
-                pika.ConnectionParameters(host=HOST, credentials=pika.PlainCredentials('sohum','1234'), port=5672)
+                pika.ConnectionParameters(host=HOST, credentials=pika.PlainCredentials('aadit','1234'), port=5672)
             )
         self.channel = self.connection.channel()
         self.channel.queue_declare(queue=SERVER_AUTH_ROUTING_KEY, durable=True)

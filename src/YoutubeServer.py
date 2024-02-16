@@ -100,8 +100,8 @@ class Server():
             else:
                 print(f"{user} was not subscribed to {youtuber}.")
 
-        print(self.UserSubList)
-        print(self.YoutuberSubList)
+        # print(self.UserSubList)
+        # print(self.YoutuberSubList)
 
     def sendNotifications(self, youtuber:str, video_name:str):
         youtuber_id = self.Youtubers[youtuber]
