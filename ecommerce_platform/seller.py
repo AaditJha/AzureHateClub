@@ -83,8 +83,6 @@ class Seller:
 
 def menu(seller:Seller):
     print(f'Welcome Seller: {seller.seller_addr}')
-    seller.register_seller()
-    print(f'Seller registered with ID: {seller.seller_id}')
     while(True):
         print('_'* 50)
         print('0. Register Seller')
@@ -96,6 +94,7 @@ def menu(seller:Seller):
         choice = input('Enter your choice: ')
         if choice == '0':
             seller.register_seller()
+            print(f'Seller registered with ID: {seller.seller_id}')
         elif choice == '1':
             product_name = input('Enter product name: ')
             category = int(input('Enter category id (0-Electronics,1-Fashion,2-Others,3-Any): '))

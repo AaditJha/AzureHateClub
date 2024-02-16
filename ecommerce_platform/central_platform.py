@@ -21,7 +21,7 @@ def serve():
 
     server.add_insecure_port(f"{address.MARKET_INTERNAL_IP}:{address.MARKET_PORT}")
     server.start()
-    print(f'Listening on {address.MARKET_INTERNAL_IP}:{address.MARKET_PORT}')
+    print(f'Listening on {address.MARKET_EXTERNAL_IP}:{address.MARKET_PORT}')
     server.wait_for_termination()
 
 
