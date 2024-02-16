@@ -9,7 +9,7 @@ import address
 class Seller:
     def __init__(self) -> None:
         self.notification_server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
-        self.channel = grpc.insecure_channel(f"{address.MARKET_IP}:{address.MARKET_PORT}")
+        self.channel = grpc.insecure_channel(f"{address.MARKET_EXTERNAL_IP}:{address.MARKET_PORT}")
         self.stub = seller_pb2_grpc.SellerStub(self.channel)
         self.seller_id = str(uuid.uuid4())
         services.register_notify_service(self.notification_server)

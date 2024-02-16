@@ -10,7 +10,7 @@ import address
 class Buyer:
     def __init__(self) -> None:
         self.notification_server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
-        self.channel = grpc.insecure_channel(f"{address.MARKET_IP}:{address.MARKET_PORT}")
+        self.channel = grpc.insecure_channel(f"{address.MARKET_EXTERNAL_IP}:{address.MARKET_PORT}")
         self.stub = buyer_pb2_grpc.BuyerStub(self.channel)
         services.register_notify_service(self.notification_server)
         # Register the signal handler

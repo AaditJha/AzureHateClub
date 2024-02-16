@@ -19,9 +19,9 @@ def serve():
     signal.signal(signal.SIGINT, lambda signum, frame : handle_termination(server))
     signal.signal(signal.SIGTERM, lambda signum, frame : handle_termination(server))
 
-    server.add_insecure_port(f"{address.MARKET_IP}:{address.MARKET_PORT}")
+    address.MARKET_PORT = server.add_insecure_port(f"{address.MARKET_INTERNAL_IP}:{address.MARKET_PORT}")
     server.start()
-    print(f'Listening on {address.MARKET_IP}:{address.MARKET_PORT}')
+    print(f'Listening on {address.MARKET_INTERNAL_IP}:{address.MARKET_PORT}')
     server.wait_for_termination()
 
 
