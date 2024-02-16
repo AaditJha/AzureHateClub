@@ -6,7 +6,6 @@
 
 import sys
 import pika
-import time 
 import signal
 from datetime import datetime
 import user_pb2
@@ -17,7 +16,7 @@ LOGOUT_FLAG = False
 SERVER_AUTH_ROUTING_KEY = 'auth_queue'
 SERVER_PUBLISH_ROUTING_KEY = 'pub_queue'
 SERVER_SUBREQ_ROUTING_KEY = 'subreq_queue'
-HOST = 'localhost'
+HOST = '35.192.48.213'
 
 def signalHandler(sig, _):
     print("\nShutting Server")
@@ -27,7 +26,9 @@ class User():
     def __init__(self, username:str, sub:str=None, channel_name:str=None):
         signal.signal(signal.SIGINT, self.signalHandler)
 
-        self.connection = pika.BlockingConnection(pika.ConnectionParameters(HOST))
+        self.connection = pika.BlockingConnection(
+                pika.ConnectionParameters(host=HOST, credentials=pika.PlainCredentials('sohum','1234'), port=5672)
+            )
         self.channel = self.connection.channel()
         self.channel.queue_declare(queue=SERVER_AUTH_ROUTING_KEY, durable=True)
 
@@ -101,15 +102,3 @@ if __name__ == '__main__':
         sub = sys.argv[2]
 
     User(username=username, sub=sub, channel_name=channel_name)
-    
-
-
-    
-
-
-    
-
-
-
-
-

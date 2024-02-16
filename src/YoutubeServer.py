@@ -15,7 +15,6 @@ import signal
 from user_pb2 import User
 from video_pb2 import Video
 from subrequest_pb2 import SubRequest
-from datetime import datetime
 import sys
 
 HOST = 'localhost'
@@ -126,5 +125,3 @@ class Server():
 
 if __name__ == '__main__':
     Server()
-
-

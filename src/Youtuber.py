@@ -2,19 +2,17 @@
 # Publish Video - with 2 args username videoname, if username doesn't exists in YoutubeServer create new Youtuber.
 
 import sys
-import time
 import pika
-from datetime import datetime
 import video_pb2
 
 SERVER_AUTH_ROUTING_KEY = 'auth_queue'
 SERVER_PUBLISH_ROUTING_KEY = 'pub_queue'
 SERVER_SUBREQ_ROUTING_KEY = 'subreq_queue'
-HOST = 'localhost'
+HOST = '35.192.48.213'
 
 class YouTuber():
     def __init__(self, youtuber:str, video_name:str):
-        self.connection = pika.BlockingConnection(pika.ConnectionParameters(HOST))
+        self.connection = pika.BlockingConnection(pika.ConnectionParameters(host=HOST, credentials=pika.PlainCredentials(username='sohum', password='1234'), port=5672))
         self.channel = self.connection.channel()
         self.channel.queue_declare(queue=SERVER_PUBLISH_ROUTING_KEY, durable=True)
 
