@@ -1,5 +1,4 @@
 grpcio
 grpcio-tools
-protobuf==3.20.1
 fuzzywuzzy
 python-Levenshtein
