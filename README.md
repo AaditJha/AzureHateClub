@@ -1,5 +1,3 @@
-# Welcome to the Project
+# RAFT Application
 
-Please head over to the appropriate branches for each assignment. You will find detailed instructions in the README.md file of each branch.
-
-Happy coding!
+This is a raft application.
