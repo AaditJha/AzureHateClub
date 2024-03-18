@@ -19,12 +19,23 @@ class NodeStub(object):
                 request_serializer=node__pb2.RequestVoteRequest.SerializeToString,
                 response_deserializer=node__pb2.RequestVoteResponse.FromString,
                 )
+        self.LogRequest = channel.unary_unary(
+                '/RAFT.Node/LogRequest',
+                request_serializer=node__pb2.LogRequestRequest.SerializeToString,
+                response_deserializer=node__pb2.LogRequestResponse.FromString,
+                )
 
 
 class NodeServicer(object):
     """Missing associated documentation comment in .proto file."""
 
     def RequestVote(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def LogRequest(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -37,6 +48,11 @@ def add_NodeServicer_to_server(servicer, server):
                     servicer.RequestVote,
                     request_deserializer=node__pb2.RequestVoteRequest.FromString,
                     response_serializer=node__pb2.RequestVoteResponse.SerializeToString,
+            ),
+            'LogRequest': grpc.unary_unary_rpc_method_handler(
+                    servicer.LogRequest,
+                    request_deserializer=node__pb2.LogRequestRequest.FromString,
+                    response_serializer=node__pb2.LogRequestResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -62,5 +78,22 @@ class Node(object):
         return grpc.experimental.unary_unary(request, target, '/RAFT.Node/RequestVote',
             node__pb2.RequestVoteRequest.SerializeToString,
             node__pb2.RequestVoteResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def LogRequest(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/RAFT.Node/LogRequest',
+            node__pb2.LogRequestRequest.SerializeToString,
+            node__pb2.LogRequestResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

@@ -3,6 +3,7 @@ package RAFT;
 
 service Node{
     rpc RequestVote(RequestVoteRequest) returns (RequestVoteResponse);
+    rpc LogRequest(LogRequestRequest) returns (LogRequestResponse);
 }
 
 message RequestVoteRequest{
@@ -16,4 +17,25 @@ message RequestVoteResponse{
     int32 term = 1;
     int32 voter_id = 2;
     bool vote_granted = 3;
+}
+
+message LogEntry{
+    string msg = 1;
+    int32 term = 2;
+}
+
+message LogRequestRequest{
+    int32 leader_id = 1;
+    int32 term = 2;
+    int32 prefix_len = 3;
+    int32 prefix_term = 4;
+    int32 leader_commit = 5;
+    repeated LogEntry suffix = 6;
+}
+
+message LogRequestResponse{
+    int32 follower_id = 1;
+    int32 term = 2;
+    int32 ack = 3;
+    bool success = 4;
 }

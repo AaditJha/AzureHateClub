@@ -26,3 +26,40 @@ class NodeServicer(node_pb2_grpc.NodeServicer):
             return node_pb2.RequestVoteResponse(term=self.node.current_term,voter_id=self.node.id,vote_granted=True)
         else:
             return node_pb2.RequestVoteResponse(term=self.node.current_term,voter_id=self.node.id,vote_granted=False)
+        
+    def append_entries(self,prefix_len,leader_commit,suffix):
+        if len(suffix) > 0 and len(self.node.log) > prefix_len:
+            index = min(len(self.node.log),prefix_len+len(suffix)) - 1
+            if self.node.log[index].term != suffix[index - prefix_len].term:
+                self.node.log = self.node.log[:prefix_len]
+        
+        if prefix_len + len(suffix) > len(self.node.log):
+            for i in range(len(self.node.log)-prefix_len, len(suffix)):
+                self.node.log.append(suffix[i])
+        
+        if leader_commit > self.node.commit_len:
+            for i in range(self.node.commit_len,leader_commit):
+                #deliver log[i] msg to application
+                pass
+            self.node.commit_len = leader_commit
+
+    def LogRequest(self, request, context):
+        if request.term > self.node.current_term:
+            self.node.current_term = request.term
+            self.node.voted_for = None
+            #Cancel election timer
+        
+        if request.term == self.node.current_term:
+            self.node.current_role = Role.FOLLOWER
+            self.current_leader = request.leader_id
+        
+        log_ok = (len(self.node.log) >= request.prefix_len) and (request.prefix_len == 0 or 
+                                                                 self.node.log[request.prefix_len-1].term == request.prefix_term)
+
+        if request.term == self.node.current_term and log_ok:
+            #AppendEntries
+            self.append_entries(request.prefix_len,request.leader_commit,request.suffix)
+            ack = request.prefix_len + len(request.suffix)
+            return node_pb2.LogRequestResponse(follower_id=self.node.id,term=self.node.current_term,ack=ack,success=True)
+    
+        return node_pb2.LogRequestResponse(follower_id=self.node.id,term=self.node.current_term,ack=0,success=False)
