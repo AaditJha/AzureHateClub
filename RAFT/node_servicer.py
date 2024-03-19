@@ -1,11 +1,10 @@
 import grpc
 import node_pb2_grpc
 import node_pb2
-from node import Node
 from role import Role
 
 class NodeServicer(node_pb2_grpc.NodeServicer):
-    def __init__(self, node : Node) -> None:
+    def __init__(self, node) -> None:
         super().__init__()
         self.node = node
     
@@ -39,7 +38,7 @@ class NodeServicer(node_pb2_grpc.NodeServicer):
         
         if leader_commit > self.node.commit_len:
             for i in range(self.node.commit_len,leader_commit):
-                #deliver log[i] msg to application
+                #TODO: deliver log[i] msg to application
                 pass
             self.node.commit_len = leader_commit
 
@@ -47,17 +46,19 @@ class NodeServicer(node_pb2_grpc.NodeServicer):
         if request.term > self.node.current_term:
             self.node.current_term = request.term
             self.node.voted_for = None
-            #Cancel election timer
+            if self.node.election_timer:
+                self.node.election_timer.reset()
         
         if request.term == self.node.current_term:
             self.node.current_role = Role.FOLLOWER
             self.current_leader = request.leader_id
+            if self.node.election_timer:
+                self.node.election_timer.reset()
         
         log_ok = (len(self.node.log) >= request.prefix_len) and (request.prefix_len == 0 or 
                                                                  self.node.log[request.prefix_len-1].term == request.prefix_term)
 
         if request.term == self.node.current_term and log_ok:
-            #AppendEntries
             self.append_entries(request.prefix_len,request.leader_commit,request.suffix)
             ack = request.prefix_len + len(request.suffix)
             return node_pb2.LogRequestResponse(follower_id=self.node.id,term=self.node.current_term,ack=ack,success=True)

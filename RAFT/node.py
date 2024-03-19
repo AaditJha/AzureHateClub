@@ -3,6 +3,13 @@ import node_pb2
 import node_pb2_grpc
 from role import Role
 from math import ceil
+from random import randint
+from election_timer import ElectionTimer
+from address import NODE_IP_PORT
+from node_servicer import NodeServicer
+import sys
+import signal
+from concurrent import futures
 
 class LogEntry:
     def __init__(self,term,command) -> None:
@@ -10,7 +17,7 @@ class LogEntry:
         self.command = command
 
 class Node:
-    def __init__(self,id) -> None:
+    def __init__(self,id,ip_port) -> None:
         self.current_term = 0
         self.voted_for = None
         self.log = []
@@ -24,12 +31,38 @@ class Node:
         self.nodes = []
         self.channels = {}
         self.stubs = {}
+        self.election_timer = None
+        self.ip_port = ip_port
+        self.introduce_nodes()
+        self.start_server()          
     
-    def introduce_nodes(self,node_ip_port):
-        self.nodes = node_ip_port.keys()
-        self.nodes.remove(self.node_id)
+    def handle_termination(self):
+        print('\nClosing Server...')
+        self.server.stop(0)
+    
+    def start_server(self):
+        self.server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
+        node_pb2_grpc.add_NodeServicer_to_server(NodeServicer(self),self.server)
+
+        signal.signal(signal.SIGINT, lambda signum, frame : self.handle_termination())
+        signal.signal(signal.SIGTERM, lambda signum, frame : self.handle_termination())
+        
+        self.server.add_insecure_port(self.ip_port)
+        self.server.start()
+        print('Node',self.id,'started at',self.ip_port)
+
+        self.election_timer = ElectionTimer(randint(5,10),self.on_election)
+        print('Election Timer at server start')
+        self.election_timer.start()
+
+        # Register the signal handler
+        self.server.wait_for_termination()
+
+    def introduce_nodes(self):
+        self.nodes = list(NODE_IP_PORT.keys())
+        self.nodes.remove(self.id)
         for node_id in self.nodes:
-            self.channels[node_id] = grpc.insecure_channel(node_ip_port[node_id])
+            self.channels[node_id] = grpc.insecure_channel(NODE_IP_PORT[node_id])
             self.stubs[node_id] = node_pb2_grpc.NodeStub(self.channels[node_id])
     
     def recover_from_crash(self):
@@ -43,12 +76,15 @@ class Node:
         response = self.stubs[node_id].RequestVote(
             node_pb2.RequestVoteRequest(term=term,candidate_id=candidate_id,
                                         last_log_index=last_log_index,last_log_term=last_log_term))
+        
         if self.current_role == Role.CANDIDATE and self.current_term == response.term and response.vote_granted:
             self.votes_recv.add(node_id)
             if len(self.votes_recv) > ceil((len(self.nodes) + 1) / 2):
+                print(self.id," is the leader")
                 self.current_role = Role.LEADER
                 self.current_leader = self.id
-                #cancel election timer
+                if self.election_timer:
+                    self.election_timer.reset()
                 for node_id in self.nodes:
                     self.sent_len[node_id] = len(self.log)
                     self.ack_len[node_id] = 0
@@ -58,7 +94,8 @@ class Node:
             self.current_term = response.term
             self.current_role = Role.FOLLOWER
             self.voted_for = None
-            #cancel election timer
+            if self.election_timer:
+                self.election_timer.reset()
         
     def on_broadcast_request(self,msg):
         if self.current_role == Role.LEADER:
@@ -66,7 +103,7 @@ class Node:
             self.ack_len[self.id] = len(self.log)
             self.heartbeat()
         else:
-            #Forward Request to Leader via FIFO
+            #TODO: Forward Request to Leader via FIFO
             pass
     
     def heartbeat(self):
@@ -88,10 +125,10 @@ class Node:
             for node_id in acks:
                 if self.ack_len[node_id] < (i+1):
                     acks.remove(node_id)
-        ready_max = max(ready)
+        ready_max = max(ready) if len(ready) > 0 else 0
         if len(ready) != 0 and ready_max > self.commit_len and self.log[ready_max - 1].term == self.current_term:
             for i in range(self.commit_len,ready_max):
-                #deliver log[i] msg to application
+                #TODO: deliver log[i] msg to application
                 pass
             self.commit_len = ready_max
 
@@ -119,9 +156,14 @@ class Node:
             self.current_term = response.term
             self.current_role = Role.FOLLOWER
             self.voted_for = None
-            #cancel election timer
+            if self.election_timer:
+                self.election_timer.reset()
 
     def on_election(self):
+        if self.current_role == Role.LEADER:
+            self.heartbeat()
+            return
+        print(self.id," starting election")
         self.current_term += 1
         self.current_role = Role.CANDIDATE
         self.voted_for = self.id 
@@ -130,6 +172,18 @@ class Node:
         if len(self.log) > 0:
             last_term = self.log[-1].term
         for node_id in self.nodes:
-            self.request_vote(self,node_id,self.current_term,self.id,len(self.log),last_term)
-        #start election timer
+            self.request_vote(node_id,self.current_term,self.id,len(self.log),last_term)
         
+        print('Election Timer at election start')
+        self.election_timer.start(randint(5,10))        
+    
+def main():
+    if len(sys.argv) != 2:
+        print("Usage: python node.py <node_id>")
+        sys.exit(1)
+
+    node_id = sys.argv[1]
+    node = Node(node_id,NODE_IP_PORT[node_id])
+
+if __name__ == "__main__":
+    main()
