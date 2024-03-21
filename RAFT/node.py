@@ -37,6 +37,8 @@ class Node:
         self.start_server()          
     
     def handle_termination(self):
+        if self.election_timer is not None:
+            self.election_timer.cancel()
         print('\nClosing Server...')
         self.server.stop(0)
     
@@ -46,6 +48,7 @@ class Node:
 
         signal.signal(signal.SIGINT, lambda signum, frame : self.handle_termination())
         signal.signal(signal.SIGTERM, lambda signum, frame : self.handle_termination())
+        signal.signal(signal.SIGALRM, lambda signum, frame : self.heartbeat())
         
         self.server.add_insecure_port(self.ip_port)
         self.server.start()
@@ -64,6 +67,8 @@ class Node:
         for node_id in self.nodes:
             self.channels[node_id] = grpc.insecure_channel(NODE_IP_PORT[node_id])
             self.stubs[node_id] = node_pb2_grpc.NodeStub(self.channels[node_id])
+            self.sent_len[node_id] = 0
+            self.ack_len[node_id] = 0
     
     def recover_from_crash(self):
         self.current_role = Role.FOLLOWER
@@ -71,6 +76,7 @@ class Node:
         self.votes_recv = {}
         self.sent_len = {}
         self.ack_len = {}
+        self.introduce_nodes()
     
     def request_vote(self,node_id,term,candidate_id,last_log_index,last_log_term):
         response = self.stubs[node_id].RequestVote(
@@ -79,12 +85,14 @@ class Node:
         
         if self.current_role == Role.CANDIDATE and self.current_term == response.term and response.vote_granted:
             self.votes_recv.add(node_id)
-            if len(self.votes_recv) > ceil((len(self.nodes) + 1) / 2):
+            if len(self.votes_recv) >= ceil((len(self.nodes) + 1) / 2):
                 print(self.id," is the leader")
                 self.current_role = Role.LEADER
                 self.current_leader = self.id
+                signal.setitimer(signal.ITIMER_REAL,1.5,1.5)
                 if self.election_timer:
-                    self.election_timer.reset()
+                    print('Stopping Election Timer')
+                    self.election_timer.cancel()
                 for node_id in self.nodes:
                     self.sent_len[node_id] = len(self.log)
                     self.ack_len[node_id] = 0
@@ -93,6 +101,7 @@ class Node:
         elif response.term > self.current_term:
             self.current_term = response.term
             self.current_role = Role.FOLLOWER
+            signal.setitimer(signal.ITIMER_REAL,0,0)
             self.voted_for = None
             if self.election_timer:
                 self.election_timer.reset()
@@ -155,17 +164,16 @@ class Node:
         elif response.term > self.current_term:
             self.current_term = response.term
             self.current_role = Role.FOLLOWER
+            signal.setitimer(signal.ITIMER_REAL,0,0)
             self.voted_for = None
             if self.election_timer:
                 self.election_timer.reset()
 
     def on_election(self):
-        if self.current_role == Role.LEADER:
-            self.heartbeat()
-            return
         print(self.id," starting election")
         self.current_term += 1
         self.current_role = Role.CANDIDATE
+        signal.setitimer(signal.ITIMER_REAL,0,0)
         self.voted_for = self.id 
         self.votes_recv.add(self.id)
         last_term = 0
@@ -174,8 +182,9 @@ class Node:
         for node_id in self.nodes:
             self.request_vote(node_id,self.current_term,self.id,len(self.log),last_term)
         
-        print('Election Timer at election start')
-        self.election_timer.start(randint(5,10))        
+        if self.current_role != Role.LEADER:
+            print('Election Timer at election start')
+            self.election_timer.start(randint(5,10))        
     
 def main():
     if len(sys.argv) != 2:

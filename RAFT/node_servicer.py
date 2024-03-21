@@ -47,12 +47,14 @@ class NodeServicer(node_pb2_grpc.NodeServicer):
             self.node.current_term = request.term
             self.node.voted_for = None
             if self.node.election_timer:
+                print("Resetting election timer")
                 self.node.election_timer.reset()
         
         if request.term == self.node.current_term:
             self.node.current_role = Role.FOLLOWER
             self.current_leader = request.leader_id
             if self.node.election_timer:
+                print("Resetting election timer")
                 self.node.election_timer.reset()
         
         log_ok = (len(self.node.log) >= request.prefix_len) and (request.prefix_len == 0 or 

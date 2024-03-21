@@ -10,7 +10,10 @@ class ElectionTimer:
 
     def callback(self):
         self.function()
-        self.start()
+    
+    def cancel(self):
+        if self.timer is not None:
+            self.timer.cancel()
     
     def start(self,interval=None,reset=False):
         if self.timer is not None:
