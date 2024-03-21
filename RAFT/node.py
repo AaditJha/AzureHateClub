@@ -11,6 +11,9 @@ import sys
 import signal
 from concurrent import futures
 
+#Might need to change this for GCP
+GRPC_DEADLINE = 3
+
 class LogEntry:
     def __init__(self,term,command) -> None:
         self.term = term
@@ -78,13 +81,24 @@ class Node:
         self.ack_len = {}
         self.introduce_nodes()
     
+    def make_grpc_call(self,method,request,node_id):
+        response = None
+        try:
+            response = method(request,timeout=GRPC_DEADLINE)
+        except grpc.RpcError as e:
+            print(e.code(),':',node_id,'is down')
+        return response
+    
     def request_vote(self,node_id,term,candidate_id,last_log_index,last_log_term):
-        response = self.stubs[node_id].RequestVote(
-            node_pb2.RequestVoteRequest(term=term,candidate_id=candidate_id,
-                                        last_log_index=last_log_index,last_log_term=last_log_term))
-        
+        response = self.make_grpc_call(self.stubs[node_id].RequestVote,node_pb2.RequestVoteRequest(term=term,candidate_id=candidate_id,
+                                            last_log_index=last_log_index,last_log_term=last_log_term),node_id)
+
+        if response is None:
+            return
+
         if self.current_role == Role.CANDIDATE and self.current_term == response.term and response.vote_granted:
             self.votes_recv.add(node_id)
+            print(self.votes_recv)
             if len(self.votes_recv) >= ceil((len(self.nodes) + 1) / 2):
                 print(self.id," is the leader")
                 self.current_role = Role.LEADER
@@ -148,10 +162,12 @@ class Node:
         if prefix_len > 0:
             prefix_term = self.log[prefix_len-1].term
         
-        response = self.stubs[follower_id].LogRequest(
-            node_pb2.LogRequestRequest(leader_id=self.id,term=self.current_term,
-                                       prefix_len=prefix_len,prefix_term=prefix_term,
-                                       leader_commit=self.commit_len,suffix=suffix))
+        response = self.make_grpc_call(self.stubs[follower_id].LogRequest,node_pb2.LogRequestRequest(leader_id=self.id,term=self.current_term,
+                                        prefix_len=prefix_len,prefix_term=prefix_term,
+                                        leader_commit=self.commit_len,suffix=suffix),follower_id)
+
+        if response is None:
+            return
 
         if response.term == self.current_term and self.current_role == Role.LEADER:
             if response.success and response.ack >= self.ack_len[follower_id]:
@@ -175,13 +191,15 @@ class Node:
         self.current_role = Role.CANDIDATE
         signal.setitimer(signal.ITIMER_REAL,0,0)
         self.voted_for = self.id 
+        self.votes_recv = set()
         self.votes_recv.add(self.id)
+        print(self.votes_recv)
         last_term = 0
         if len(self.log) > 0:
             last_term = self.log[-1].term
         for node_id in self.nodes:
             self.request_vote(node_id,self.current_term,self.id,len(self.log),last_term)
-        
+        self.votes_recv = set()
         if self.current_role != Role.LEADER:
             print('Election Timer at election start')
             self.election_timer.start(randint(5,10))        
