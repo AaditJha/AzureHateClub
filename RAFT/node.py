@@ -198,6 +198,7 @@ class Node:
         if len(self.log) > 0:
             last_term = self.log[-1].term
         for node_id in self.nodes:
+            print('Requesting vote from',node_id)
             self.request_vote(node_id,self.current_term,self.id,len(self.log),last_term)
         self.votes_recv = set()
         if self.current_role != Role.LEADER:
