@@ -38,6 +38,10 @@ class NodeServicer(node_pb2_grpc.NodeServicer):
         if prefix_len + len(suffix) > len(self.node.log):
             for i in range(len(self.node.log)-prefix_len, len(suffix)):
                 self.node.log.append(suffix[i])
+                msg = suffix[i].msg
+                if msg.startswith('SET'):
+                    key,value = msg.split(' ')[1:]
+                    self.node.database[key] = value
         
         if leader_commit > self.node.commit_len:
             for i in range(self.node.commit_len,leader_commit):
@@ -55,13 +59,14 @@ class NodeServicer(node_pb2_grpc.NodeServicer):
         
         if request.term == self.node.current_term:
             self.node.current_role = Role.FOLLOWER
-            self.current_leader = request.leader_id
+            self.node.current_leader = request.leader_id
             if self.node.election_timer:
                 print("Resetting election timer")
                 self.node.election_timer.reset()
-        
+
         log_ok = (len(self.node.log) >= request.prefix_len) and (request.prefix_len == 0 or 
                                                                  self.node.log[request.prefix_len-1].term == request.prefix_term)
+
 
         if request.term == self.node.current_term and log_ok:
             self.append_entries(request.prefix_len,request.leader_commit,request.suffix)

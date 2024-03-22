@@ -1,23 +1,18 @@
 import grpc
-import node_pb2
-import node_pb2_grpc
+import node_pb2, node_pb2_grpc
+import client_pb2, client_pb2_grpc
 from role import Role
 from math import ceil
 from random import randint
 from election_timer import ElectionTimer
 from address import NODE_IP_PORT
 from node_servicer import NodeServicer
-import sys
-import signal
+from client_servicer import ClientServicer
+import sys, signal, os
 from concurrent import futures
 
 #Might need to change this for GCP
 GRPC_DEADLINE = 3
-
-class LogEntry:
-    def __init__(self,term,command) -> None:
-        self.term = term
-        self.command = command
 
 class Node:
     def __init__(self,id,ip_port) -> None:
@@ -34,6 +29,7 @@ class Node:
         self.nodes = []
         self.channels = {}
         self.stubs = {}
+        self.database = {}
         self.election_timer = None
         self.ip_port = ip_port
         self.introduce_nodes()
@@ -48,6 +44,7 @@ class Node:
     def start_server(self):
         self.server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
         node_pb2_grpc.add_NodeServicer_to_server(NodeServicer(self),self.server)
+        client_pb2_grpc.add_ClientServicer_to_server(ClientServicer(self),self.server)
 
         signal.signal(signal.SIGINT, lambda signum, frame : self.handle_termination())
         signal.signal(signal.SIGTERM, lambda signum, frame : self.handle_termination())
@@ -120,14 +117,22 @@ class Node:
             if self.election_timer:
                 self.election_timer.reset()
         
-    def on_broadcast_request(self,msg):
+    def on_broadcast_request(self,msg,log):
+        if self.current_role != Role.LEADER:
+            return self.current_leader, False, f"I am not the leader, {self.current_leader} is the leader"
+        
         if self.current_role == Role.LEADER:
-            self.log.append(LogEntry(self.current_term,msg))
+            self.log.append(node_pb2.LogEntry(term=self.current_term,msg=msg))
             self.ack_len[self.id] = len(self.log)
             self.heartbeat()
-        else:
-            #TODO: Forward Request to Leader via FIFO
-            pass
+            key = msg.split(' ')[1]
+            if msg.startswith('SET'):
+                value = msg.split(' ')[2]
+                self.database[key] = value
+            if key in self.database:
+                return self.id, True, self.database[key]
+            else:
+                return self.id, False, "Key not found"
     
     def heartbeat(self):
         for node_id in self.nodes:
@@ -210,7 +215,10 @@ def main():
         print("Usage: python node.py <node_id>")
         sys.exit(1)
 
+
     node_id = sys.argv[1]
+    if not os.path.exists(f'logs_node_{node_id}'):
+        os.mkdir(f'logs_node_{node_id}')
     node = Node(node_id,NODE_IP_PORT[node_id])
 
 if __name__ == "__main__":

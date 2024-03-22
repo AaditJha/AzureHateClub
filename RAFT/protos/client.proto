@@ -1,0 +1,16 @@
+syntax = "proto3";
+package RAFT;
+
+service Client{
+    rpc QueryServer (QueryServerRequest) returns (QueryServerResponse);
+}
+
+message QueryServerRequest {
+  string msg = 1;
+}
+
+message QueryServerResponse {
+  string data = 1;
+  string leader_id = 2;
+  bool success = 3;
+}
