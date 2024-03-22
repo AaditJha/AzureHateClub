@@ -129,11 +129,9 @@ class Node:
             if msg.startswith('SET'):
                 value = msg.split(' ')[2]
                 self.database[key] = value
-            if key in self.database:
-                return self.id, True, self.database[key]
-            else:
-                return self.id, False, "Key not found"
-    
+            data = self.database[key] if key in self.database else ""
+            return self.id, True, data
+
     def heartbeat(self):
         for node_id in self.nodes:
             self.replicate_log(node_id)
