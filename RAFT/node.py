@@ -87,7 +87,7 @@ class Node:
         try:
             response = method(request,timeout=GRPC_DEADLINE)
         except grpc.RpcError as e:
-            print(e.code(),':',node_id,'is down')
+            print(e.code(),':',node_id,'is down',e.details())
         return response
     
     def request_vote(self,node_id,term,candidate_id,last_log_index,last_log_term):
@@ -126,11 +126,11 @@ class Node:
             return self.current_leader, False, f"I am not the leader, {self.current_leader} is the leader"
         
         if self.current_role == Role.LEADER:
-            self.log.append(node_pb2.LogEntry(term=self.current_term,msg=msg))
-            self.ack_len[self.id] = len(self.log)
-            self.heartbeat()
             key = msg.split(' ')[1]
             if msg.startswith('SET'):
+                self.log.append(node_pb2.LogEntry(term=self.current_term,msg=msg))
+                self.ack_len[self.id] = len(self.log)
+                self.heartbeat()
                 value = msg.split(' ')[2]
                 self.database[key] = value
             data = self.database[key] if key in self.database else ""
@@ -222,8 +222,8 @@ def main():
     node = Node(node_id,NODE_IP_PORT[node_id])
     if not os.path.exists(f'logs_node_{node_id}'):
         os.mkdir(f'logs_node_{node_id}')
-    else:
-        node.recover_from_crash()
+    # else:
+    #     node.recover_from_crash()
 
 if __name__ == "__main__":
     main()

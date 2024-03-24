@@ -18,7 +18,7 @@ class Client:
             print(response.leader_id)
             return response.leader_id,response.success,response.data
         return self.current_leader,response.success,response.data
-    
+
 if __name__ == "__main__":
     client = Client()
     while True:
