@@ -71,6 +71,10 @@ class Node:
             self.ack_len[node_id] = 0
     
     def recover_from_crash(self):
+        '''
+        This method reads the persistent states and updates the node accordingly.
+        '''
+        #TODO: Read Metadata, update state, Read Logs, update logs and database on the fly
         self.current_role = Role.FOLLOWER
         self.current_leader = None
         self.votes_recv = {}
@@ -215,9 +219,11 @@ def main():
 
 
     node_id = sys.argv[1]
+    node = Node(node_id,NODE_IP_PORT[node_id])
     if not os.path.exists(f'logs_node_{node_id}'):
         os.mkdir(f'logs_node_{node_id}')
-    node = Node(node_id,NODE_IP_PORT[node_id])
+    else:
+        node.recover_from_crash()
 
 if __name__ == "__main__":
     main()

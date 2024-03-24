@@ -37,15 +37,15 @@ class NodeServicer(node_pb2_grpc.NodeServicer):
         
         if prefix_len + len(suffix) > len(self.node.log):
             for i in range(len(self.node.log)-prefix_len, len(suffix)):
-                self.node.log.append(suffix[i])
-                msg = suffix[i].msg
                 if msg.startswith('SET'):
+                    self.node.log.append(suffix[i])
+                    msg = suffix[i].msg
                     key,value = msg.split(' ')[1:]
                     self.node.database[key] = value
         
         if leader_commit > self.node.commit_len:
             for i in range(self.node.commit_len,leader_commit):
-                #TODO: deliver log[i] msg to application
+                #TODO: Store the new logs in logs.txt 
                 pass
             self.node.commit_len = leader_commit
 
