@@ -5,14 +5,12 @@ from role import Role
 from math import ceil
 from random import randint
 from election_timer import ElectionTimer
-from address import NODE_IP_PORT
+from address import NODE_IP_PORT, GRPC_DEADLINE
 from node_servicer import NodeServicer
 from client_servicer import ClientServicer
 import sys, signal, os
 from concurrent import futures
 
-#Might need to change this for GCP
-GRPC_DEADLINE = 3
 
 class Node:
     def __init__(self,id,ip_port) -> None:
@@ -141,6 +139,7 @@ class Node:
             self.replicate_log(node_id)
         
     def commit_log(self):
+        print("HEY LEADER")
         acks = []
         min_acks = ceil((len(self.nodes) + 1) / 2)
         ready = []
@@ -159,7 +158,7 @@ class Node:
         if len(ready) != 0 and ready_max > self.commit_len and self.log[ready_max - 1].term == self.current_term:
             for i in range(self.commit_len,ready_max):
                 #TODO: deliver log[i] msg to application
-                pass
+                print("HEY LEADER LOOP")
             self.commit_len = ready_max
 
     def replicate_log(self,follower_id):
