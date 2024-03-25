@@ -30,7 +30,6 @@ class NodeServicer(node_pb2_grpc.NodeServicer):
             return node_pb2.RequestVoteResponse(term=self.node.current_term,voter_id=self.node.id,vote_granted=False)
         
     def append_entries(self,prefix_len,leader_commit,suffix):
-        print("HEY")
         if len(suffix) > 0 and len(self.node.log) > prefix_len:
             index = min(len(self.node.log),prefix_len+len(suffix)) - 1
             if self.node.log[index].term != suffix[index - prefix_len].term:
@@ -46,8 +45,8 @@ class NodeServicer(node_pb2_grpc.NodeServicer):
         
         if leader_commit > self.node.commit_len:
             for i in range(self.node.commit_len,leader_commit):
-                #TODO: Store the new logs in logs.txt 
-                print("HEY", i)
+                #TODO: Store the new logs for follower
+                pass
             self.node.commit_len = leader_commit
 
     def LogRequest(self, request, context):

@@ -31,6 +31,10 @@ class Node:
         self.election_timer = None
         self.ip_port = ip_port
         self.introduce_nodes()
+        if not os.path.exists(f'logs_node_{self.id}'):
+            os.mkdir(f'logs_node_{self.id}')
+        else:
+            self.recover_from_crash()
         self.start_server()          
     
     def handle_termination(self):
@@ -72,13 +76,14 @@ class Node:
         '''
         This method reads the persistent states and updates the node accordingly.
         '''
-        #TODO: Read Metadata, update state, Read Logs, update logs and database on the fly
         self.current_role = Role.FOLLOWER
         self.current_leader = None
         self.votes_recv = {}
         self.sent_len = {}
         self.ack_len = {}
-        self.introduce_nodes()
+
+        #TODO: Read Metadata, update state, Read Logs, update logs and database on the fly
+
     
     def make_grpc_call(self,method,request,node_id):
         response = None
@@ -139,7 +144,6 @@ class Node:
             self.replicate_log(node_id)
         
     def commit_log(self):
-        print("HEY LEADER")
         acks = []
         min_acks = ceil((len(self.nodes) + 1) / 2)
         ready = []
@@ -157,8 +161,8 @@ class Node:
         ready_max = max(ready) if len(ready) > 0 else 0
         if len(ready) != 0 and ready_max > self.commit_len and self.log[ready_max - 1].term == self.current_term:
             for i in range(self.commit_len,ready_max):
-                #TODO: deliver log[i] msg to application
-                print("HEY LEADER LOOP")
+                #TODO: saving the logs for leader
+                pass
             self.commit_len = ready_max
 
     def replicate_log(self,follower_id):
@@ -219,10 +223,7 @@ def main():
 
     node_id = sys.argv[1]
     node = Node(node_id,NODE_IP_PORT[node_id])
-    if not os.path.exists(f'logs_node_{node_id}'):
-        os.mkdir(f'logs_node_{node_id}')
-    # else:
-    #     node.recover_from_crash()
+    
 
 if __name__ == "__main__":
     main()
