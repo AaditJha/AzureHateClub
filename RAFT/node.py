@@ -89,12 +89,12 @@ class Node:
                 msg = line[0] + " " + line[1] + " " + line[2]
                 self.log.append(node_pb2.LogEntry(term=self.current_term,msg=msg))
 
-        with open(f'logs_node_{self.id}/metadata.txt', 'r') as f:
-            # commit_length, current_term, voted_for
-            line = f.readline().split()
-            self.commit_len = int(line[0])
-            self.current_term = int(line[1])
-            self.voted_for = line[2]
+        # with open(f'logs_node_{self.id}/metadata.txt', 'r') as f:
+        #     # commit_length, current_term, voted_for
+        #     line = f.readline().split()
+        #     self.commit_len = int(line[0])
+        #     self.current_term = int(line[1])
+        #     self.voted_for = line[2]
     
     def make_grpc_call(self,method,request,node_id):
         response = None
@@ -120,6 +120,7 @@ class Node:
                 self.current_leader = self.id
                 signal.setitimer(signal.ITIMER_REAL,1.5,1.5)
                 #TODO: append no-op to the log
+                    
                 if self.election_timer:
                     print('Stopping Election Timer')
                     self.election_timer.cancel()
@@ -127,7 +128,11 @@ class Node:
                     self.sent_len[node_id] = len(self.log)
                     self.ack_len[node_id] = 0
                     self.replicate_log(node_id)
-    
+
+                self.log.append(node_pb2.LogEntry(term=self.current_term,msg="NO-OP"))
+                with open(f'logs_node_{self.id}/logs.txt', 'a') as f:
+                    f.write(f"NO-OP {self.current_term}\n")
+                    
         elif response.term > self.current_term:
             self.current_term = response.term
             self.current_role = Role.FOLLOWER
@@ -157,7 +162,7 @@ class Node:
         
     def commit_log(self):
         acks = []
-        min_acks = ceil((len(self.nodes) + 1) / 2)
+        min_acks = len(self.nodes) // 2 + 1
         ready = []
         #Optimization: Store the ack_len in sorted format and use one pointer in the second loop
         for node_id in self.nodes:
@@ -165,16 +170,19 @@ class Node:
                 acks.append(node_id)
 
         for i in range(1,len(self.log)):
-            if len(acks) >= min_acks:
+            if len(acks) + 1  >= min_acks:
                 ready.append(i)
             for node_id in acks:
                 if self.ack_len[node_id] < (i+1):
                     acks.remove(node_id)
+
+
         ready_max = max(ready) if len(ready) > 0 else 0
-        if len(ready) != 0 and ready_max > self.commit_len and self.log[ready_max - 1].term == self.current_term:
-            for i in range(self.commit_len,ready_max):
-                #TODO: saving the logs for leader
-                pass
+        if len(ready) != 0 and ready_max > self.commit_len:
+            with open(f'logs_node_{self.id}/logs.txt', 'a') as f:
+                for i in range(self.commit_len,ready_max):
+                    #TODO: saving the logs for leader
+                    f.write(f'{self.log[i + 1].msg} {self.log[i + 1].term}\n')
             self.commit_len = ready_max
 
     def replicate_log(self,follower_id):

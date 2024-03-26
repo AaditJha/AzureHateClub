@@ -43,10 +43,14 @@ class NodeServicer(node_pb2_grpc.NodeServicer):
                     key,value = msg.split(' ')[1:]
                     self.node.database[key] = value
         
+        print("leader_commit:", leader_commit)
+        print("commit_len:", self.node.commit_len)
+
         if leader_commit > self.node.commit_len:
+            print("_________IN DA LOOP________")
             for i in range(self.node.commit_len,leader_commit):
+                print(self.node.log[i])
                 #TODO: Store the new logs for follower
-                pass
             self.node.commit_len = leader_commit
 
     def LogRequest(self, request, context):
