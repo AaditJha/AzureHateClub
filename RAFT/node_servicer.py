@@ -45,12 +45,13 @@ class NodeServicer(node_pb2_grpc.NodeServicer):
         
         print("leader_commit:", leader_commit)
         print("commit_len:", self.node.commit_len)
-        
+
         if leader_commit > self.node.commit_len:
             print("_________IN DA LOOP________")
-            for i in range(self.node.commit_len,leader_commit):
-                print(self.node.log[i])
-                #TODO: Store the new logs for follower
+            with open(f'logs_node_{self.node.id}/logs.txt', 'a') as f:
+                for i in range(self.node.commit_len,leader_commit):
+                    f.write(f'{self.node.log[i].msg} {self.node.log[i].term}\n')
+                    #TODO: Store the new META for follower
             self.node.commit_len = leader_commit
 
     def LogRequest(self, request, context):

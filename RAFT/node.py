@@ -182,10 +182,8 @@ class Node:
         if len(ready) != 0 and ready_max >= self.commit_len:
             with open(f'logs_node_{self.id}/logs.txt', 'a') as f:
                 for i in range(self.commit_len ,ready_max + 1):
-                    #TODO: saving the logs for leader
-                    f.write(f"commit len: {self.commit_len}, ready: {ready}\n")
-                    # f.write(f"log: {(self.log)}\n")
                     f.write(f'{self.log[i].msg} {self.log[i].term}\n')
+                    #TODO: saving the META for leader
         self.commit_len = ready_max + 1
 
     def replicate_log(self,follower_id):

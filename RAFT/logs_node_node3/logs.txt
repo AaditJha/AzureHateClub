@@ -1,0 +1,6 @@
+NO-OP 1
+SET a 1 1
+SET b 2 1
+NO-OP 2
+SET c 2 2
+SET a 5 2
