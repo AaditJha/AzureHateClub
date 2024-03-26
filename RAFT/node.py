@@ -119,6 +119,7 @@ class Node:
                 self.current_role = Role.LEADER
                 self.current_leader = self.id
                 signal.setitimer(signal.ITIMER_REAL,1.5,1.5)
+                #TODO: append no-op to the log
                 if self.election_timer:
                     print('Stopping Election Timer')
                     self.election_timer.cancel()
