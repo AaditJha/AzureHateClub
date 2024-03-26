@@ -1,6 +1,11 @@
 NO-OP 1
 SET a 1 1
 SET b 2 1
-NO-OP 2
-SET c 2 2
-SET a 5 2
+SET c 3 1
+NO-OP 3
+SET e 4 3
+SET f 7 3
+NO-OP 4
+SET h 6 4
+NO-OP 7
+SET h 3 7

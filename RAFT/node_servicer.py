@@ -9,6 +9,8 @@ class NodeServicer(node_pb2_grpc.NodeServicer):
         self.node = node
     
     def RequestVote(self, request, context):
+        if self.node.current_role == Role.LEADER:
+            return node_pb2.RequestVoteResponse(term=self.node.current_term,voter_id=self.node.id,vote_granted=False)
         c_term = request.term
         c_log_len = request.last_log_index
         c_id = request.candidate_id
@@ -51,8 +53,11 @@ class NodeServicer(node_pb2_grpc.NodeServicer):
             with open(f'logs_node_{self.node.id}/logs.txt', 'a') as f:
                 for i in range(self.node.commit_len,leader_commit):
                     f.write(f'{self.node.log[i].msg} {self.node.log[i].term}\n')
-                    #TODO: Store the new META for follower
+            
             self.node.commit_len = leader_commit
+            #TODO: Store the new META for follower
+            with open(f'logs_node_{self.node.id}/metadata.txt', 'w') as f:
+                f.write(f'{self.node.commit_len} {self.node.current_term} {self.node.voted_for}')
 
     def LogRequest(self, request, context):
         if request.term > self.node.current_term:

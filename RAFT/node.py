@@ -83,25 +83,27 @@ class Node:
         with open(f'logs_node_{self.id}/logs.txt', 'r') as f:
             for line in f.readlines():
                 line = line.split()
-                if line[0] != 'SET':
-                    continue
-                self.database[line[1]] = line[2]
-                msg = line[0] + " " + line[1] + " " + line[2]
-                self.log.append(node_pb2.LogEntry(term=self.current_term,msg=msg))
+                if (line[0] == 'SET'):
+                    self.database[line[1]] = line[2]
+                msg = " ".join(line[:-1])
+                self.log.append(node_pb2.LogEntry(term=int(line[-1]),msg=msg))
 
-        # with open(f'logs_node_{self.id}/metadata.txt', 'r') as f:
-        #     # commit_length, current_term, voted_for
-        #     line = f.readline().split()
-        #     self.commit_len = int(line[0])
-        #     self.current_term = int(line[1])
-        #     self.voted_for = line[2]
+        with open(f'logs_node_{self.id}/metadata.txt', 'r') as f:
+            # commit_length, current_term, voted_for
+            line = f.readline().split()
+            self.commit_len = int(line[0])
+            self.current_term = int(line[1])
+            self.voted_for = line[2]
     
     def make_grpc_call(self,method,request,node_id):
+        self.channels[node_id] = grpc.insecure_channel(NODE_IP_PORT[node_id])
+        self.stubs[node_id] = node_pb2_grpc.NodeStub(self.channels[node_id])
         response = None
         try:
             response = method(request,timeout=GRPC_DEADLINE)
         except grpc.RpcError as e:
             print(e.code(),':',node_id,'is down',e.details())
+            response = None
         return response
     
     def request_vote(self,node_id,term,candidate_id,last_log_index,last_log_term):
@@ -176,18 +178,21 @@ class Node:
             for node_id in acks:
                 if self.ack_len[node_id] < (i+1):
                     acks.remove(node_id)
-
-
         ready_max = max(ready) if len(ready) > 0 else 0
         if len(ready) != 0 and ready_max >= self.commit_len:
             with open(f'logs_node_{self.id}/logs.txt', 'a') as f:
                 for i in range(self.commit_len ,ready_max + 1):
                     f.write(f'{self.log[i].msg} {self.log[i].term}\n')
-                    #TODO: saving the META for leader
+
         self.commit_len = ready_max + 1
+        #TODO: saving the META for leader
+        with open(f'logs_node_{self.id}/metadata.txt', 'w') as f:
+            f.write(f'{self.commit_len} {self.current_term} {self.voted_for}')
 
     def replicate_log(self,follower_id):
         prefix_len = self.sent_len[follower_id]
+        with open(f"test_{self.id}.txt", 'a') as f:
+            f.write(f"pref: {prefix_len}, log: {self.log}, follower_ID: {follower_id}\n") 
         suffix = self.log[prefix_len:]
         prefix_term = 0
         if prefix_len > 0:

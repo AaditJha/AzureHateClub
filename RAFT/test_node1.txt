@@ -1,0 +1,3427 @@
+pref: 1, log: [msg: "NO-OP"
+term: 1
+], follower_ID: node2
+pref: 0, log: [msg: "NO-OP"
+term: 1
+], follower_ID: node2
+pref: 1, log: [msg: "NO-OP"
+term: 1
+], follower_ID: node3
+pref: 0, log: [msg: "NO-OP"
+term: 1
+], follower_ID: node3
+pref: 1, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+], follower_ID: node2
+pref: 1, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+], follower_ID: node3
+pref: 2, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+], follower_ID: node2
+pref: 2, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+], follower_ID: node3
+pref: 2, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+], follower_ID: node2
+pref: 2, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+], follower_ID: node3
+pref: 2, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+], follower_ID: node2
+pref: 2, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+], follower_ID: node3
+pref: 2, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+], follower_ID: node2
+pref: 2, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+], follower_ID: node3
+pref: 2, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+], follower_ID: node2
+pref: 2, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+], follower_ID: node3
+pref: 2, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+], follower_ID: node2
+pref: 2, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+], follower_ID: node3
+pref: 2, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+], follower_ID: node2
+pref: 2, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+], follower_ID: node3
+pref: 2, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+], follower_ID: node2
+pref: 2, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+], follower_ID: node3
+pref: 2, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+], follower_ID: node2
+pref: 3, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+], follower_ID: node3
+pref: 2, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+], follower_ID: node2
+pref: 3, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+], follower_ID: node3
+pref: 2, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+], follower_ID: node2
+pref: 3, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+], follower_ID: node3
+pref: 2, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+], follower_ID: node2
+pref: 4, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+], follower_ID: node3
+pref: 2, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+], follower_ID: node2
+pref: 4, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+], follower_ID: node3
+pref: 2, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+], follower_ID: node2
+pref: 4, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+], follower_ID: node3
+pref: 2, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+], follower_ID: node2
+pref: 4, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+], follower_ID: node3
+pref: 2, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+], follower_ID: node2
+pref: 4, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+], follower_ID: node3
+pref: 2, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+], follower_ID: node2
+pref: 4, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+], follower_ID: node3
+pref: 2, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+], follower_ID: node2
+pref: 4, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+], follower_ID: node3
+pref: 4, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+], follower_ID: node2
+pref: 4, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+], follower_ID: node3
+pref: 4, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+], follower_ID: node2
+pref: 4, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+], follower_ID: node3
+pref: 4, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+], follower_ID: node2
+pref: 4, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+], follower_ID: node3
+pref: 4, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+], follower_ID: node2
+pref: 4, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+], follower_ID: node3
+pref: 4, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+], follower_ID: node2
+pref: 4, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+], follower_ID: node3
+pref: 4, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+], follower_ID: node2
+pref: 4, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+], follower_ID: node3
+pref: 4, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+], follower_ID: node2
+pref: 4, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+], follower_ID: node3
+pref: 8, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+], follower_ID: node2
+pref: 8, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+], follower_ID: node3
+pref: 7, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+], follower_ID: node3
+pref: 8, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+], follower_ID: node2
+pref: 8, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+], follower_ID: node3
+pref: 8, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+], follower_ID: node2
+pref: 8, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+], follower_ID: node3
+pref: 8, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+], follower_ID: node2
+pref: 8, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+], follower_ID: node3
+pref: 8, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+], follower_ID: node2
+pref: 8, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+], follower_ID: node3
+pref: 8, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+], follower_ID: node2
+pref: 8, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+], follower_ID: node3
+pref: 8, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+], follower_ID: node2
+pref: 8, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+], follower_ID: node3
+pref: 8, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+], follower_ID: node2
+pref: 8, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+], follower_ID: node3
+pref: 8, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+], follower_ID: node2
+pref: 8, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+], follower_ID: node3
+pref: 8, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+], follower_ID: node2
+pref: 8, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+], follower_ID: node3
+pref: 8, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+], follower_ID: node2
+pref: 8, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+], follower_ID: node3
+pref: 8, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+], follower_ID: node2
+pref: 8, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+], follower_ID: node3
+pref: 8, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+], follower_ID: node2
+pref: 8, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+], follower_ID: node3
+pref: 8, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+], follower_ID: node2
+pref: 8, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+], follower_ID: node3
+pref: 8, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+], follower_ID: node2
+pref: 8, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+], follower_ID: node3
+pref: 8, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+], follower_ID: node2
+pref: 8, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+], follower_ID: node3
+pref: 8, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+], follower_ID: node2
+pref: 8, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+], follower_ID: node3
+pref: 8, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+], follower_ID: node2
+pref: 8, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+], follower_ID: node3
+pref: 8, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+], follower_ID: node2
+pref: 8, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+], follower_ID: node3
+pref: 8, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+], follower_ID: node2
+pref: 9, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+], follower_ID: node3
+pref: 8, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+], follower_ID: node2
+pref: 9, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+], follower_ID: node3
+pref: 8, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+], follower_ID: node2
+pref: 9, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+], follower_ID: node3
+pref: 8, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+], follower_ID: node2
+pref: 9, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+], follower_ID: node3
+pref: 8, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+], follower_ID: node2
+pref: 9, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+], follower_ID: node3
+pref: 8, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+], follower_ID: node2
+pref: 9, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+], follower_ID: node3
+pref: 8, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+], follower_ID: node2
+pref: 9, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+], follower_ID: node3
+pref: 8, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+], follower_ID: node2
+pref: 9, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+], follower_ID: node3
+pref: 8, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+], follower_ID: node2
+pref: 9, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+], follower_ID: node3
+pref: 8, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+], follower_ID: node2
+pref: 7, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+], follower_ID: node2
+pref: 9, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+], follower_ID: node3
+pref: 9, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+], follower_ID: node2
+pref: 9, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+], follower_ID: node3
+pref: 9, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+], follower_ID: node2
+pref: 9, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+], follower_ID: node3
+pref: 9, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+], follower_ID: node2
+pref: 9, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+], follower_ID: node3
+pref: 9, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+], follower_ID: node2
+pref: 9, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+], follower_ID: node3
+pref: 9, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+], follower_ID: node2
+pref: 9, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+], follower_ID: node3
+pref: 9, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+], follower_ID: node2
+pref: 9, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+], follower_ID: node3
+pref: 9, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+], follower_ID: node2
+pref: 9, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+], follower_ID: node3
+pref: 9, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+], follower_ID: node2
+pref: 9, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+], follower_ID: node3
+pref: 9, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+], follower_ID: node2
+pref: 9, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+], follower_ID: node3
+pref: 9, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+], follower_ID: node2
+pref: 9, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+], follower_ID: node3
+pref: 9, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+], follower_ID: node2
+pref: 9, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+], follower_ID: node3
+pref: 9, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+], follower_ID: node2
+pref: 9, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+], follower_ID: node3
+pref: 9, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+], follower_ID: node2
+pref: 9, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+], follower_ID: node3
+pref: 10, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+], follower_ID: node2
+pref: 9, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+], follower_ID: node2
+pref: 10, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+], follower_ID: node3
+pref: 10, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+], follower_ID: node2
+pref: 10, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+], follower_ID: node3
+pref: 10, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+], follower_ID: node2
+pref: 10, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+], follower_ID: node3
+pref: 10, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+], follower_ID: node2
+pref: 10, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+], follower_ID: node3
+pref: 10, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+], follower_ID: node2
+pref: 10, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+], follower_ID: node3
+pref: 10, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+], follower_ID: node2
+pref: 10, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+], follower_ID: node3
+pref: 10, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+], follower_ID: node2
+pref: 10, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+], follower_ID: node3
+pref: 10, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+], follower_ID: node2
+pref: 10, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+], follower_ID: node3
+pref: 10, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+], follower_ID: node2
+pref: 10, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+], follower_ID: node3
+pref: 10, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+], follower_ID: node2
+pref: 10, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+], follower_ID: node3
+pref: 10, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+], follower_ID: node2
+pref: 10, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+], follower_ID: node3
+pref: 10, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+], follower_ID: node2
+pref: 10, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+], follower_ID: node3
+pref: 10, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+], follower_ID: node2
+pref: 10, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+], follower_ID: node3
+pref: 10, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+], follower_ID: node2
+pref: 10, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+], follower_ID: node3
+pref: 10, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+], follower_ID: node2
+pref: 10, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+], follower_ID: node3
+pref: 10, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+], follower_ID: node2
+pref: 10, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+], follower_ID: node3
+pref: 10, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+], follower_ID: node2
+pref: 10, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+], follower_ID: node3
+pref: 10, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+], follower_ID: node2
+pref: 10, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+], follower_ID: node3
+pref: 10, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+], follower_ID: node2
+pref: 10, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+], follower_ID: node3
+pref: 10, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+, msg: "SET h 3"
+term: 7
+], follower_ID: node2
+pref: 10, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+, msg: "SET h 3"
+term: 7
+], follower_ID: node3
+pref: 11, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+, msg: "SET h 3"
+term: 7
+], follower_ID: node2
+pref: 10, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+, msg: "SET h 3"
+term: 7
+], follower_ID: node3
+pref: 11, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+, msg: "SET h 3"
+term: 7
+], follower_ID: node2
+pref: 10, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+, msg: "SET h 3"
+term: 7
+], follower_ID: node3
+pref: 11, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+, msg: "SET h 3"
+term: 7
+], follower_ID: node2
+pref: 10, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+, msg: "SET h 3"
+term: 7
+], follower_ID: node3
+pref: 11, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+, msg: "SET h 3"
+term: 7
+], follower_ID: node2
+pref: 10, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+, msg: "SET h 3"
+term: 7
+], follower_ID: node3
+pref: 11, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+, msg: "SET h 3"
+term: 7
+], follower_ID: node2
+pref: 10, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+, msg: "SET h 3"
+term: 7
+], follower_ID: node3
+pref: 11, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+, msg: "SET h 3"
+term: 7
+], follower_ID: node2
+pref: 10, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+, msg: "SET h 3"
+term: 7
+], follower_ID: node3
+pref: 11, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+, msg: "SET h 3"
+term: 7
+], follower_ID: node2
+pref: 10, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+, msg: "SET h 3"
+term: 7
+], follower_ID: node3
+pref: 11, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+, msg: "SET h 3"
+term: 7
+], follower_ID: node2
+pref: 10, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+, msg: "SET h 3"
+term: 7
+], follower_ID: node3
+pref: 11, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+, msg: "SET h 3"
+term: 7
+], follower_ID: node2
+pref: 10, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+, msg: "SET h 3"
+term: 7
+], follower_ID: node3
+pref: 11, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+, msg: "SET h 3"
+term: 7
+], follower_ID: node2
+pref: 10, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+, msg: "SET h 3"
+term: 7
+], follower_ID: node3
+pref: 11, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+, msg: "SET h 3"
+term: 7
+], follower_ID: node2
+pref: 10, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+, msg: "SET h 3"
+term: 7
+], follower_ID: node3
+pref: 11, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+, msg: "SET h 3"
+term: 7
+], follower_ID: node2
+pref: 10, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+, msg: "SET h 3"
+term: 7
+], follower_ID: node3
+pref: 11, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+, msg: "SET h 3"
+term: 7
+], follower_ID: node2
+pref: 10, log: [msg: "NO-OP"
+term: 1
+, msg: "SET a 1"
+term: 1
+, msg: "SET b 2"
+term: 1
+, msg: "SET c 3"
+term: 1
+, msg: "NO-OP"
+term: 3
+, msg: "SET e 4"
+term: 3
+, msg: "SET f 7"
+term: 3
+, msg: "NO-OP"
+term: 4
+, msg: "SET h 6"
+term: 4
+, msg: "NO-OP"
+term: 7
+, msg: "SET h 3"
+term: 7
+], follower_ID: node3
