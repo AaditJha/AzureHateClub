@@ -45,7 +45,7 @@ class NodeServicer(node_pb2_grpc.NodeServicer):
         
         print("leader_commit:", leader_commit)
         print("commit_len:", self.node.commit_len)
-
+        
         if leader_commit > self.node.commit_len:
             print("_________IN DA LOOP________")
             for i in range(self.node.commit_len,leader_commit):

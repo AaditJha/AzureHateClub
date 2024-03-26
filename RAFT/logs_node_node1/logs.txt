@@ -1,6 +1,0 @@
-NO-OP 1
-SET a 0 1
-SET b 2 1
-SET b 2 0
-NO-OP 3
-NO-OP 3

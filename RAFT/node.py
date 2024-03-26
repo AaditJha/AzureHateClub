@@ -124,14 +124,15 @@ class Node:
                 if self.election_timer:
                     print('Stopping Election Timer')
                     self.election_timer.cancel()
+                self.log.append(node_pb2.LogEntry(term=self.current_term,msg="NO-OP"))
+                # with open(f'logs_node_{self.id}/logs.txt', 'a') as f:
+                    # f.write(f"NO-OP {self.current_term}\n")
+
                 for node_id in self.nodes:
                     self.sent_len[node_id] = len(self.log)
                     self.ack_len[node_id] = 0
                     self.replicate_log(node_id)
 
-                self.log.append(node_pb2.LogEntry(term=self.current_term,msg="NO-OP"))
-                with open(f'logs_node_{self.id}/logs.txt', 'a') as f:
-                    f.write(f"NO-OP {self.current_term}\n")
                     
         elif response.term > self.current_term:
             self.current_term = response.term
@@ -169,7 +170,7 @@ class Node:
             if self.ack_len[node_id] >= 1:
                 acks.append(node_id)
 
-        for i in range(1,len(self.log)):
+        for i in range(0,len(self.log)):
             if len(acks) + 1  >= min_acks:
                 ready.append(i)
             for node_id in acks:
@@ -178,12 +179,14 @@ class Node:
 
 
         ready_max = max(ready) if len(ready) > 0 else 0
-        if len(ready) != 0 and ready_max > self.commit_len:
+        if len(ready) != 0 and ready_max >= self.commit_len:
             with open(f'logs_node_{self.id}/logs.txt', 'a') as f:
-                for i in range(self.commit_len,ready_max):
+                for i in range(self.commit_len ,ready_max + 1):
                     #TODO: saving the logs for leader
-                    f.write(f'{self.log[i + 1].msg} {self.log[i + 1].term}\n')
-            self.commit_len = ready_max
+                    f.write(f"commit len: {self.commit_len}, ready: {ready}\n")
+                    # f.write(f"log: {(self.log)}\n")
+                    f.write(f'{self.log[i].msg} {self.log[i].term}\n')
+        self.commit_len = ready_max + 1
 
     def replicate_log(self,follower_id):
         prefix_len = self.sent_len[follower_id]
