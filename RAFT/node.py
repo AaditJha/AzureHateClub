@@ -21,8 +21,8 @@ class Node:
         self.current_role = Role.FOLLOWER    
         self.current_leader = None
         self.votes_recv = set()
-        self.sent_len = {}
-        self.ack_len = {}
+        self.sent_len = {} #
+        self.ack_len = {} #
         self.id = id
         self.nodes = []
         self.channels = {}
@@ -33,6 +33,9 @@ class Node:
         self.introduce_nodes()
         if not os.path.exists(f'logs_node_{self.id}'):
             os.mkdir(f'logs_node_{self.id}')
+            open(f'logs_node_{self.id}/metadata.txt', 'x')
+            open(f'logs_node_{self.id}/logs.txt', 'x')
+            open(f'logs_node_{self.id}/dump.txt', 'x')
         else:
             self.recover_from_crash()
         self.start_server()          
@@ -76,14 +79,22 @@ class Node:
         '''
         This method reads the persistent states and updates the node accordingly.
         '''
-        self.current_role = Role.FOLLOWER
-        self.current_leader = None
-        self.votes_recv = {}
-        self.sent_len = {}
-        self.ack_len = {}
 
-        #TODO: Read Metadata, update state, Read Logs, update logs and database on the fly
+        with open(f'logs_node_{self.id}/logs.txt', 'r') as f:
+            for line in f.readlines():
+                line = line.split()
+                if line[0] != 'SET':
+                    continue
+                self.database[line[1]] = line[2]
+                msg = line[0] + " " + line[1] + " " + line[2]
+                self.log.append(node_pb2.LogEntry(term=self.current_term,msg=msg))
 
+        with open(f'logs_node_{self.id}/metadata.txt', 'r') as f:
+            # commit_length, current_term, voted_for
+            line = f.readline().split()
+            self.commit_len = int(line[0])
+            self.current_term = int(line[1])
+            self.voted_for = line[2]
     
     def make_grpc_call(self,method,request,node_id):
         response = None
