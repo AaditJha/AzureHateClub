@@ -54,6 +54,7 @@ class Node:
         signal.signal(signal.SIGINT, lambda signum, frame : self.handle_termination())
         signal.signal(signal.SIGTERM, lambda signum, frame : self.handle_termination())
         signal.signal(signal.SIGALRM, lambda signum, frame : self.heartbeat())
+        signal.signal(signal.SIGVTALRM, lambda signum, frame : self.lease())
         
         self.server.add_insecure_port(self.ip_port)
         self.server.start()
@@ -121,7 +122,7 @@ class Node:
                 self.current_role = Role.LEADER
                 self.current_leader = self.id
                 signal.setitimer(signal.ITIMER_REAL,1.5,1.5)
-                #TODO: append no-op to the log
+                signal.setitimer(signal.ITIMER_VIRTUAL, 10)
                     
                 if self.election_timer:
                     print('Stopping Election Timer')
@@ -162,6 +163,9 @@ class Node:
     def heartbeat(self):
         for node_id in self.nodes:
             self.replicate_log(node_id)
+    
+    def lease(self):
+        pass
         
     def commit_log(self):
         acks = []
@@ -185,7 +189,6 @@ class Node:
                     f.write(f'{self.log[i].msg} {self.log[i].term}\n')
 
         self.commit_len = ready_max + 1
-        #TODO: saving the META for leader
         with open(f'logs_node_{self.id}/metadata.txt', 'w') as f:
             f.write(f'{self.commit_len} {self.current_term} {self.voted_for}')
 
@@ -200,7 +203,7 @@ class Node:
         
         response = self.make_grpc_call(self.stubs[follower_id].LogRequest,node_pb2.LogRequestRequest(leader_id=self.id,term=self.current_term,
                                         prefix_len=prefix_len,prefix_term=prefix_term,
-                                        leader_commit=self.commit_len,suffix=suffix),follower_id)
+                                        leader_commit=self.commit_len,suffix=suffix, lease_timer=signal.getitimer(signal.ITIMER_VIRTUAL)[0]),follower_id)
 
         if response is None:
             return

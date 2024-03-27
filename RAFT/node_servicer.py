@@ -55,7 +55,6 @@ class NodeServicer(node_pb2_grpc.NodeServicer):
                     f.write(f'{self.node.log[i].msg} {self.node.log[i].term}\n')
             
             self.node.commit_len = leader_commit
-            #TODO: Store the new META for follower
             with open(f'logs_node_{self.node.id}/metadata.txt', 'w') as f:
                 f.write(f'{self.node.commit_len} {self.node.current_term} {self.node.voted_for}')
 
