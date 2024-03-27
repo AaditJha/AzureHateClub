@@ -11,6 +11,9 @@ from client_servicer import ClientServicer
 import sys, signal, os
 from concurrent import futures
 
+# TODO - Current Lease holder for checking the case when leader terminates but
+# the new leader holds the follower lease for the previous leader.
+
 
 class Node:
     def __init__(self,id,ip_port) -> None:
