@@ -17,6 +17,7 @@ message RequestVoteResponse{
     int32 term = 1;
     string voter_id = 2;
     bool vote_granted = 3;
+    double old_lease_timer = 4;
 }
 
 message LogEntry{

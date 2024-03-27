@@ -30,6 +30,7 @@ class Node:
         self.database = {}
         self.election_timer = None
         self.ip_port = ip_port
+        self.last_timer = -1
         self.introduce_nodes()
         if not os.path.exists(f'logs_node_{self.id}'):
             os.mkdir(f'logs_node_{self.id}')
@@ -122,7 +123,6 @@ class Node:
                 self.current_role = Role.LEADER
                 self.current_leader = self.id
                 signal.setitimer(signal.ITIMER_REAL,1.5,1.5)
-                signal.setitimer(signal.ITIMER_VIRTUAL, 10)
                     
                 if self.election_timer:
                     print('Stopping Election Timer')
@@ -145,6 +145,9 @@ class Node:
             if self.election_timer:
                 self.election_timer.reset()
         
+        self.last_timer = max(self.last_timer, response.old_lease_timer)
+
+        
     def on_broadcast_request(self,msg,log):
         if self.current_role != Role.LEADER:
             return self.current_leader, False, f"I am not the leader, {self.current_leader} is the leader"
@@ -161,11 +164,17 @@ class Node:
             return self.id, True, data
 
     def heartbeat(self):
+        acks = 0
         for node_id in self.nodes:
-            self.replicate_log(node_id)
-    
+           acks += int(self.replicate_log(node_id))
+        if acks >= len(self.nodes) // 2 + 1 and self.current_role == Role.LEADER:
+            signal.setitimer(signal.ITIMER_VIRTUAL,10,0)
+        else:
+            signal.setitimer(signal.ITIMER_VIRTUAL,0,0)
+
     def lease(self):
-        pass
+        if self.current_role == Role.LEADER:
+            signal.setitimer(signal.ITIMER_VIRTUAL, 10, 0)
         
     def commit_log(self):
         acks = []
@@ -206,7 +215,7 @@ class Node:
                                         leader_commit=self.commit_len,suffix=suffix, lease_timer=signal.getitimer(signal.ITIMER_VIRTUAL)[0]),follower_id)
 
         if response is None:
-            return
+            return False
 
         if response.term == self.current_term and self.current_role == Role.LEADER:
             if response.success and response.ack >= self.ack_len[follower_id]:
@@ -223,6 +232,8 @@ class Node:
             self.voted_for = None
             if self.election_timer:
                 self.election_timer.reset()
+
+        return True if response.SUCCESS else False
 
     def on_election(self):
         print(self.id," starting election")
@@ -242,7 +253,10 @@ class Node:
         self.votes_recv = set()
         if self.current_role != Role.LEADER:
             print('Election Timer at election start')
-            self.election_timer.start(randint(5,10))        
+            self.election_timer.start(randint(5,10))
+        if self.current_role == Role.LEADER:
+            #TODO: Make the leader wait for greatest time period
+            signal.setitimer(signal.ITIMER_VIRTUAL, self.last_timer, 0)
     
 def main():
     if len(sys.argv) != 2:
