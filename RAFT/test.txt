@@ -1,9 +1,0 @@
-pref: 4, log: [msg: "NO-OP"
-term: 1
-, msg: "SET a 2"
-term: 1
-, msg: "NO-OP"
-term: 2
-, msg: "NO-OP"
-term: 3
-]
