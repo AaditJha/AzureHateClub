@@ -11,12 +11,8 @@ from client_servicer import ClientServicer
 import sys, signal, os
 from concurrent import futures
 
-# TODO - Current Lease holder for checking the case when leader terminates but
-# the new leader holds the follower lease for the previous leader.
-
-#TODO - Last timer of lease is not being reset to -1. This could cause problems
-# in subsequent elections.
-
+# TODO - extensive testing. 
+# TODO - integrate with gRPC.
 
 class Node:
     def __init__(self,id,ip_port) -> None:
@@ -116,7 +112,6 @@ class Node:
             response = None
         return response
     
-    #TODO - handle all cases better for leasing
     def request_vote(self,node_id,term,candidate_id,last_log_index,last_log_term):
         response = self.make_grpc_call(self.stubs[node_id].RequestVote,node_pb2.RequestVoteRequest(term=term,candidate_id=candidate_id,
                                             last_log_index=last_log_index,last_log_term=last_log_term),node_id)
@@ -155,7 +150,6 @@ class Node:
         
         self.last_timer = max(self.last_timer, response.old_lease_timer)
 
-
     def on_broadcast_request(self,msg,log):
         if self.current_role != Role.LEADER:
             return self.current_leader, False, f"I am not the leader, {self.current_leader} is the leader"
@@ -177,17 +171,41 @@ class Node:
             return self.id, True, data
 
     def heartbeat(self):
+        #Only leader can send heartbeats
+        if self.current_role != Role.LEADER:
+            print("ERROR! NON-LEADER SENDING HEARTBEATS!")
+            return
+        
         acks = 0
         for node_id in self.nodes:
            acks += int(self.replicate_log(node_id))
-        if acks >= len(self.nodes) // 2 + 1 and self.current_role == Role.LEADER:
-            signal.setitimer(signal.ITIMER_VIRTUAL,10,0)
+        if self.lease_type == Role.LEADER:
+            if acks >= len(self.nodes) // 2 + 1:
+                signal.setitimer(signal.ITIMER_VIRTUAL,10,0)
+            else:
+                # Wait for the lease to run out.
+                # Hope that in the next heartbeat, more nodes respond to your message.
+                pass
         else:
-            signal.setitimer(signal.ITIMER_VIRTUAL,0,0)
+            #You are a follower lease
+            if acks >= len(self.nodes) // 2 + 1:
+                # Do not do anything. Wait for the follower lease to run out to get the leader lease.
+                pass
+            else:
+                #TODO - Do we need to do something?
+                pass
 
     def lease(self):
-        if self.current_role == Role.LEADER:
-            signal.setitimer(signal.ITIMER_VIRTUAL, 0, 0)
+        print(f"{self.id} has the {self.lease_type} lease. It has timer remaining - {signal.getitimer(signal.ITIMER_VIRTUAL)[0]}")
+        if self.current_role == Role.LEADER and self.lease_type != Role.LEADER:
+            # You have successfully waited for all other nodes' follower lease timers to run off.
+            # You may now successfully become the leader!
+            signal.setitimer(signal.ITIMER_VIRTUAL, 10, 0)
+            self.lease_type = Role.LEADER
+        elif self.lease_type == Role.LEADER:
+            # You cannot establish comms with all other nodes. 
+            # How do you have the leader lease, if you ain't the leader?!
+            self.lease_type = Role.FOLLOWER
         
     def commit_log(self):
         acks = []
@@ -216,16 +234,18 @@ class Node:
 
     def replicate_log(self,follower_id):
         prefix_len = self.sent_len[follower_id]
-        with open(f"test_{self.id}.txt", 'a') as f:
-            f.write(f"pref: {prefix_len}, log: {self.log}, follower_ID: {follower_id}\n") 
+        # with open(f"test_{self.id}.txt", 'a') as f:
+        #     f.write(f"pref: {prefix_len}, log: {self.log}, follower_ID: {follower_id}\n") 
         suffix = self.log[prefix_len:]
         prefix_term = 0
         if prefix_len > 0:
             prefix_term = self.log[prefix_len-1].term
         
-        response = self.make_grpc_call(self.stubs[follower_id].LogRequest,node_pb2.LogRequestRequest(leader_id=self.id,term=self.current_term,
-                                        prefix_len=prefix_len,prefix_term=prefix_term,
-                                        leader_commit=self.commit_len,suffix=suffix, lease_timer=signal.getitimer(signal.ITIMER_VIRTUAL)[0]),follower_id)
+        response = self.make_grpc_call(self.stubs[follower_id].LogRequest,node_pb2.LogRequestRequest(
+            leader_id=self.id,term=self.current_term,
+            prefix_len=prefix_len,prefix_term=prefix_term,
+            leader_commit=self.commit_len,suffix=suffix, 
+            lease_timer=signal.getitimer(signal.ITIMER_VIRTUAL)[0]),follower_id)
 
         if response is None:
             return False
@@ -246,9 +266,10 @@ class Node:
             if self.election_timer:
                 self.election_timer.reset()
 
-        return True if response.SUCCESS else False
+        return response.success
 
     def on_election(self):
+        self.last_timer = -1
         print(self.id," starting election")
         self.current_term += 1
         self.current_role = Role.CANDIDATE
@@ -263,13 +284,14 @@ class Node:
         for node_id in self.nodes:
             print('Requesting vote from',node_id)
             self.request_vote(node_id,self.current_term,self.id,len(self.log),last_term)
+            # TODO - should we add a break statement if the node wins the election and becomes the leader?
         self.votes_recv = set()
         if self.current_role != Role.LEADER:
             print('Election Timer at election start')
             self.election_timer.start(randint(5,10))
         if self.current_role == Role.LEADER:
-            #TODO: Make the leader wait for greatest time period
             signal.setitimer(signal.ITIMER_VIRTUAL, self.last_timer, 0)
+            self.lease_type = Role.FOLLOWER
     
 def main():
     if len(sys.argv) != 2:

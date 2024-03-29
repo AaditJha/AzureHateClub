@@ -55,12 +55,8 @@ class NodeServicer(node_pb2_grpc.NodeServicer):
                 if msg.startswith('SET'):
                     key,value = msg.split(' ')[1:]
                     self.node.database[key] = value
-        
-        print("leader_commit:", leader_commit)
-        print("commit_len:", self.node.commit_len)
 
         if leader_commit > self.node.commit_len:
-            print("_________IN DA LOOP________")
             with open(f'logs_node_{self.node.id}/logs.txt', 'a') as f:
                 for i in range(self.node.commit_len,leader_commit):
                     f.write(f'{self.node.log[i].msg} {self.node.log[i].term}\n')
@@ -84,7 +80,10 @@ class NodeServicer(node_pb2_grpc.NodeServicer):
                 print("Resetting election timer")
                 self.node.election_timer.reset()
         
+
+        #Does not matter is leader's lease_type is Role.LEADER or Role.FOLLOWER
         signal.setitimer(signal.ITIMER_VIRTUAL,request.lease_timer,0)
+
         log_ok = (len(self.node.log) >= request.prefix_len) and (request.prefix_len == 0 or 
                                                                  self.node.log[request.prefix_len-1].term == request.prefix_term)
 
