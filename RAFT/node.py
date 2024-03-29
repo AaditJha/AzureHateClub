@@ -14,6 +14,9 @@ from concurrent import futures
 # TODO - Current Lease holder for checking the case when leader terminates but
 # the new leader holds the follower lease for the previous leader.
 
+#TODO - Last timer of lease is not being reset to -1. This could cause problems
+# in subsequent elections.
+
 
 class Node:
     def __init__(self,id,ip_port) -> None:
@@ -34,6 +37,8 @@ class Node:
         self.election_timer = None
         self.ip_port = ip_port
         self.last_timer = -1
+        self.lease_type = Role.FOLLOWER
+
         self.introduce_nodes()
         if not os.path.exists(f'logs_node_{self.id}'):
             os.mkdir(f'logs_node_{self.id}')
@@ -111,6 +116,7 @@ class Node:
             response = None
         return response
     
+    #TODO - handle all cases better for leasing
     def request_vote(self,node_id,term,candidate_id,last_log_index,last_log_term):
         response = self.make_grpc_call(self.stubs[node_id].RequestVote,node_pb2.RequestVoteRequest(term=term,candidate_id=candidate_id,
                                             last_log_index=last_log_index,last_log_term=last_log_term),node_id)
@@ -139,7 +145,6 @@ class Node:
                     self.ack_len[node_id] = 0
                     self.replicate_log(node_id)
 
-                    
         elif response.term > self.current_term:
             self.current_term = response.term
             self.current_role = Role.FOLLOWER
@@ -150,19 +155,24 @@ class Node:
         
         self.last_timer = max(self.last_timer, response.old_lease_timer)
 
-        
+
     def on_broadcast_request(self,msg,log):
         if self.current_role != Role.LEADER:
             return self.current_leader, False, f"I am not the leader, {self.current_leader} is the leader"
+
+        if self.current_role == Role.LEADER and signal.getitimer(signal.ITIMER_VIRTUAL)[0] <= 0:
+            return "", False, f"I am a leader but my lease is not renewed. {signal.getitimer(signal.ITIMER_VIRTUAL)[0]}"
         
-        if self.current_role == Role.LEADER:
+        if self.current_role == Role.LEADER and signal.getitimer(signal.ITIMER_VIRTUAL)[0] > 0:
             key = msg.split(' ')[1]
-            if msg.startswith('SET'):
+            if msg.startswith('SET') and self.lease_type == Role.LEADER:
                 self.log.append(node_pb2.LogEntry(term=self.current_term,msg=msg))
                 self.ack_len[self.id] = len(self.log)
                 self.heartbeat()
                 value = msg.split(' ')[2]
                 self.database[key] = value
+            elif msg.startswith('SET') and self.lease_type != Role.LEADER:
+                return self.id, False, f"I am a leader with a valid lease, but my lease is not the leader lease."
             data = self.database[key] if key in self.database else ""
             return self.id, True, data
 
@@ -177,7 +187,7 @@ class Node:
 
     def lease(self):
         if self.current_role == Role.LEADER:
-            signal.setitimer(signal.ITIMER_VIRTUAL, 10, 0)
+            signal.setitimer(signal.ITIMER_VIRTUAL, 0, 0)
         
     def commit_log(self):
         acks = []

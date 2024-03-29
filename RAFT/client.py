@@ -17,10 +17,14 @@ class Client:
     def broadcast_request(self,msg):
         response = self.make_grpc_call(self.stubs[self.current_leader].QueryServer, \
                                        client_pb2.QueryServerRequest(msg=msg), self.current_leader)
-        if response is not None and response.leader_id != '':
+        if response is None:
+            return list(NODE_IP_PORT.keys())[random.randint(0, len(NODE_IP_PORT.keys())-1)],False,''
+        if response.leader_id == "":
+            return list(NODE_IP_PORT.keys())[random.randint(0, len(NODE_IP_PORT.keys())-1)],\
+                response.success,response.data
+        if response.leader_id != '':
             print(response.leader_id)
             return response.leader_id,response.success,response.data
-        return list(NODE_IP_PORT.keys())[random.randint(0, len(NODE_IP_PORT.keys())-1)],False,''
 
     def make_grpc_call(self,method,request,node_id):
         response = None
