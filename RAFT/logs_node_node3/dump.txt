@@ -1,0 +1,27 @@
+Vote granted for Node node2 in term 1.
+Node node3 rejected AppendEntries RPC from node2.
+Node node3 accepted AppendEntries RPC from node2.
+Node node3 (follower) committed the entry NO-OP to the state machine.
+Node node3 accepted AppendEntries RPC from node2.
+Node node3 (follower) committed the entry SET a 23 to the state machine.
+Node node3 accepted AppendEntries RPC from node2.
+Node node3 (follower) committed the entry SET b 24 to the state machine.
+Node node3 accepted AppendEntries RPC from node2.
+Node node3 (follower) committed the entry SET c 44 to the state machine.
+Node node3 election timer timed out, Starting election.
+Vote granted for Node node2 in term 3.
+Error occurred while sending RPC to Node node4.
+Error occurred while sending RPC to Node node5.
+Node node3 rejected AppendEntries RPC from node2.
+Node node3 became the leader for term 3.
+Vote granted for Node node1 in term 4.
+Node node3 election timer timed out, Starting election.
+Node node3 rejected AppendEntries RPC from node1.
+Error occurred while sending RPC to Node node4.
+Error occurred while sending RPC to Node node5.
+Vote granted for Node node1 in term 6.
+Node node3 rejected AppendEntries RPC from node1.
+Node node3 rejected AppendEntries RPC from node1.
+Node node3 accepted AppendEntries RPC from node1.
+Node node3 (follower) committed the entry NO-OP to the state machine.
+Node node3 (follower) committed the entry NO-OP to the state machine.

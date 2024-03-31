@@ -1,5 +1,75 @@
+Node node2 election timer timed out, Starting election.
+Node node2 became the leader for term 1.
+New Leader waiting for Old Leader Lease to timeout.
+Leader node2 sending heartbeat & Renewing Lease
+Leader node2 sending heartbeat & Renewing Lease
+Leader node2 sending heartbeat & Renewing Lease
+Leader node2 sending heartbeat & Renewing Lease
+Node node2 (leader) received an SET a 23 request.
+Leader node2 sending heartbeat & Renewing Lease
+Node node2 (leader) committed the entry SET a 23 to the state machine.
 Leader node2 sending heartbeat & Renewing Lease
 Leader node2 sending heartbeat & Renewing Lease
 Leader node2 sending heartbeat & Renewing Lease
 Leader node2 sending heartbeat & Renewing Lease
 Leader node2 sending heartbeat & Renewing Lease
+Leader node2 sending heartbeat & Renewing Lease
+Node node2 (leader) received an SET b 24 request.
+Leader node2 sending heartbeat & Renewing Lease
+Node node2 (leader) committed the entry SET b 24 to the state machine.
+Leader node2 sending heartbeat & Renewing Lease
+Leader node2 sending heartbeat & Renewing Lease
+Leader node2 sending heartbeat & Renewing Lease
+Node node2 (leader) received an SET c 44 request.
+Leader node2 sending heartbeat & Renewing Lease
+Node node2 (leader) committed the entry SET c 44 to the state machine.
+Leader node2 sending heartbeat & Renewing Lease
+Leader node2 sending heartbeat & Renewing Lease
+Leader node2 sending heartbeat & Renewing Lease
+Leader node2 sending heartbeat & Renewing Lease
+Leader node2 sending heartbeat & Renewing Lease
+Leader node2 sending heartbeat & Renewing Lease
+Leader node2 sending heartbeat & Renewing Lease
+Leader node2 sending heartbeat & Renewing Lease
+Node node2 (leader) received an GET a request.
+Leader node2 sending heartbeat & Renewing Lease
+Node node2 (leader) received an GET v request.
+Leader node2 sending heartbeat & Renewing Lease
+Leader node2 sending heartbeat & Renewing Lease
+Node node2 (leader) received an GET b request.
+Leader node2 sending heartbeat & Renewing Lease
+Node node2 (leader) received an GET c request.
+Leader node2 sending heartbeat & Renewing Lease
+Leader node2 sending heartbeat & Renewing Lease
+Leader node2 sending heartbeat & Renewing Lease
+Leader node2 sending heartbeat & Renewing Lease
+Leader node2 sending heartbeat & Renewing Lease
+Leader node2 sending heartbeat & Renewing Lease
+Leader node2 sending heartbeat & Renewing Lease
+Leader node2 sending heartbeat & Renewing Lease
+Leader node2 sending heartbeat & Renewing Lease
+Leader node2 sending heartbeat & Renewing Lease
+Leader node2 sending heartbeat & Renewing Lease
+Leader node2 sending heartbeat & Renewing Lease
+Leader node2 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node node5.
+Leader node2 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node node4.
+Error occurred while sending RPC to Node node5.
+Leader node2 lease renewal failed. Stepping Down.
+node2 Stepping down
+Vote granted for Node node3 in term 2.
+Node node2 election timer timed out, Starting election.
+Node node2 rejected AppendEntries RPC from node3.
+Error occurred while sending RPC to Node node4.
+Error occurred while sending RPC to Node node5.
+Node node2 became the leader for term 3.
+Vote granted for Node node1 in term 4.
+Node node2 rejected AppendEntries RPC from node1.
+Node node2 accepted AppendEntries RPC from node1.
+Vote granted for Node node3 in term 5.
+Vote granted for Node node1 in term 6.
+Node node2 rejected AppendEntries RPC from node1.
+Node node2 accepted AppendEntries RPC from node1.
+Node node2 (follower) committed the entry NO-OP to the state machine.
+Node node2 (follower) committed the entry NO-OP to the state machine.

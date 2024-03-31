@@ -54,6 +54,8 @@ class NodeServicer(node_pb2_grpc.NodeServicer):
                 self.node.log = self.node.log[:prefix_len]
         
         if prefix_len + len(suffix) > len(self.node.log):
+            with open(f'logs_node_{self.node.id}/dump.txt', 'a') as f:
+                f.write(f"Node {self.node.id} accepted AppendEntries RPC from {self.node.current_leader}.\n")
             for i in range(len(self.node.log)-prefix_len, len(suffix)):
                 self.node.log.append(suffix[i])
                 msg = suffix[i].msg
@@ -95,8 +97,6 @@ class NodeServicer(node_pb2_grpc.NodeServicer):
 
 
         if request.term == self.node.current_term and log_ok:
-            with open(f'logs_node_{self.node.id}/dump.txt', 'a') as f:
-                f.write(f"Node {self.node.id} accepted AppendEntries RPC from {request.leader_id}.\n")
             self.append_entries(request.prefix_len,request.leader_commit,request.suffix)
             ack = request.prefix_len + len(request.suffix)
             return node_pb2.LogRequestResponse(follower_id=self.node.id,term=self.node.current_term,ack=ack,success=True)

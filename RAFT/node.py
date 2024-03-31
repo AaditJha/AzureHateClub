@@ -253,10 +253,10 @@ class Node:
         ready_max = max(ready) if len(ready) > 0 else 0
         if len(ready) != 0 and ready_max >= self.commit_len:
             with open(f'logs_node_{self.id}/logs.txt', 'a') as f:
-                f2 = open(f'logs_node_{self.node.id}/dump.txt', 'a')
+                f2 = open(f'logs_node_{self.id}/dump.txt', 'a')
                 for i in range(self.commit_len ,ready_max + 1):
                     f.write(f'{self.log[i].msg} {self.log[i].term}\n')
-                    f2.write(f"Node {self.node.id} (leader) committed the entry {self.node.log[i].msg} to the state machine.\n")
+                    f2.write(f"Node {self.id} (leader) committed the entry {self.log[i].msg} to the state machine.\n")
                 f2.close()
             
         self.commit_len = ready_max + 1
