@@ -107,3 +107,28 @@ Vote granted for Node node3 in term 5.
 Node node2 rejected AppendEntries RPC from node3.
 Node node2 accepted AppendEntries RPC from node3.
 Node node2 (follower) committed the entry NO-OP to the state machine.
+Vote granted for Node node1 in term 6.
+Node node2 election timer timed out, Starting election.
+Error occurred while sending RPC to Node node3.
+Error occurred while sending RPC to Node node4.
+Error occurred while sending RPC to Node node5.
+Node node2 election timer timed out, Starting election.
+Error occurred while sending RPC to Node node3.
+Error occurred while sending RPC to Node node4.
+Error occurred while sending RPC to Node node5.
+Vote granted for Node node1 in term 9.
+Node node2 election timer timed out, Starting election.
+Error occurred while sending RPC to Node node3.
+Error occurred while sending RPC to Node node4.
+Error occurred while sending RPC to Node node5.
+Vote granted for Node node1 in term 11.
+Vote granted for Node node1 in term 12.
+Node node2 election timer timed out, Starting election.
+Error occurred while sending RPC to Node node3.
+Error occurred while sending RPC to Node node4.
+Error occurred while sending RPC to Node node5.
+Vote granted for Node node1 in term 14.
+Node node2 election timer timed out, Starting election.
+Error occurred while sending RPC to Node node3.
+Error occurred while sending RPC to Node node4.
+Error occurred while sending RPC to Node node5.

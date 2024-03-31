@@ -11,8 +11,6 @@ from client_servicer import ClientServicer
 import sys, signal, os
 from concurrent import futures
 
-# TODO - extensive testing.
-# TODO - dump.txt
 # TODO - integrate with GCP.
 
 class Node:
