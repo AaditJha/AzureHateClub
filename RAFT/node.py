@@ -36,6 +36,7 @@ class Node:
         self.last_timer = -1
         self.lease_type = LeaseContext.SECONDARY #Someone else's lease
         self.lease_timer = ElectionTimer(self.last_timer,self.lease,False)
+        self.not_enough_acks = False
 
         self.introduce_nodes()
         if not os.path.exists(f'logs_node_{self.id}'):
@@ -158,7 +159,6 @@ class Node:
             print('Voter has higher term')
             self.step_down()
         
-        print("SDJAJKF",self.last_timer,response.old_lease_timer)
         self.last_timer = max(self.last_timer, response.old_lease_timer)
 
     def on_broadcast_request(self,msg,log):
@@ -193,22 +193,21 @@ class Node:
             f.write(f"Leader {self.id} sending heartbeat & Renewing Lease\n")
 
         acks = 1
-        if self.lease_type == LeaseContext.PRIMARY:
+        if self.lease_type == LeaseContext.PRIMARY and not self.not_enough_acks:
             self.lease_timer.start(10,True)
         for node_id in self.nodes:
            acks += self.replicate_log(node_id)
         if self.lease_type == LeaseContext.PRIMARY:
             if acks >= len(self.nodes) // 2 + 1:
                 # Balle Balle - You are the leader!
-                pass
+                self.not_enough_acks = False
             else:
                 #Become a follower
                 print('not enough acks')
-                with open(f'logs_node_{self.id}/dump.txt', 'a') as f:
-                    f.write(f"Leader {self.id} lease renewal failed. Stepping Down.\n")
-                self.step_down()
+                self.not_enough_acks = True
 
     def step_down(self):
+        self.not_enough_acks = False
         print('Stepping down...')
         with open(f'logs_node_{self.id}/dump.txt', 'a') as f:
             f.write(f"{self.id} Stepping down\n")
@@ -234,6 +233,8 @@ class Node:
 
             if self.current_role == Role.LEADER:
                 print('Leader lost lease')
+                with open(f'logs_node_{self.id}/dump.txt', 'a') as f:
+                    f.write(f"Leader {self.id} lease renewal failed. Stepping Down.\n")
                 self.step_down()
         # print(f"{self.id} has the {self.lease_type} lease. It has timer remaining - {self.lease_timer.get_timer()}")
         

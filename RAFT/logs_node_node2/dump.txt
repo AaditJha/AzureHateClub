@@ -1,14 +1,109 @@
+Vote granted for Node node1 in term 1.
+Node node2 rejected AppendEntries RPC from node1.
+Node node2 accepted AppendEntries RPC from node1.
+Node node2 (follower) committed the entry NO-OP to the state machine.
+Node node2 accepted AppendEntries RPC from node1.
+Node node2 (follower) committed the entry SET a 23 to the state machine.
+Node node2 accepted AppendEntries RPC from node1.
+Node node2 (follower) committed the entry SET v 21 to the state machine.
+Node node2 accepted AppendEntries RPC from node1.
+Node node2 (follower) committed the entry SET a 55 to the state machine.
+Node node2 accepted AppendEntries RPC from node1.
+Node node2 (follower) committed the entry SET c 22 to the state machine.
 Node node2 election timer timed out, Starting election.
+Error occurred while sending RPC to Node node1.
+Error occurred while sending RPC to Node node1.
 Node node2 (leader) committed the entry NO-OP to the state machine.
-Node node2 became the leader for term 1.
+Node node2 became the leader for term 2.
 New Leader waiting for Old Leader Lease to timeout.
 Leader node2 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node node1.
 Leader node2 sending heartbeat & Renewing Lease
-Node node2 (leader) received an SET a 22 request.
+Error occurred while sending RPC to Node node1.
 Leader node2 sending heartbeat & Renewing Lease
-Node node2 (leader) committed the entry SET a 22 to the state machine.
+Error occurred while sending RPC to Node node1.
+Leader node2 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node node1.
+Leader node2 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node node1.
+Leader node2 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node node1.
+Node node2 (leader) received an SET c 22 request.
+Leader node2 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node node1.
+Node node2 (leader) committed the entry SET c 22 to the state machine.
+Leader node2 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node node1.
+Leader node2 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node node1.
+Leader node2 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node node1.
+Leader node2 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node node1.
+Node node2 (leader) received an GET a request.
+Leader node2 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node node1.
+Leader node2 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node node1.
+Node node2 (leader) received an SET d 556 request.
+Leader node2 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node node1.
+Node node2 (leader) committed the entry SET d 556 to the state machine.
+Leader node2 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node node1.
+Leader node2 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node node1.
+Leader node2 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node node1.
 Leader node2 sending heartbeat & Renewing Lease
 Leader node2 sending heartbeat & Renewing Lease
 Leader node2 sending heartbeat & Renewing Lease
 Leader node2 sending heartbeat & Renewing Lease
 Leader node2 sending heartbeat & Renewing Lease
+Leader node2 sending heartbeat & Renewing Lease
+Leader node2 sending heartbeat & Renewing Lease
+Node node2 (leader) received an GET b request.
+Leader node2 sending heartbeat & Renewing Lease
+Leader node2 sending heartbeat & Renewing Lease
+Leader node2 sending heartbeat & Renewing Lease
+Leader node2 sending heartbeat & Renewing Lease
+Leader node2 sending heartbeat & Renewing Lease
+Leader node2 sending heartbeat & Renewing Lease
+Leader node2 sending heartbeat & Renewing Lease
+Leader node2 sending heartbeat & Renewing Lease
+Leader node2 sending heartbeat & Renewing Lease
+Leader node2 sending heartbeat & Renewing Lease
+Leader node2 sending heartbeat & Renewing Lease
+Leader node2 sending heartbeat & Renewing Lease
+Leader node2 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node node3.
+Error occurred while sending RPC to Node node4.
+Leader node2 sending heartbeat & Renewing Lease
+Error occurred while sending RPC to Node node3.
+Error occurred while sending RPC to Node node4.
+Error occurred while sending RPC to Node node5.
+Leader node2 lease renewal failed. Stepping Down.
+node2 Stepping down
+Vote granted for Node node1 in term 3.
+Node node2 election timer timed out, Starting election.
+Error occurred while sending RPC to Node node3.
+Error occurred while sending RPC to Node node4.
+Error occurred while sending RPC to Node node5.
+Vote granted for Node node1 in term 5.
+Node node2 election timer timed out, Starting election.
+Vote denied for Node node1 in term 6.
+Error occurred while sending RPC to Node node3.
+Error occurred while sending RPC to Node node4.
+Error occurred while sending RPC to Node node5.
+Vote granted for Node node3 in term 3.
+Node node2 rejected AppendEntries RPC from node3.
+Node node2 accepted AppendEntries RPC from node3.
+Node node2 (follower) committed the entry NO-OP to the state machine.
+Vote granted for Node node1 in term 4.
+Node node2 rejected AppendEntries RPC from node1.
+Node node2 accepted AppendEntries RPC from node1.
+Node node2 (follower) committed the entry NO-OP to the state machine.
+Vote granted for Node node3 in term 5.
+Node node2 rejected AppendEntries RPC from node3.
+Node node2 accepted AppendEntries RPC from node3.
+Node node2 (follower) committed the entry NO-OP to the state machine.

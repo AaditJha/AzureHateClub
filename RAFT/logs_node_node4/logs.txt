@@ -1,4 +1,11 @@
 NO-OP 1
-SET a 22 1
+SET a 23 1
+SET v 21 1
+SET a 55 1
+SET c 22 1
 NO-OP 2
-SET x 44 2
+SET c 22 2
+SET d 556 2
+NO-OP 3
+NO-OP 4
+NO-OP 5

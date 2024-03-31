@@ -1,31 +1,27 @@
+Node node4 rejected AppendEntries RPC from node1.
+Node node4 accepted AppendEntries RPC from node1.
+Node node4 (follower) committed the entry NO-OP to the state machine.
+Node node4 accepted AppendEntries RPC from node1.
+Node node4 (follower) committed the entry SET a 23 to the state machine.
+Node node4 accepted AppendEntries RPC from node1.
+Node node4 (follower) committed the entry SET v 21 to the state machine.
+Node node4 accepted AppendEntries RPC from node1.
+Node node4 (follower) committed the entry SET a 55 to the state machine.
+Node node4 (follower) committed the entry SET c 22 to the state machine.
+Vote granted for Node node2 in term 2.
 Node node4 rejected AppendEntries RPC from node2.
 Node node4 accepted AppendEntries RPC from node2.
 Node node4 (follower) committed the entry NO-OP to the state machine.
 Node node4 accepted AppendEntries RPC from node2.
-Node node4 (follower) committed the entry SET a 22 to the state machine.
-Node node4 election timer timed out, Starting election.
-Error occurred while sending RPC to Node node2.
-Error occurred while sending RPC to Node node2.
-Node node4 (leader) committed the entry NO-OP to the state machine.
-Node node4 became the leader for term 2.
-New Leader waiting for Old Leader Lease to timeout.
-Leader node4 sending heartbeat & Renewing Lease
-Error occurred while sending RPC to Node node2.
-Leader node4 sending heartbeat & Renewing Lease
-Error occurred while sending RPC to Node node2.
-Leader node4 sending heartbeat & Renewing Lease
-Error occurred while sending RPC to Node node2.
-Leader node4 sending heartbeat & Renewing Lease
-Error occurred while sending RPC to Node node2.
-Leader node4 sending heartbeat & Renewing Lease
-Error occurred while sending RPC to Node node2.
-Node node4 (leader) received an SET x 44 request.
-Leader node4 sending heartbeat & Renewing Lease
-Node node4 (leader) committed the entry SET x 44 to the state machine.
-Error occurred while sending RPC to Node node2.
-Leader node4 sending heartbeat & Renewing Lease
-Error occurred while sending RPC to Node node2.
-Leader node4 sending heartbeat & Renewing Lease
-Error occurred while sending RPC to Node node2.
-Leader node4 sending heartbeat & Renewing Lease
-Error occurred while sending RPC to Node node2.
+Node node4 (follower) committed the entry SET c 22 to the state machine.
+Node node4 accepted AppendEntries RPC from node2.
+Node node4 (follower) committed the entry SET d 556 to the state machine.
+Node node4 rejected AppendEntries RPC from node3.
+Node node4 accepted AppendEntries RPC from node3.
+Node node4 (follower) committed the entry NO-OP to the state machine.
+Node node4 rejected AppendEntries RPC from node1.
+Node node4 accepted AppendEntries RPC from node1.
+Node node4 (follower) committed the entry NO-OP to the state machine.
+Node node4 rejected AppendEntries RPC from node3.
+Node node4 accepted AppendEntries RPC from node3.
+Node node4 (follower) committed the entry NO-OP to the state machine.
