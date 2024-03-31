@@ -1,3 +1,10 @@
-Node node5 rejected AppendEntries RPC from node1.
-Node node5 accepted AppendEntries RPC from node1.
+Node node5 rejected AppendEntries RPC from node2.
+Node node5 accepted AppendEntries RPC from node2.
 Node node5 (follower) committed the entry NO-OP to the state machine.
+Node node5 accepted AppendEntries RPC from node2.
+Node node5 (follower) committed the entry SET a 22 to the state machine.
+Node node5 rejected AppendEntries RPC from node4.
+Node node5 accepted AppendEntries RPC from node4.
+Node node5 (follower) committed the entry NO-OP to the state machine.
+Node node5 accepted AppendEntries RPC from node4.
+Node node5 (follower) committed the entry SET x 44 to the state machine.

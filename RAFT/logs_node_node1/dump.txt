@@ -1,8 +1,12 @@
-Node node1 election timer timed out, Starting election.
-Node node1 (leader) committed the entry NO-OP to the state machine.
-Node node1 became the leader for term 1.
-New Leader waiting for Old Leader Lease to timeout.
-Leader node1 sending heartbeat & Renewing Lease
-Leader node1 sending heartbeat & Renewing Lease
-Leader node1 sending heartbeat & Renewing Lease
-Leader node1 sending heartbeat & Renewing Lease
+Vote granted for Node node2 in term 1.
+Node node1 rejected AppendEntries RPC from node2.
+Node node1 accepted AppendEntries RPC from node2.
+Node node1 (follower) committed the entry NO-OP to the state machine.
+Node node1 accepted AppendEntries RPC from node2.
+Node node1 (follower) committed the entry SET a 22 to the state machine.
+Vote granted for Node node4 in term 2.
+Node node1 rejected AppendEntries RPC from node4.
+Node node1 accepted AppendEntries RPC from node4.
+Node node1 (follower) committed the entry NO-OP to the state machine.
+Node node1 accepted AppendEntries RPC from node4.
+Node node1 (follower) committed the entry SET x 44 to the state machine.

@@ -158,6 +158,7 @@ class Node:
             print('Voter has higher term')
             self.step_down()
         
+        print("SDJAJKF",self.last_timer,response.old_lease_timer)
         self.last_timer = max(self.last_timer, response.old_lease_timer)
 
     def on_broadcast_request(self,msg,log):
@@ -192,7 +193,8 @@ class Node:
             f.write(f"Leader {self.id} sending heartbeat & Renewing Lease\n")
 
         acks = 1
-        self.lease_timer.start(10,True)
+        if self.lease_type == LeaseContext.PRIMARY:
+            self.lease_timer.start(10,True)
         for node_id in self.nodes:
            acks += self.replicate_log(node_id)
         if self.lease_type == LeaseContext.PRIMARY:
@@ -253,7 +255,6 @@ class Node:
 
         ready_max = max(ready) if len(ready) > 0 else 0
         if len(ready) != 0 and ready_max >= self.commit_len:
-            print("AUFSHIFAIU")
             with open(f'logs_node_{self.id}/logs.txt', 'a') as f:
                 f2 = open(f'logs_node_{self.id}/dump.txt', 'a')
                 for i in range(self.commit_len ,ready_max + 1):
