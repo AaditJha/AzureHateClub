@@ -14,7 +14,7 @@ class NodeServicer(node_pb2_grpc.NodeServicer):
             return node_pb2.RequestVoteResponse(term=self.node.current_term,
                                                 voter_id=self.node.id,
                                                 vote_granted=False,
-                                                old_lease_timer=signal.getitimer(signal.ITIMER_VIRTUAL)[0])
+                                                old_lease_timer=self.node.lease_timer.get_timer())
 
         c_term = request.term
         c_log_len = request.last_log_index
@@ -29,18 +29,19 @@ class NodeServicer(node_pb2_grpc.NodeServicer):
         log_ok = (c_term > last_term) or (c_term == last_term and c_log_len >= len(self.node.log))
 
         print('Voted for:',self.node.voted_for,'Requested by:',c_id)
+        timer = self.node.lease_timer.get_timer() if self.node.lease_timer else 0
         if c_term == self.node.current_term and log_ok and self.node.voted_for in [None,c_id]:
             self.node.voted_for = c_id
             print('granted vote to',c_id)
             return node_pb2.RequestVoteResponse(term=self.node.current_term,
                                                 voter_id=self.node.id,
                                                 vote_granted=True,
-                                                old_lease_timer=signal.getitimer(signal.ITIMER_VIRTUAL)[0])
+                                                old_lease_timer=timer)
         else:
             return node_pb2.RequestVoteResponse(term=self.node.current_term,
                                                 voter_id=self.node.id,
                                                 vote_granted=False,
-                                                old_lease_timer=signal.getitimer(signal.ITIMER_VIRTUAL)[0])
+                                                old_lease_timer=timer)
         
     def append_entries(self,prefix_len,leader_commit,suffix):
         if len(suffix) > 0 and len(self.node.log) > prefix_len:
@@ -70,19 +71,17 @@ class NodeServicer(node_pb2_grpc.NodeServicer):
             self.node.current_term = request.term
             self.node.voted_for = None
             if self.node.election_timer:
-                print("Resetting election timer")
                 self.node.election_timer.reset()
         
         if request.term == self.node.current_term:
             self.node.current_role = Role.FOLLOWER
             self.node.current_leader = request.leader_id
             if self.node.election_timer:
-                print("Resetting election timer")
                 self.node.election_timer.reset()
         
 
         #Does not matter is leader's lease_type is Role.LEADER or Role.FOLLOWER
-        signal.setitimer(signal.ITIMER_VIRTUAL,request.lease_timer,0)
+        self.node.lease_timer.start(request.lease_timer,True)
 
         log_ok = (len(self.node.log) >= request.prefix_len) and (request.prefix_len == 0 or 
                                                                  self.node.log[request.prefix_len-1].term == request.prefix_term)

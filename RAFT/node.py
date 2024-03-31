@@ -35,13 +35,11 @@ class Node:
         self.ip_port = ip_port
         self.last_timer = -1
         self.lease_type = Role.FOLLOWER
+        self.lease_timer = ElectionTimer(self.last_timer,self.lease,False)
 
         self.introduce_nodes()
         if not os.path.exists(f'logs_node_{self.id}'):
             os.mkdir(f'logs_node_{self.id}')
-            open(f'logs_node_{self.id}/metadata.txt', 'x')
-            open(f'logs_node_{self.id}/logs.txt', 'x')
-            open(f'logs_node_{self.id}/dump.txt', 'x')
         else:
             self.recover_from_crash()
         self.start_server()          
@@ -49,6 +47,8 @@ class Node:
     def handle_termination(self):
         if self.election_timer is not None:
             self.election_timer.cancel()
+        if self.lease_timer is not None:
+            self.lease_timer.cancel()
         print('\nClosing Server...')
         self.server.stop(0)
     
@@ -60,7 +60,6 @@ class Node:
         signal.signal(signal.SIGINT, lambda signum, frame : self.handle_termination())
         signal.signal(signal.SIGTERM, lambda signum, frame : self.handle_termination())
         signal.signal(signal.SIGALRM, lambda signum, frame : self.heartbeat())
-        signal.signal(signal.SIGVTALRM, lambda signum, frame : self.lease())
         
         self.server.add_insecure_port(self.ip_port)
         self.server.start()
@@ -132,6 +131,10 @@ class Node:
                 if self.election_timer:
                     print('Stopping Election Timer')
                     self.election_timer.cancel()
+                
+                if self.lease_timer:
+                    self.lease_timer.cancel()
+
                 self.log.append(node_pb2.LogEntry(term=self.current_term,msg="NO-OP"))
                 # with open(f'logs_node_{self.id}/logs.txt', 'a') as f:
                     # f.write(f"NO-OP {self.current_term}\n")
@@ -155,10 +158,10 @@ class Node:
         if self.current_role != Role.LEADER:
             return self.current_leader, False, f"I am not the leader, {self.current_leader} is the leader"
 
-        if self.current_role == Role.LEADER and signal.getitimer(signal.ITIMER_VIRTUAL)[0] <= 0:
-            return "", False, f"I am a leader but my lease is not renewed. {signal.getitimer(signal.ITIMER_VIRTUAL)[0]}"
+        if self.current_role == Role.LEADER and self.lease_timer.get_timer() <= 0:
+            return "", False, f"I am a leader but my lease is not renewed. {self.lease_timer.get_timer()}"
         
-        if self.current_role == Role.LEADER and signal.getitimer(signal.ITIMER_VIRTUAL)[0] > 0:
+        if self.current_role == Role.LEADER and  self.lease_timer.get_timer() > 0:
             key = msg.split(' ')[1]
             if msg.startswith('SET') and self.lease_type == Role.LEADER:
                 self.log.append(node_pb2.LogEntry(term=self.current_term,msg=msg))
@@ -182,7 +185,7 @@ class Node:
            acks += int(self.replicate_log(node_id))
         if self.lease_type == Role.LEADER:
             if acks >= len(self.nodes) // 2 + 1:
-                signal.setitimer(signal.ITIMER_VIRTUAL,10,0)
+                self.lease_timer.start(10,True)
             else:
                 # Wait for the lease to run out.
                 # Hope that in the next heartbeat, more nodes respond to your message.
@@ -197,16 +200,18 @@ class Node:
                 pass
 
     def lease(self):
-        print(f"{self.id} has the {self.lease_type} lease. It has timer remaining - {signal.getitimer(signal.ITIMER_VIRTUAL)[0]}")
+        # print('+'*50)
+        # print(f"{self.id} has the {self.lease_type} lease. It has timer remaining - {self.lease_timer.get_timer()}")
         if self.current_role == Role.LEADER and self.lease_type != Role.LEADER:
             # You have successfully waited for all other nodes' follower lease timers to run off.
             # You may now successfully become the leader!
-            signal.setitimer(signal.ITIMER_VIRTUAL, 10, 0)
+            self.lease_timer.start(10)
             self.lease_type = Role.LEADER
         elif self.lease_type == Role.LEADER:
             # You cannot establish comms with all other nodes. 
             # How do you have the leader lease, if you ain't the leader?!
             self.lease_type = Role.FOLLOWER
+        # print(f"{self.id} has the {self.lease_type} lease. It has timer remaining - {self.lease_timer.get_timer()}")
         
     def commit_log(self):
         acks = []
@@ -242,11 +247,12 @@ class Node:
         if prefix_len > 0:
             prefix_term = self.log[prefix_len-1].term
         
+        print(self.lease_timer.get_timer(),'fuaidshf')
         response = self.make_grpc_call(self.stubs[follower_id].LogRequest,node_pb2.LogRequestRequest(
             leader_id=self.id,term=self.current_term,
             prefix_len=prefix_len,prefix_term=prefix_term,
             leader_commit=self.commit_len,suffix=suffix, 
-            lease_timer=signal.getitimer(signal.ITIMER_VIRTUAL)[0]),follower_id)
+            lease_timer=self.lease_timer.get_timer()),follower_id)
 
         if response is None:
             return False
@@ -291,7 +297,8 @@ class Node:
             print('Election Timer at election start')
             self.election_timer.start(randint(5,10))
         if self.current_role == Role.LEADER:
-            signal.setitimer(signal.ITIMER_VIRTUAL, self.last_timer, 0)
+            self.last_timer = max(0,self.last_timer)
+            self.lease_timer.start(self.last_timer)
             self.lease_type = Role.FOLLOWER
     
 def main():
