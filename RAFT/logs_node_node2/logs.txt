@@ -1,5 +1,1 @@
-SET a 23 1
-SET b 24 1
-SET c 44 1
-NO-OP 4
-NO-OP 6
+NO-OP 1

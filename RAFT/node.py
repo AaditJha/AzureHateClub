@@ -110,7 +110,7 @@ class Node:
         except grpc.RpcError as e:
             with open(f'logs_node_{self.id}/dump.txt', 'a') as f:
                 f.write(f"Error occurred while sending RPC to Node {node_id}.\n")
-            print(e.code(),':',node_id,'is down',e.details())
+            print(e.code(),':',node_id,'is down')
             response = None
         return response
     
@@ -191,7 +191,7 @@ class Node:
         with open(f'logs_node_{self.id}/dump.txt', 'a') as f:
             f.write(f"Leader {self.id} sending heartbeat & Renewing Lease\n")
 
-        acks = 0
+        acks = 1
         self.lease_timer.start(10,True)
         for node_id in self.nodes:
            acks += self.replicate_log(node_id)
@@ -250,8 +250,10 @@ class Node:
             for node_id in acks:
                 if self.ack_len[node_id] < (i+1):
                     acks.remove(node_id)
+
         ready_max = max(ready) if len(ready) > 0 else 0
         if len(ready) != 0 and ready_max >= self.commit_len:
+            print("AUFSHIFAIU")
             with open(f'logs_node_{self.id}/logs.txt', 'a') as f:
                 f2 = open(f'logs_node_{self.id}/dump.txt', 'a')
                 for i in range(self.commit_len ,ready_max + 1):
@@ -259,7 +261,7 @@ class Node:
                     f2.write(f"Node {self.id} (leader) committed the entry {self.log[i].msg} to the state machine.\n")
                 f2.close()
             
-        self.commit_len = ready_max + 1
+            self.commit_len = ready_max + 1
         with open(f'logs_node_{self.id}/metadata.txt', 'w') as f:
             f.write(f'{self.commit_len} {self.current_term} {self.voted_for}')
 
