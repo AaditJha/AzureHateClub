@@ -13,6 +13,7 @@ class ElectionTimer:
 
     def callback(self):
         self.function()
+        self.start_time = None
     
     def cancel(self):
         if self.timer is not None:
@@ -36,7 +37,7 @@ class ElectionTimer:
         timer_type = "Election" if self.is_election_timer else "Lease"
         reset_str = "reset" if reset else "started"
         if self.debug:
-            print(timer_type,"Timer",reset_str,"at", datetime.now().strftime("%I:%M:%S"), "==", self.interval, "s")
+            print(timer_type,"Timer",reset_str,"at", datetime.now().strftime("%I:%M:%S"), f": {self.interval :.2f}s")
 
     def reset(self):
         self.timer.cancel()

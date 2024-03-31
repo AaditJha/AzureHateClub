@@ -1,7 +1,7 @@
 import grpc
 import node_pb2, node_pb2_grpc
 import client_pb2, client_pb2_grpc
-from role import Role
+from role import Role, LeaseContext
 from math import ceil
 from random import randint
 from election_timer import ElectionTimer
@@ -11,9 +11,9 @@ from client_servicer import ClientServicer
 import sys, signal, os
 from concurrent import futures
 
-# TODO - extensive testing. 
+# TODO - extensive testing.
 # TODO - dump.txt
-# TODO - integrate with gRPC.
+# TODO - integrate with GCP.
 
 class Node:
     def __init__(self,id,ip_port) -> None:
@@ -34,7 +34,7 @@ class Node:
         self.election_timer = None
         self.ip_port = ip_port
         self.last_timer = -1
-        self.lease_type = Role.FOLLOWER
+        self.lease_type = LeaseContext.SECONDARY #Someone else's lease
         self.lease_timer = ElectionTimer(self.last_timer,self.lease,False)
 
         self.introduce_nodes()
@@ -108,11 +108,16 @@ class Node:
         try:
             response = method(request,timeout=GRPC_DEADLINE)
         except grpc.RpcError as e:
+            with open(f'logs_node_{self.id}/dump.txt', 'a') as f:
+                f.write(f"Error occurred while sending RPC to Node {node_id}.\n")
             print(e.code(),':',node_id,'is down',e.details())
             response = None
         return response
     
     def request_vote(self,node_id,term,candidate_id,last_log_index,last_log_term):
+        if len(self.votes_recv) >= ceil((len(self.nodes) + 1) / 2):
+            return
+        print('Requesting vote from',node_id)
         response = self.make_grpc_call(self.stubs[node_id].RequestVote,node_pb2.RequestVoteRequest(term=term,candidate_id=candidate_id,
                                             last_log_index=last_log_index,last_log_term=last_log_term),node_id)
 
@@ -123,7 +128,8 @@ class Node:
             self.votes_recv.add(node_id)
             print(self.votes_recv)
             if len(self.votes_recv) >= ceil((len(self.nodes) + 1) / 2):
-                print(self.id," is the leader")
+                print(self.id," is the leader",self.current_term)
+                self.lease_type = LeaseContext.SECONDARY
                 self.current_role = Role.LEADER
                 self.current_leader = self.id
                 signal.setitimer(signal.ITIMER_REAL,1.5,1.5)
@@ -144,13 +150,13 @@ class Node:
                     self.ack_len[node_id] = 0
                     self.replicate_log(node_id)
 
+                with open(f'logs_node_{self.id}/dump.txt', 'a') as f:
+                    f.write(f"Node {self.id} became the leader for term {self.current_term}.\n")
+
         elif response.term > self.current_term:
             self.current_term = response.term
-            self.current_role = Role.FOLLOWER
-            signal.setitimer(signal.ITIMER_REAL,0,0)
-            self.voted_for = None
-            if self.election_timer:
-                self.election_timer.reset()
+            print('Voter has higher term')
+            self.step_down()
         
         self.last_timer = max(self.last_timer, response.old_lease_timer)
 
@@ -162,14 +168,16 @@ class Node:
             return "", False, f"I am a leader but my lease is not renewed. {self.lease_timer.get_timer()}"
         
         if self.current_role == Role.LEADER and  self.lease_timer.get_timer() > 0:
+            with open(f'logs_node_{self.id}/dump.txt', 'a') as f:
+                f.write(f"Node {self.id} (leader) received an {msg} request.\n")
             key = msg.split(' ')[1]
-            if msg.startswith('SET') and self.lease_type == Role.LEADER:
+            if msg.startswith('SET') and self.lease_type == LeaseContext.PRIMARY:
                 self.log.append(node_pb2.LogEntry(term=self.current_term,msg=msg))
                 self.ack_len[self.id] = len(self.log)
                 self.heartbeat()
                 value = msg.split(' ')[2]
                 self.database[key] = value
-            elif msg.startswith('SET') and self.lease_type != Role.LEADER:
+            elif msg.startswith('SET') and self.lease_type != LeaseContext.PRIMARY:
                 return self.id, False, f"I am a leader with a valid lease, but my lease is not the leader lease."
             data = self.database[key] if key in self.database else ""
             return self.id, True, data
@@ -180,37 +188,51 @@ class Node:
             print("ERROR! NON-LEADER SENDING HEARTBEATS!")
             return
         
+        with open(f'logs_node_{self.id}/dump.txt', 'a') as f:
+            f.write(f"Leader {self.id} sending heartbeat & Renewing Lease\n")
+
         acks = 0
+        self.lease_timer.start(10,True)
         for node_id in self.nodes:
-           acks += int(self.replicate_log(node_id))
-        if self.lease_type == Role.LEADER:
+           acks += self.replicate_log(node_id)
+        if self.lease_type == LeaseContext.PRIMARY:
             if acks >= len(self.nodes) // 2 + 1:
-                self.lease_timer.start(10,True)
-            else:
-                # Wait for the lease to run out.
-                # Hope that in the next heartbeat, more nodes respond to your message.
-                pass
-        else:
-            #You are a follower lease
-            if acks >= len(self.nodes) // 2 + 1:
-                # Do not do anything. Wait for the follower lease to run out to get the leader lease.
+                # Balle Balle - You are the leader!
                 pass
             else:
-                #TODO - Do we need to do something?
-                pass
+                #Become a follower
+                print('not enough acks')
+                with open(f'logs_node_{self.id}/dump.txt', 'a') as f:
+                    f.write(f"Leader {self.id} lease renewal failed. Stepping Down.\n")
+                self.step_down()
+
+    def step_down(self):
+        print('Stepping down...')
+        with open(f'logs_node_{self.id}/dump.txt', 'a') as f:
+            f.write(f"{self.id} Stepping down\n")
+        signal.setitimer(signal.ITIMER_REAL,0,0)
+        self.voted_for = None
+        if self.election_timer:
+            self.election_timer.reset()
+        self.current_role = Role.FOLLOWER
+        if self.lease_timer:
+            self.lease_timer.cancel()
 
     def lease(self):
-        # print('+'*50)
-        # print(f"{self.id} has the {self.lease_type} lease. It has timer remaining - {self.lease_timer.get_timer()}")
-        if self.current_role == Role.LEADER and self.lease_type != Role.LEADER:
+        if self.current_role == Role.LEADER and self.lease_type == LeaseContext.SECONDARY:
             # You have successfully waited for all other nodes' follower lease timers to run off.
             # You may now successfully become the leader!
             self.lease_timer.start(10)
-            self.lease_type = Role.LEADER
-        elif self.lease_type == Role.LEADER:
+            self.lease_type = LeaseContext.PRIMARY
+
+        elif self.lease_type == LeaseContext.PRIMARY: 
             # You cannot establish comms with all other nodes. 
             # How do you have the leader lease, if you ain't the leader?!
-            self.lease_type = Role.FOLLOWER
+            self.lease_type = LeaseContext.SECONDARY
+
+            if self.current_role == Role.LEADER:
+                print('Leader lost lease')
+                self.step_down()
         # print(f"{self.id} has the {self.lease_type} lease. It has timer remaining - {self.lease_timer.get_timer()}")
         
     def commit_log(self):
@@ -231,9 +253,12 @@ class Node:
         ready_max = max(ready) if len(ready) > 0 else 0
         if len(ready) != 0 and ready_max >= self.commit_len:
             with open(f'logs_node_{self.id}/logs.txt', 'a') as f:
+                f2 = open(f'logs_node_{self.node.id}/dump.txt', 'a')
                 for i in range(self.commit_len ,ready_max + 1):
                     f.write(f'{self.log[i].msg} {self.log[i].term}\n')
-
+                    f2.write(f"Node {self.node.id} (leader) committed the entry {self.node.log[i].msg} to the state machine.\n")
+                f2.close()
+            
         self.commit_len = ready_max + 1
         with open(f'logs_node_{self.id}/metadata.txt', 'w') as f:
             f.write(f'{self.commit_len} {self.current_term} {self.voted_for}')
@@ -247,7 +272,6 @@ class Node:
         if prefix_len > 0:
             prefix_term = self.log[prefix_len-1].term
         
-        print(self.lease_timer.get_timer(),'fuaidshf')
         response = self.make_grpc_call(self.stubs[follower_id].LogRequest,node_pb2.LogRequestRequest(
             leader_id=self.id,term=self.current_term,
             prefix_len=prefix_len,prefix_term=prefix_term,
@@ -277,6 +301,8 @@ class Node:
 
     def on_election(self):
         self.last_timer = -1
+        with open(f'logs_node_{self.id}/dump.txt', 'a') as f:
+            f.write(f"Node {self.id} election timer timed out, Starting election.\n")
         print(self.id," starting election")
         self.current_term += 1
         self.current_role = Role.CANDIDATE
@@ -289,9 +315,7 @@ class Node:
         if len(self.log) > 0:
             last_term = self.log[-1].term
         for node_id in self.nodes:
-            print('Requesting vote from',node_id)
             self.request_vote(node_id,self.current_term,self.id,len(self.log),last_term)
-            # TODO - should we add a break statement if the node wins the election and becomes the leader?
         self.votes_recv = set()
         if self.current_role != Role.LEADER:
             print('Election Timer at election start')
@@ -299,7 +323,10 @@ class Node:
         if self.current_role == Role.LEADER:
             self.last_timer = max(0,self.last_timer)
             self.lease_timer.start(self.last_timer)
-            self.lease_type = Role.FOLLOWER
+            self.lease_type = LeaseContext.SECONDARY
+
+            with open(f'logs_node_{self.id}/dump.txt', 'a') as f:
+                f.write("New Leader waiting for Old Leader Lease to timeout.\n")
     
 def main():
     if len(sys.argv) != 2:

@@ -33,11 +33,15 @@ class NodeServicer(node_pb2_grpc.NodeServicer):
         if c_term == self.node.current_term and log_ok and self.node.voted_for in [None,c_id]:
             self.node.voted_for = c_id
             print('granted vote to',c_id)
+            with open(f'logs_node_{self.node.id}/dump.txt', 'a') as f:
+                f.write(f"Vote granted for Node {c_id} in term {c_term}.\n")
             return node_pb2.RequestVoteResponse(term=self.node.current_term,
                                                 voter_id=self.node.id,
                                                 vote_granted=True,
                                                 old_lease_timer=timer)
         else:
+            with open(f'logs_node_{self.node.id}/dump.txt', 'a') as f:
+                f.write(f"Vote denied for Node {c_id} in term {c_term}.\n")
             return node_pb2.RequestVoteResponse(term=self.node.current_term,
                                                 voter_id=self.node.id,
                                                 vote_granted=False,
@@ -59,9 +63,12 @@ class NodeServicer(node_pb2_grpc.NodeServicer):
 
         if leader_commit > self.node.commit_len:
             with open(f'logs_node_{self.node.id}/logs.txt', 'a') as f:
+                f2 = open(f'logs_node_{self.node.id}/dump.txt', 'a')
                 for i in range(self.node.commit_len,leader_commit):
                     f.write(f'{self.node.log[i].msg} {self.node.log[i].term}\n')
-            
+                    f2.write(f"Node {self.node.id} (follower) committed the entry {self.node.log[i].msg} to the state machine.\n")
+                f2.close()
+
             self.node.commit_len = leader_commit
             with open(f'logs_node_{self.node.id}/metadata.txt', 'w') as f:
                 f.write(f'{self.node.commit_len} {self.node.current_term} {self.node.voted_for}')
@@ -88,8 +95,12 @@ class NodeServicer(node_pb2_grpc.NodeServicer):
 
 
         if request.term == self.node.current_term and log_ok:
+            with open(f'logs_node_{self.node.id}/dump.txt', 'a') as f:
+                f.write(f"Node {self.node.id} accepted AppendEntries RPC from {request.leader_id}.\n")
             self.append_entries(request.prefix_len,request.leader_commit,request.suffix)
             ack = request.prefix_len + len(request.suffix)
             return node_pb2.LogRequestResponse(follower_id=self.node.id,term=self.node.current_term,ack=ack,success=True)
-    
+
+        with open(f'logs_node_{self.node.id}/dump.txt', 'a') as f:
+            f.write(f"Node {self.node.id} rejected AppendEntries RPC from {request.leader_id}.\n")
         return node_pb2.LogRequestResponse(follower_id=self.node.id,term=self.node.current_term,ack=0,success=False)
