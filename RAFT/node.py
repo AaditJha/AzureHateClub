@@ -60,6 +60,7 @@ class Node:
         signal.signal(signal.SIGTERM, lambda signum, frame : self.handle_termination())
         signal.signal(signal.SIGALRM, lambda signum, frame : self.heartbeat())
         
+        self.ip_port = "[::]:"+self.ip_port.split(":")[-1]
         self.server.add_insecure_port(self.ip_port)
         self.server.start()
         print('Node',self.id,'started at',self.ip_port)
