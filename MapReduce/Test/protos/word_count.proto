@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package wordcount;
+
+service WordCount {
+  rpc Map(MapRequest) returns (stream MapResponse) {}
+  rpc Reduce(ReduceRequest) returns (ReduceResponse) {}
+}
+
+message MapRequest {
+  string text = 1;
+}
+
+message MapResponse {
+  repeated KeyValue pairs = 1;
+}
+
+message ReduceRequest {
+  repeated KeyValue pairs = 1;
+}
+
+message ReduceResponse {
+  map<string, int32> counts = 1;
+}
+
+message KeyValue {
+  string key = 1;
+  string value = 2;
+}

@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package reducer;
+
+service Reducer {
+    rpc GetKV(KVRequst) returns (KVResponse);
+}
+
+// Request for points with centroid ID.
+message KVRequst {
+    int32 centroid_id = 1;
+}
+
+// returns the all points the Mapper has for that key.
+message KVResponse {
+    int32 centroid_id = 1;
+    repeated Point points = 2;
+}
+
+message Point {
+    repeated float dim_val = 1;
+}

@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package master;
+
+service Master {
+    rpc Map(MapRequest) returns (MapResponse);
+    rpc Reduce(ReduceRequest) returns (ReduceResponse);
+}
+
+// sends centroids and the shard(repeated point icx)
+message MapRequest {
+    repeated Point centroids = 1;
+    repeated int32 points_ids = 2;
+}
+
+// returns the closest centroid ID for the point. 
+message MapResponse {
+    repeated KeyValue pairs = 1;
+}
+
+message ReduceRequest {
+    int32 original_centroid_id = 1;
+}
+
+message ReduceResponse {
+    int32 original_centroid_id = 1;
+    repeated float updated_centroid = 2;
+}
+
+message KeyValue {
+    int32 closest_centroid = 1;
+    Point point = 2;
+}
+
+message Point {
+    repeated float dim_val = 1;
+}
