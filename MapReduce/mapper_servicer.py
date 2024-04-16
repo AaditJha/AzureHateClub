@@ -10,7 +10,7 @@ class MapperServicer(mapper_pb2_grpc.MapperServicer):
     def Map(self, request:mapper_pb2.MapRequest, context:str) -> mapper_pb2.MapResponse:
         self.point_ids, self.centroids = utils.read_map_request(map_request=request)
         self.MapRoutine()
-        self.Partition()
+        self.Partition(request.num_reducers)
         self.CreateLocalFiles()
         response = utils.create_map_response(self.partitions)
         return response
@@ -23,10 +23,10 @@ class MapperServicer(mapper_pb2_grpc.MapperServicer):
         self.closest_centroid = [utils.get_closest_centroid(point, self.centroids) for point in self.points]
     
     # creates a list of tuple[int, list[float]]
-    def Partition(self) -> None:
-        self.partitions = [[] for _ in range(NUM_REDUCERS)]
+    def Partition(self,num_reducers) -> None:
+        self.partitions = [[] for _ in range(num_reducers)]
         for i in range(len(self.closest_centroid)):
-            self.partitions[self.closest_centroid[i] % NUM_REDUCERS].append((self.closest_centroid[i], self.points[i]))
+            self.partitions[self.closest_centroid[i] % num_reducers].append((self.closest_centroid[i], self.points[i]))
 
     def CreateLocalFiles(self) -> None:
         for partition_id, partition in enumerate(self.partitions):

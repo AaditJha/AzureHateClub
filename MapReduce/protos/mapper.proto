@@ -12,6 +12,7 @@ service Mapper {
 message MapRequest {
     repeated Point centroids = 1;
     repeated int32 point_ids = 2;
+    int32 num_reducers = 3;
 }
 
 // returns the closest centroid ID for the point. 

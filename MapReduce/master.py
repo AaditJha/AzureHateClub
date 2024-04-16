@@ -14,7 +14,7 @@ def mapper_call(shard:list[int], centroids:list[list[float]], mapper_id:int) -> 
 
     with grpc.insecure_channel(MAPPER_IP_PORT[mapper_id]) as channel:
         stub = mapper_pb2_grpc.MapperStub(channel)
-        request = utils.create_map_request(shard=shard, centroids=centroids)
+        request = utils.create_map_request(shard=shard, centroids=centroids, num_reducers=args.R)
         response = stub.Map(request)
 
 def spawn_mapper(shard:list[int], centroids:list[list[float]], mapper_id:int) -> None:
@@ -23,7 +23,8 @@ def spawn_mapper(shard:list[int], centroids:list[list[float]], mapper_id:int) ->
             mapper_call(shard, centroids, mapper_id)
             print(f"Mapper {mapper_id} successfully mapped.")
             return
-        except:
+        except grpc.RpcError as e:
+            print(e.details())
             print(f"Mapper {mapper_id} failed.")
             time.sleep(5)
 

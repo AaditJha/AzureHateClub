@@ -36,7 +36,7 @@ def create_shards(n_mappers:int) -> tuple[list[list[int]],int]:
 def get_point_from_id(idx:int) -> list[float]:
     return [float(element.strip()) for element in linecache.getline(filename=DATA_DIR, lineno=idx+1).split(', ')]
 
-def create_map_request(shard: list[int], centroids: list[list[float]]) -> mapper_pb2.MapRequest:
+def create_map_request(shard: list[int], centroids: list[list[float]], num_reducers: int) -> mapper_pb2.MapRequest:
     map_request = mapper_pb2.MapRequest()
 
     for centroid_list in centroids:
@@ -44,6 +44,8 @@ def create_map_request(shard: list[int], centroids: list[list[float]]) -> mapper
         centroid_point.dim_val.extend(centroid_list)
 
     map_request.point_ids.extend(shard)
+
+    map_request.num_reducers = num_reducers
     return map_request
 
 def read_map_request(map_request: mapper_pb2.MapRequest) -> tuple[list[int], list[list[float]]]:
