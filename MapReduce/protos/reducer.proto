@@ -1,18 +1,19 @@
+// python -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. reducer.proto    
 syntax = "proto3";
 
 package reducer;
 
 service Reducer {
-    rpc GetKV(KVRequst) returns (KVResponse);
+    rpc Reduce(ReduceRequst) returns (ReduceResponse);
 }
 
 // Request for points with centroid ID.
-message KVRequst {
+message ReduceRequst {
     int32 centroid_id = 1;
 }
 
 // returns the all points the Mapper has for that key.
-message KVResponse {
+message ReduceResponse {
     int32 centroid_id = 1;
     repeated Point points = 2;
 }

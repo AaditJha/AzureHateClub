@@ -2,10 +2,10 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-import word_count_pb2 as word__count__pb2
+import mapper_pb2 as mapper__pb2
 
 
-class WordCountStub(object):
+class MapperStub(object):
     """Missing associated documentation comment in .proto file."""
 
     def __init__(self, channel):
@@ -14,19 +14,19 @@ class WordCountStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.Map = channel.unary_stream(
-                '/wordcount.WordCount/Map',
-                request_serializer=word__count__pb2.MapRequest.SerializeToString,
-                response_deserializer=word__count__pb2.MapResponse.FromString,
+        self.Map = channel.unary_unary(
+                '/mapper.Mapper/Map',
+                request_serializer=mapper__pb2.MapRequest.SerializeToString,
+                response_deserializer=mapper__pb2.MapResponse.FromString,
                 )
         self.Reduce = channel.unary_unary(
-                '/wordcount.WordCount/Reduce',
-                request_serializer=word__count__pb2.ReduceRequest.SerializeToString,
-                response_deserializer=word__count__pb2.ReduceResponse.FromString,
+                '/mapper.Mapper/Reduce',
+                request_serializer=mapper__pb2.ReduceRequest.SerializeToString,
+                response_deserializer=mapper__pb2.ReduceResponse.FromString,
                 )
 
 
-class WordCountServicer(object):
+class MapperServicer(object):
     """Missing associated documentation comment in .proto file."""
 
     def Map(self, request, context):
@@ -42,26 +42,26 @@ class WordCountServicer(object):
         raise NotImplementedError('Method not implemented!')
 
 
-def add_WordCountServicer_to_server(servicer, server):
+def add_MapperServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'Map': grpc.unary_stream_rpc_method_handler(
+            'Map': grpc.unary_unary_rpc_method_handler(
                     servicer.Map,
-                    request_deserializer=word__count__pb2.MapRequest.FromString,
-                    response_serializer=word__count__pb2.MapResponse.SerializeToString,
+                    request_deserializer=mapper__pb2.MapRequest.FromString,
+                    response_serializer=mapper__pb2.MapResponse.SerializeToString,
             ),
             'Reduce': grpc.unary_unary_rpc_method_handler(
                     servicer.Reduce,
-                    request_deserializer=word__count__pb2.ReduceRequest.FromString,
-                    response_serializer=word__count__pb2.ReduceResponse.SerializeToString,
+                    request_deserializer=mapper__pb2.ReduceRequest.FromString,
+                    response_serializer=mapper__pb2.ReduceResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'wordcount.WordCount', rpc_method_handlers)
+            'mapper.Mapper', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
 
  # This class is part of an EXPERIMENTAL API.
-class WordCount(object):
+class Mapper(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
@@ -75,9 +75,9 @@ class WordCount(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_stream(request, target, '/wordcount.WordCount/Map',
-            word__count__pb2.MapRequest.SerializeToString,
-            word__count__pb2.MapResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/mapper.Mapper/Map',
+            mapper__pb2.MapRequest.SerializeToString,
+            mapper__pb2.MapResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -92,8 +92,8 @@ class WordCount(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/wordcount.WordCount/Reduce',
-            word__count__pb2.ReduceRequest.SerializeToString,
-            word__count__pb2.ReduceResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/mapper.Mapper/Reduce',
+            mapper__pb2.ReduceRequest.SerializeToString,
+            mapper__pb2.ReduceResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

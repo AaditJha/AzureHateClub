@@ -1,8 +1,8 @@
 import random
 N = 100
-with open("small_data.txt", 'w') as f:
+with open("/Users/pr0hum/Documents/JalebiBoi/AzureHateClub/MapReduce/Data/Input/small_data.txt", 'w') as f:
     for _ in range(N):
-        for __ in range(10):
-            f.write(f"{(random.random() - 0.5) * N} ")
+        f.write(f"{(random.randint(-5, 5))}, ")
+        f.write(f"{(random.randint(-5, 5))}")
         f.write("\n")
         

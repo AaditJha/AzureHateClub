@@ -1,16 +1,17 @@
+// python -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. mapper.proto  
 syntax = "proto3";
 
-package master;
+package mapper;
 
-service Master {
+service Mapper {
     rpc Map(MapRequest) returns (MapResponse);
     rpc Reduce(ReduceRequest) returns (ReduceResponse);
 }
 
-// sends centroids and the shard(repeated point icx)
+// sends centroids and the shard(repeated point idx).
 message MapRequest {
     repeated Point centroids = 1;
-    repeated int32 points_ids = 2;
+    repeated int32 point_ids = 2;
 }
 
 // returns the closest centroid ID for the point. 
