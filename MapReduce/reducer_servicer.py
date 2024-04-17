@@ -3,8 +3,12 @@ import reducer_pb2, reducer_pb2_grpc, mapper_pb2_grpc, mapper_pb2
 from address import MAPPER_IP_PORT
 from common import REDUCER_DIR
 import numpy as np
+import random
 
 class ReducerServicer(reducer_pb2_grpc.ReducerServicer):
+    def __init__(self, failure_prob) -> None:
+        self.failure_prob = failure_prob
+
     def sort_by_key(self, keys, values):
         sorted_pairs = sorted(zip(keys, values), key=lambda pair: pair[0])
         sorted_k, sorted_v = zip(*sorted_pairs)
@@ -29,11 +33,22 @@ class ReducerServicer(reducer_pb2_grpc.ReducerServicer):
                 f.write(f"{centroid_id}, {updated_centroid}\n")
 
     def Reduce(self, request, context):
+        if random.random() < self.failure_prob:
+            context.set_code(grpc.StatusCode.UNAVAILABLE)
+            context.set_details(f'Reducer {request.reducer_id} currently unavailable')
+            return reducer_pb2.ReduceResponse()
+        
         num_mappers = request.num_mappers
         for mapper_id in range(1, num_mappers+1):
             with grpc.insecure_channel(MAPPER_IP_PORT[mapper_id]) as channel:
                 stub = mapper_pb2_grpc.MapperStub(channel)
-                response = stub.GetPairs(mapper_pb2.GetPairsRequest(reducer_id=request.reducer_id))
+                try:
+                    response = stub.GetPairs(mapper_pb2.GetPairsRequest(reducer_id=request.reducer_id))
+                except grpc.RpcError as e:
+                    print('[ERROR]',e.details())
+                    context.set_code(grpc.StatusCode.UNAVAILABLE)
+                    context.set_details(f'Reducer {request.reducer_id} currently unavailable')
+                    return reducer_pb2.ReduceResponse()
         
         centroid_ids, updated_centroids = self.ReduceRoutine(response.keys, [point.dim_val for point in response.values])
 
@@ -44,4 +59,6 @@ class ReducerServicer(reducer_pb2_grpc.ReducerServicer):
             reduce_response.centroid_ids.append(centroid_id)
 
         self.CreateLocalFiles(request.reducer_id,centroid_ids, updated_centroids)        
+    
         return reduce_response
+    

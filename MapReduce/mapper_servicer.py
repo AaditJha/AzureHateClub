@@ -1,13 +1,28 @@
 import grpc
 import mapper_pb2, mapper_pb2_grpc, mapper_pb2
 import utils
+import random
+import os
 from common import NUM_REDUCERS, MAPPER_DIR
 
 class MapperServicer(mapper_pb2_grpc.MapperServicer):
-    def __init__(self, mapper_id:int) -> None:
+    def __init__(self, mapper_id:int, failure_prob:float) -> None:
         self.mapper_id = mapper_id
+        self.failure_prob = failure_prob
+        if os.path.exists(f"{MAPPER_DIR}/M{self.mapper_id}"):
+            partition_files = sorted([f for f in os.listdir(f"{MAPPER_DIR}/M{self.mapper_id}") if f.endswith('.txt')])
+            self.partitions = [[] for _ in range(len(partition_files))]
+            for f in partition_files:
+                partition_id = int(f.split('_')[-1].split('.')[0]) - 1
+                print(partition_id)
+                with open(f"{MAPPER_DIR}/M{self.mapper_id}/{f}", 'r') as f:
+                    lines = f.readlines()
+                    self.partitions[partition_id] = [(int(line.split(',')[0]), list(map(float , line.split(',')[1:-1]))) for line in lines]
 
     def Map(self, request:mapper_pb2.MapRequest, context:str) -> mapper_pb2.MapResponse:
+        if random.random() < self.failure_prob:
+            return mapper_pb2.MapResponse(success=False)
+        
         self.point_ids, self.centroids = utils.read_map_request(map_request=request)
         self.MapRoutine()
         self.Partition(request.num_reducers)
@@ -30,7 +45,10 @@ class MapperServicer(mapper_pb2_grpc.MapperServicer):
         for partition_id, partition in enumerate(self.partitions):
             with open(f"{MAPPER_DIR}/M{self.mapper_id}/partition_{partition_id+1}.txt", 'w') as f:
                 for centroid, point in partition:
-                    f.write(f"{centroid}, {point}\n")
+                    f.write(f"{centroid}, ")
+                    for p in point:
+                        f.write(f"{p}, ")
+                    f.write('\n')
     
 
     def GetPairs(self, request, context):

@@ -9,6 +9,7 @@ from address import MASTER_IP_PORT, MAPPER_IP_PORT, REDUCER_IP_PORT
 import common
 import mapper_pb2, mapper_pb2_grpc
 import reducer_pb2, reducer_pb2_grpc
+import numpy as np
 
 def mapper_call(shard:list[int], centroids:list[list[float]], mapper_id:int) -> None:
 
@@ -17,8 +18,8 @@ def mapper_call(shard:list[int], centroids:list[list[float]], mapper_id:int) -> 
         request = utils.create_map_request(shard=shard, centroids=centroids, num_reducers=args.R)
         response = stub.Map(request)
 
-    if not response:
-        raise Exception(f"Mapper {mapper_id} failed to map.")
+    if not response.success:
+        raise Exception(f"Mapper {mapper_id} currently unavailable")
 
 def spawn_mapper(shard:list[int], centroids:list[list[float]], mapper_id:int) -> None:
     while True:
@@ -27,9 +28,9 @@ def spawn_mapper(shard:list[int], centroids:list[list[float]], mapper_id:int) ->
             print(f"Mapper {mapper_id} successfully mapped.")
             return
         except Exception as e:
-            print(e)
+            print('[ERROR]',e)
             print(f"Mapper {mapper_id} failed.")
-            time.sleep(5)
+            time.sleep(2)
 
 centroid_dict = {}
 
@@ -39,13 +40,13 @@ def spawn_reducer(reducer_id:int) -> None:
             with grpc.insecure_channel(REDUCER_IP_PORT[reducer_id]) as channel:
                 stub = reducer_pb2_grpc.ReducerStub(channel)
                 response = stub.Reduce(reducer_pb2.ReduceRequest(reducer_id=reducer_id,num_mappers=args.M))
-                # print(response)
                 for centroid_id, centroid in zip(response.centroid_ids, response.updated_centroids):
                     centroid_dict[centroid_id] = centroid.dim_val
                 print(f"Reducer {reducer_id} successfully reduced.")
                 return
+            
         except grpc.RpcError as e:
-            print(e.details())
+            print('[ERROR]',e.details())
             print(f"Reducer {reducer_id} failed.")
             time.sleep(5)
 
@@ -82,11 +83,19 @@ def run_master(iter) -> None:
         for thread in reducer_threads:
             thread.join()
         
+        converged = True
         # Update centroids.
         for i in range(args.K):
-            centroids[i] = centroid_dict[i]
+            if np.linalg.norm(np.array(list(centroid_dict[i])) - np.array(centroids[i])) > 1e-6:
+                converged = False
+            centroids[i] = list(centroid_dict[i])
         
         centroid_dict = {}
+        if converged:
+            print('Converged.')
+            break
+
+        print('-'*50)
     
     with open("Data/centroids.txt", 'w') as f:
         for centroid in centroids:
