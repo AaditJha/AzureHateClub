@@ -16,7 +16,7 @@ class ReducerStub(object):
         """
         self.Reduce = channel.unary_unary(
                 '/reducer.Reducer/Reduce',
-                request_serializer=reducer__pb2.ReduceRequst.SerializeToString,
+                request_serializer=reducer__pb2.ReduceRequest.SerializeToString,
                 response_deserializer=reducer__pb2.ReduceResponse.FromString,
                 )
 
@@ -35,7 +35,7 @@ def add_ReducerServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'Reduce': grpc.unary_unary_rpc_method_handler(
                     servicer.Reduce,
-                    request_deserializer=reducer__pb2.ReduceRequst.FromString,
+                    request_deserializer=reducer__pb2.ReduceRequest.FromString,
                     response_serializer=reducer__pb2.ReduceResponse.SerializeToString,
             ),
     }
@@ -60,7 +60,7 @@ class Reducer(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/reducer.Reducer/Reduce',
-            reducer__pb2.ReduceRequst.SerializeToString,
+            reducer__pb2.ReduceRequest.SerializeToString,
             reducer__pb2.ReduceResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

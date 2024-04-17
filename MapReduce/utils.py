@@ -57,18 +57,6 @@ def read_map_request(map_request: mapper_pb2.MapRequest) -> tuple[list[int], lis
         shard.append(point_id)
     return shard, centroids
 
-def create_map_response(partitions: list[list[tuple[int, list[float]]]]) -> mapper_pb2.MapResponse:
-    map_response = mapper_pb2.MapResponse()
-
-    for partition in partitions:
-        for centroid_id, point_values in partition:
-            key_value = map_response.pairs.add()
-            key_value.closest_centroid = centroid_id
-            point = key_value.point
-            point.dim_val.extend(point_values)
-            
-    return map_response
-
 def read_map_response(map_response: mapper_pb2.MapResponse) -> list[tuple[int, list[float]]]:
     partition = []
 

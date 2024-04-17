@@ -19,10 +19,10 @@ class MapperStub(object):
                 request_serializer=mapper__pb2.MapRequest.SerializeToString,
                 response_deserializer=mapper__pb2.MapResponse.FromString,
                 )
-        self.Reduce = channel.unary_unary(
-                '/mapper.Mapper/Reduce',
-                request_serializer=mapper__pb2.ReduceRequest.SerializeToString,
-                response_deserializer=mapper__pb2.ReduceResponse.FromString,
+        self.GetPairs = channel.unary_unary(
+                '/mapper.Mapper/GetPairs',
+                request_serializer=mapper__pb2.GetPairsRequest.SerializeToString,
+                response_deserializer=mapper__pb2.GetPairsResponse.FromString,
                 )
 
 
@@ -35,7 +35,7 @@ class MapperServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def Reduce(self, request, context):
+    def GetPairs(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -49,10 +49,10 @@ def add_MapperServicer_to_server(servicer, server):
                     request_deserializer=mapper__pb2.MapRequest.FromString,
                     response_serializer=mapper__pb2.MapResponse.SerializeToString,
             ),
-            'Reduce': grpc.unary_unary_rpc_method_handler(
-                    servicer.Reduce,
-                    request_deserializer=mapper__pb2.ReduceRequest.FromString,
-                    response_serializer=mapper__pb2.ReduceResponse.SerializeToString,
+            'GetPairs': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetPairs,
+                    request_deserializer=mapper__pb2.GetPairsRequest.FromString,
+                    response_serializer=mapper__pb2.GetPairsResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -82,7 +82,7 @@ class Mapper(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def Reduce(request,
+    def GetPairs(request,
             target,
             options=(),
             channel_credentials=None,
@@ -92,8 +92,8 @@ class Mapper(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/mapper.Mapper/Reduce',
-            mapper__pb2.ReduceRequest.SerializeToString,
-            mapper__pb2.ReduceResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/mapper.Mapper/GetPairs',
+            mapper__pb2.GetPairsRequest.SerializeToString,
+            mapper__pb2.GetPairsResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

@@ -1,4 +1,5 @@
 #! /bin/bash
 
 rm -rd Data/Mappers/M*
-rm -rd Data/Reducers/R*
+rm -rf Data/R*.txt
+rm -rf Data/centroids.txt

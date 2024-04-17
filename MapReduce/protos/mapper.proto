@@ -5,7 +5,7 @@ package mapper;
 
 service Mapper {
     rpc Map(MapRequest) returns (MapResponse);
-    rpc Reduce(ReduceRequest) returns (ReduceResponse);
+    rpc GetPairs(GetPairsRequest) returns (GetPairsResponse);
 }
 
 // sends centroids and the shard(repeated point idx).
@@ -17,16 +17,16 @@ message MapRequest {
 
 // returns the closest centroid ID for the point. 
 message MapResponse {
-    repeated KeyValue pairs = 1;
+    bool success = 1;
 }
 
-message ReduceRequest {
-    int32 original_centroid_id = 1;
+message GetPairsRequest {
+    int32 reducer_id = 1;
 }
 
-message ReduceResponse {
-    int32 original_centroid_id = 1;
-    repeated float updated_centroid = 2;
+message GetPairsResponse {
+    repeated int32 keys = 1;
+    repeated Point values = 2;
 }
 
 message KeyValue {

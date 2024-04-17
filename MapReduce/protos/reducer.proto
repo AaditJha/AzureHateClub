@@ -4,18 +4,17 @@ syntax = "proto3";
 package reducer;
 
 service Reducer {
-    rpc Reduce(ReduceRequst) returns (ReduceResponse);
+    rpc Reduce(ReduceRequest) returns (ReduceResponse);
 }
 
-// Request for points with centroid ID.
-message ReduceRequst {
-    int32 centroid_id = 1;
+message ReduceRequest {
+    int32 reducer_id = 1;
+    int32 num_mappers = 2;
 }
 
-// returns the all points the Mapper has for that key.
 message ReduceResponse {
-    int32 centroid_id = 1;
-    repeated Point points = 2;
+    repeated int32 centroid_ids = 1;
+    repeated Point updated_centroids = 2;
 }
 
 message Point {

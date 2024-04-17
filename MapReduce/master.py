@@ -17,34 +17,82 @@ def mapper_call(shard:list[int], centroids:list[list[float]], mapper_id:int) -> 
         request = utils.create_map_request(shard=shard, centroids=centroids, num_reducers=args.R)
         response = stub.Map(request)
 
+    if not response:
+        raise Exception(f"Mapper {mapper_id} failed to map.")
+
 def spawn_mapper(shard:list[int], centroids:list[list[float]], mapper_id:int) -> None:
     while True:
         try:
             mapper_call(shard, centroids, mapper_id)
             print(f"Mapper {mapper_id} successfully mapped.")
             return
-        except grpc.RpcError as e:
-            print(e.details())
+        except Exception as e:
+            print(e)
             print(f"Mapper {mapper_id} failed.")
             time.sleep(5)
 
+centroid_dict = {}
 
-def run_master() -> None:
+def spawn_reducer(reducer_id:int) -> None:
+    while True:
+        try:
+            with grpc.insecure_channel(REDUCER_IP_PORT[reducer_id]) as channel:
+                stub = reducer_pb2_grpc.ReducerStub(channel)
+                response = stub.Reduce(reducer_pb2.ReduceRequest(reducer_id=reducer_id,num_mappers=args.M))
+                # print(response)
+                for centroid_id, centroid in zip(response.centroid_ids, response.updated_centroids):
+                    centroid_dict[centroid_id] = centroid.dim_val
+                print(f"Reducer {reducer_id} successfully reduced.")
+                return
+        except grpc.RpcError as e:
+            print(e.details())
+            print(f"Reducer {reducer_id} failed.")
+            time.sleep(5)
+
+
+def run_master(iter) -> None:
     shards, dim = utils.create_shards(args.M) #shards[i] has the points for ith mapper.
     centroids = utils.gen_centroids(dim=dim, n_centroids=args.K) #inital centroids.
-    
-    # Spawn mappers and make an RPC call to them.
-    # Data to provide them is the shard and the centroids.
-    mapper_threads = []
-    for i in range(args.M):
-        thread = threading.Thread(target=spawn_mapper, args=(shards[i], centroids, i+1))
-        mapper_threads.append(thread)
 
-    for thread in mapper_threads:
-        thread.start()
+    for i in range(iter):
+        global centroid_dict
+        print('Running iteration:', i+1)
+        # Spawn mappers and make an RPC call to them.
+        # Data to provide them is the shard and the centroids.
+        mapper_threads = []
+        for i in range(args.M):
+            thread = threading.Thread(target=spawn_mapper, args=(shards[i], centroids, i+1))
+            mapper_threads.append(thread)
+
+        for thread in mapper_threads:
+            thread.start()
+        
+        for thread in mapper_threads:
+            thread.join()
+        
+        # Spawn reducers and make an RPC call to them.
+        reducer_threads = []
+        for i in range(args.R):
+            thread = threading.Thread(target=spawn_reducer, args=(i+1,))
+            reducer_threads.append(thread)
+        
+        for thread in reducer_threads:
+            thread.start()
+        
+        for thread in reducer_threads:
+            thread.join()
+        
+        # Update centroids.
+        for i in range(args.K):
+            centroids[i] = centroid_dict[i]
+        
+        centroid_dict = {}
     
-    for thread in mapper_threads:
-        thread.join()
+    with open("Data/centroids.txt", 'w') as f:
+        for centroid in centroids:
+            for dim in centroid[:-1]:
+                f.write(f"{dim}, ")
+            f.write(f"{centroid[-1]}\n")
 
 
 if __name__ == '__main__':
@@ -59,10 +107,6 @@ if __name__ == '__main__':
     for i in range(args.M):
         if not os.path.exists(f"Data/Mappers/M{i + 1}"):
             os.makedirs(f"Data/Mappers/M{i + 1}")
-    for i in range(args.R):
-        if not os.path.exists(f"Data/Reducers/R{i + 1}"):
-            os.makedirs(f"Data/Reducers/R{i + 1}")
 
-
-    run_master()
+    run_master(args.max_iter)
 
