@@ -35,6 +35,8 @@ def spawn_mapper(shard:list[int], centroids:list[list[float]], mapper_id:int) ->
             mapper_id = (mapper_id % args.M) + 1
             if mapper_id != starting_mapper:
                 write_mode = 'a'
+            else:
+                write_mode = 'w'
             time.sleep(2)
 
 centroid_dict = {}
@@ -58,6 +60,8 @@ def spawn_reducer(reducer_id:int) -> None:
             reducer_id = (reducer_id % args.R) + 1
             if reducer_id != starting_reducer:
                 write_mode = 'a'
+            else:
+                write_mode = 'w'
             time.sleep(2)
 
 

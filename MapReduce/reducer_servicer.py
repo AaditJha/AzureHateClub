@@ -50,7 +50,8 @@ class ReducerServicer(reducer_pb2_grpc.ReducerServicer):
                 try:
                     response = stub.GetPairs(mapper_pb2.GetPairsRequest(reducer_id=request.reducer_id))
                 except grpc.RpcError as e:
-                    print('[ERROR]',e.details())
+                    print(e)
+                    # print('[ERROR]',e.details())
                     continue
         
         centroid_ids, updated_centroids = self.ReduceRoutine(response.keys, [point.dim_val for point in response.values])
