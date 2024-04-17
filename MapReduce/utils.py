@@ -5,8 +5,12 @@ import mapper_pb2, mapper_pb2_grpc
 from common import DATA_DIR
 
 
-def gen_centroids(dim:int, n_centroids:int) -> list[list[float]]:
-    return [[(random.random() - 0.5) * 10 for _ in range(dim)] for __ in range(n_centroids)]
+def gen_centroids(dim:int, n_centroids:int, n_points:int) -> list[list[float]]:
+    choices = np.random.choice(n_points, n_centroids, replace=False)
+    centroids = []
+    for idx in choices:
+        centroids.append(get_point_from_id(idx))
+    return centroids
 
 def euclidean_dist(point:list[float], centroid:list[float]) -> float:
     return ((np.array(point) -  np.array(centroid)) ** 2).sum() ** 0.5
@@ -34,7 +38,7 @@ def create_shards(n_mappers:int) -> tuple[list[list[int]],int]:
     return shards, len(get_point_from_id(idx=0))
 
 def get_point_from_id(idx:int) -> list[float]:
-    return [float(element.strip()) for element in linecache.getline(filename=DATA_DIR, lineno=idx+1).split(', ')]
+    return [float(element.strip()) for element in linecache.getline(filename=DATA_DIR, lineno=idx+1).split(',')]
 
 def create_map_request(shard: list[int], centroids: list[list[float]], num_reducers: int) -> mapper_pb2.MapRequest:
     map_request = mapper_pb2.MapRequest()

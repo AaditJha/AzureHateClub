@@ -1,4 +1,4 @@
-DATA_DIR = 'Data/Input/small_data.txt'
+DATA_DIR = 'Data/Input/points.txt'
 MAPPER_DIR = 'Data/Mappers'
 REDUCER_DIR = 'Data/Reducers'
 NUM_CENTROIDS = 3

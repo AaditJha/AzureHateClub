@@ -15,6 +15,10 @@ class ReducerServicer(reducer_pb2_grpc.ReducerServicer):
         return list(sorted_k), list(sorted_v)
 
     def ReduceRoutine(self, centroid_ids, points):
+        # print(centroid_ids, points)
+        if len(centroid_ids) == 0:
+            return [], []
+
         sorted_centroid_ids, sorted_points = self.sort_by_key(centroid_ids, points)
         updated_centroid_ids, first_occ = np.unique(sorted_centroid_ids, return_index=True)
         updated_centroids = []

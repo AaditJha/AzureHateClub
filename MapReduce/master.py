@@ -46,6 +46,7 @@ def spawn_reducer(reducer_id:int) -> None:
                 return
             
         except grpc.RpcError as e:
+            print("IAFDHUIFHADUI")
             print('[ERROR]',e.details())
             print(f"Reducer {reducer_id} failed.")
             time.sleep(5)
@@ -53,7 +54,7 @@ def spawn_reducer(reducer_id:int) -> None:
 
 def run_master(iter) -> None:
     shards, dim = utils.create_shards(args.M) #shards[i] has the points for ith mapper.
-    centroids = utils.gen_centroids(dim=dim, n_centroids=args.K) #inital centroids.
+    centroids = utils.gen_centroids(dim=dim, n_centroids=args.K, n_points=sum([len(_) for _ in shards])) #inital centroids.
 
     for i in range(iter):
         global centroid_dict

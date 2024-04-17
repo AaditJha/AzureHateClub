@@ -10,11 +10,11 @@ class MapperServicer(mapper_pb2_grpc.MapperServicer):
         self.mapper_id = mapper_id
         self.failure_prob = failure_prob
         if os.path.exists(f"{MAPPER_DIR}/M{self.mapper_id}"):
+            print('Reading from local files')
             partition_files = sorted([f for f in os.listdir(f"{MAPPER_DIR}/M{self.mapper_id}") if f.endswith('.txt')])
-            self.partitions = [[] for _ in range(len(partition_files))]
+            self.partitions = {k : [] for k in range(len(partition_files))}
             for f in partition_files:
-                partition_id = int(f.split('_')[-1].split('.')[0]) - 1
-                print(partition_id)
+                partition_id = int(f.split('_')[-1].split('.')[0])
                 with open(f"{MAPPER_DIR}/M{self.mapper_id}/{f}", 'r') as f:
                     lines = f.readlines()
                     self.partitions[partition_id] = [(int(line.split(',')[0]), list(map(float , line.split(',')[1:-1]))) for line in lines]
@@ -35,14 +35,14 @@ class MapperServicer(mapper_pb2_grpc.MapperServicer):
     
     # creates a list of tuple[int, list[float]]
     def Partition(self,num_reducers) -> None:
-        self.partitions = [[] for _ in range(num_reducers)]
+        self.partitions = {k:[] for k in range(num_reducers)}
         for i in range(len(self.closest_centroid)):
             reducer_id = self.closest_centroid[i] % num_reducers
             self.partitions[reducer_id].append((self.closest_centroid[i], self.points[i]))
 
 
     def CreateLocalFiles(self) -> None:
-        for partition_id, partition in enumerate(self.partitions):
+        for partition_id, partition in self.partitions.items():
             with open(f"{MAPPER_DIR}/M{self.mapper_id}/partition_{partition_id+1}.txt", 'w') as f:
                 for centroid, point in partition:
                     f.write(f"{centroid}, ")
@@ -53,6 +53,8 @@ class MapperServicer(mapper_pb2_grpc.MapperServicer):
 
     def GetPairs(self, request, context):
         reducer_id = request.reducer_id - 1
+        if len(self.partitions[reducer_id]) == 0:
+            return mapper_pb2.GetPairsResponse(keys=[], values=[])
         keys, values = list(zip(*self.partitions[reducer_id]))
         points = [mapper_pb2.Point(dim_val=list(v)) for v in values]
         return mapper_pb2.GetPairsResponse(keys=list(keys), values=points)
