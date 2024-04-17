@@ -10,6 +10,7 @@ service Reducer {
 message ReduceRequest {
     int32 reducer_id = 1;
     int32 num_mappers = 2;
+    string write_mode = 3;
 }
 
 message ReduceResponse {

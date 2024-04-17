@@ -14,7 +14,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rreducer.proto\x12\x07reducer\"8\n\rReduceRequest\x12\x12\n\nreducer_id\x18\x01 \x01(\x05\x12\x13\n\x0bnum_mappers\x18\x02 \x01(\x05\"Q\n\x0eReduceResponse\x12\x14\n\x0c\x63\x65ntroid_ids\x18\x01 \x03(\x05\x12)\n\x11updated_centroids\x18\x02 \x03(\x0b\x32\x0e.reducer.Point\"\x18\n\x05Point\x12\x0f\n\x07\x64im_val\x18\x01 \x03(\x02\x32\x44\n\x07Reducer\x12\x39\n\x06Reduce\x12\x16.reducer.ReduceRequest\x1a\x17.reducer.ReduceResponseb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rreducer.proto\x12\x07reducer\"L\n\rReduceRequest\x12\x12\n\nreducer_id\x18\x01 \x01(\x05\x12\x13\n\x0bnum_mappers\x18\x02 \x01(\x05\x12\x12\n\nwrite_mode\x18\x03 \x01(\t\"Q\n\x0eReduceResponse\x12\x14\n\x0c\x63\x65ntroid_ids\x18\x01 \x03(\x05\x12)\n\x11updated_centroids\x18\x02 \x03(\x0b\x32\x0e.reducer.Point\"\x18\n\x05Point\x12\x0f\n\x07\x64im_val\x18\x01 \x03(\x02\x32\x44\n\x07Reducer\x12\x39\n\x06Reduce\x12\x16.reducer.ReduceRequest\x1a\x17.reducer.ReduceResponseb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -22,11 +22,11 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'reducer_pb2', _globals)
 if _descriptor._USE_C_DESCRIPTORS == False:
   DESCRIPTOR._options = None
   _globals['_REDUCEREQUEST']._serialized_start=26
-  _globals['_REDUCEREQUEST']._serialized_end=82
-  _globals['_REDUCERESPONSE']._serialized_start=84
-  _globals['_REDUCERESPONSE']._serialized_end=165
-  _globals['_POINT']._serialized_start=167
-  _globals['_POINT']._serialized_end=191
-  _globals['_REDUCER']._serialized_start=193
-  _globals['_REDUCER']._serialized_end=261
+  _globals['_REDUCEREQUEST']._serialized_end=102
+  _globals['_REDUCERESPONSE']._serialized_start=104
+  _globals['_REDUCERESPONSE']._serialized_end=185
+  _globals['_POINT']._serialized_start=187
+  _globals['_POINT']._serialized_end=211
+  _globals['_REDUCER']._serialized_start=213
+  _globals['_REDUCER']._serialized_end=281
 # @@protoc_insertion_point(module_scope)

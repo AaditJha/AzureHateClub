@@ -6,8 +6,9 @@ import numpy as np
 import random
 
 class ReducerServicer(reducer_pb2_grpc.ReducerServicer):
-    def __init__(self, failure_prob) -> None:
+    def __init__(self, failure_prob, reducer_id) -> None:
         self.failure_prob = failure_prob
+        self.reducer_id = reducer_id
 
     def sort_by_key(self, keys, values):
         sorted_pairs = sorted(zip(keys, values), key=lambda pair: pair[0])
@@ -31,8 +32,8 @@ class ReducerServicer(reducer_pb2_grpc.ReducerServicer):
         
         return list(updated_centroid_ids), updated_centroids
     
-    def CreateLocalFiles(self,reducer_id,centroid_ids, updated_centroids) -> None:
-        with open(f"{REDUCER_DIR}/R{reducer_id}.txt", 'w') as f:
+    def CreateLocalFiles(self, centroid_ids, updated_centroids, write_mode) -> None:
+        with open(f"{REDUCER_DIR}/R{self.reducer_id}.txt", write_mode) as f:
             for centroid_id, updated_centroid in zip(centroid_ids, updated_centroids):
                 f.write(f"{centroid_id}, {updated_centroid}\n")
 
@@ -50,9 +51,7 @@ class ReducerServicer(reducer_pb2_grpc.ReducerServicer):
                     response = stub.GetPairs(mapper_pb2.GetPairsRequest(reducer_id=request.reducer_id))
                 except grpc.RpcError as e:
                     print('[ERROR]',e.details())
-                    context.set_code(grpc.StatusCode.UNAVAILABLE)
-                    context.set_details(f'Reducer {request.reducer_id} currently unavailable')
-                    return reducer_pb2.ReduceResponse()
+                    continue
         
         centroid_ids, updated_centroids = self.ReduceRoutine(response.keys, [point.dim_val for point in response.values])
 
@@ -62,7 +61,7 @@ class ReducerServicer(reducer_pb2_grpc.ReducerServicer):
             centroid_point.dim_val.extend(centroid)
             reduce_response.centroid_ids.append(centroid_id)
 
-        self.CreateLocalFiles(request.reducer_id,centroid_ids, updated_centroids)        
+        self.CreateLocalFiles(centroid_ids, updated_centroids, request.write_mode)        
     
         return reduce_response
     

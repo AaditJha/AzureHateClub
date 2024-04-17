@@ -11,45 +11,54 @@ import mapper_pb2, mapper_pb2_grpc
 import reducer_pb2, reducer_pb2_grpc
 import numpy as np
 
-def mapper_call(shard:list[int], centroids:list[list[float]], mapper_id:int) -> None:
+def mapper_call(shard:list[int], centroids:list[list[float]], mapper_id:int, write_mode: str) -> None:
 
     with grpc.insecure_channel(MAPPER_IP_PORT[mapper_id]) as channel:
         stub = mapper_pb2_grpc.MapperStub(channel)
-        request = utils.create_map_request(shard=shard, centroids=centroids, num_reducers=args.R)
+        request = utils.create_map_request(shard=shard, centroids=centroids, num_reducers=args.R, write_mode=write_mode)
         response = stub.Map(request)
 
     if not response.success:
         raise Exception(f"Mapper {mapper_id} currently unavailable")
 
 def spawn_mapper(shard:list[int], centroids:list[list[float]], mapper_id:int) -> None:
+    write_mode = 'w'
+    starting_mapper = mapper_id
     while True:
         try:
-            mapper_call(shard, centroids, mapper_id)
+            mapper_call(shard, centroids, mapper_id, write_mode = write_mode)
             print(f"Mapper {mapper_id} successfully mapped.")
             return
         except Exception as e:
             print('[ERROR]',e)
             print(f"Mapper {mapper_id} failed.")
+            mapper_id = (mapper_id % args.M) + 1
+            if mapper_id != starting_mapper:
+                write_mode = 'a'
             time.sleep(2)
 
 centroid_dict = {}
 
 def spawn_reducer(reducer_id:int) -> None:
+    write_mode = 'w'
+    starting_reducer = reducer_id
     while True:
         try:
             with grpc.insecure_channel(REDUCER_IP_PORT[reducer_id]) as channel:
                 stub = reducer_pb2_grpc.ReducerStub(channel)
-                response = stub.Reduce(reducer_pb2.ReduceRequest(reducer_id=reducer_id,num_mappers=args.M))
+                response = stub.Reduce(reducer_pb2.ReduceRequest(reducer_id=starting_reducer,num_mappers=args.M,write_mode=write_mode))
                 for centroid_id, centroid in zip(response.centroid_ids, response.updated_centroids):
                     centroid_dict[centroid_id] = centroid.dim_val
                 print(f"Reducer {reducer_id} successfully reduced.")
                 return
             
         except grpc.RpcError as e:
-            print("IAFDHUIFHADUI")
             print('[ERROR]',e.details())
             print(f"Reducer {reducer_id} failed.")
-            time.sleep(5)
+            reducer_id = (reducer_id % args.R) + 1
+            if reducer_id != starting_reducer:
+                write_mode = 'a'
+            time.sleep(2)
 
 
 def run_master(iter) -> None:

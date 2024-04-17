@@ -14,7 +14,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0cmapper.proto\x12\x06mapper\"W\n\nMapRequest\x12 \n\tcentroids\x18\x01 \x03(\x0b\x32\r.mapper.Point\x12\x11\n\tpoint_ids\x18\x02 \x03(\x05\x12\x14\n\x0cnum_reducers\x18\x03 \x01(\x05\"\x1e\n\x0bMapResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\"%\n\x0fGetPairsRequest\x12\x12\n\nreducer_id\x18\x01 \x01(\x05\"?\n\x10GetPairsResponse\x12\x0c\n\x04keys\x18\x01 \x03(\x05\x12\x1d\n\x06values\x18\x02 \x03(\x0b\x32\r.mapper.Point\"B\n\x08KeyValue\x12\x18\n\x10\x63losest_centroid\x18\x01 \x01(\x05\x12\x1c\n\x05point\x18\x02 \x01(\x0b\x32\r.mapper.Point\"\x18\n\x05Point\x12\x0f\n\x07\x64im_val\x18\x01 \x03(\x02\x32w\n\x06Mapper\x12.\n\x03Map\x12\x12.mapper.MapRequest\x1a\x13.mapper.MapResponse\x12=\n\x08GetPairs\x12\x17.mapper.GetPairsRequest\x1a\x18.mapper.GetPairsResponseb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0cmapper.proto\x12\x06mapper\"k\n\nMapRequest\x12 \n\tcentroids\x18\x01 \x03(\x0b\x32\r.mapper.Point\x12\x11\n\tpoint_ids\x18\x02 \x03(\x05\x12\x14\n\x0cnum_reducers\x18\x03 \x01(\x05\x12\x12\n\nwrite_mode\x18\x04 \x01(\t\"\x1e\n\x0bMapResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\"%\n\x0fGetPairsRequest\x12\x12\n\nreducer_id\x18\x01 \x01(\x05\"?\n\x10GetPairsResponse\x12\x0c\n\x04keys\x18\x01 \x03(\x05\x12\x1d\n\x06values\x18\x02 \x03(\x0b\x32\r.mapper.Point\"B\n\x08KeyValue\x12\x18\n\x10\x63losest_centroid\x18\x01 \x01(\x05\x12\x1c\n\x05point\x18\x02 \x01(\x0b\x32\r.mapper.Point\"\x18\n\x05Point\x12\x0f\n\x07\x64im_val\x18\x01 \x03(\x02\x32w\n\x06Mapper\x12.\n\x03Map\x12\x12.mapper.MapRequest\x1a\x13.mapper.MapResponse\x12=\n\x08GetPairs\x12\x17.mapper.GetPairsRequest\x1a\x18.mapper.GetPairsResponseb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -22,17 +22,17 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'mapper_pb2', _globals)
 if _descriptor._USE_C_DESCRIPTORS == False:
   DESCRIPTOR._options = None
   _globals['_MAPREQUEST']._serialized_start=24
-  _globals['_MAPREQUEST']._serialized_end=111
-  _globals['_MAPRESPONSE']._serialized_start=113
-  _globals['_MAPRESPONSE']._serialized_end=143
-  _globals['_GETPAIRSREQUEST']._serialized_start=145
-  _globals['_GETPAIRSREQUEST']._serialized_end=182
-  _globals['_GETPAIRSRESPONSE']._serialized_start=184
-  _globals['_GETPAIRSRESPONSE']._serialized_end=247
-  _globals['_KEYVALUE']._serialized_start=249
-  _globals['_KEYVALUE']._serialized_end=315
-  _globals['_POINT']._serialized_start=317
-  _globals['_POINT']._serialized_end=341
-  _globals['_MAPPER']._serialized_start=343
-  _globals['_MAPPER']._serialized_end=462
+  _globals['_MAPREQUEST']._serialized_end=131
+  _globals['_MAPRESPONSE']._serialized_start=133
+  _globals['_MAPRESPONSE']._serialized_end=163
+  _globals['_GETPAIRSREQUEST']._serialized_start=165
+  _globals['_GETPAIRSREQUEST']._serialized_end=202
+  _globals['_GETPAIRSRESPONSE']._serialized_start=204
+  _globals['_GETPAIRSRESPONSE']._serialized_end=267
+  _globals['_KEYVALUE']._serialized_start=269
+  _globals['_KEYVALUE']._serialized_end=335
+  _globals['_POINT']._serialized_start=337
+  _globals['_POINT']._serialized_end=361
+  _globals['_MAPPER']._serialized_start=363
+  _globals['_MAPPER']._serialized_end=482
 # @@protoc_insertion_point(module_scope)

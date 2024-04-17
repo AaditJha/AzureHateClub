@@ -26,7 +26,7 @@ class MapperServicer(mapper_pb2_grpc.MapperServicer):
         self.point_ids, self.centroids = utils.read_map_request(map_request=request)
         self.MapRoutine()
         self.Partition(request.num_reducers)
-        self.CreateLocalFiles()
+        self.CreateLocalFiles(request.write_mode)
         return mapper_pb2.MapResponse(success=True)
 
     def MapRoutine(self) -> None:
@@ -41,9 +41,9 @@ class MapperServicer(mapper_pb2_grpc.MapperServicer):
             self.partitions[reducer_id].append((self.closest_centroid[i], self.points[i]))
 
 
-    def CreateLocalFiles(self) -> None:
+    def CreateLocalFiles(self, write_mode) -> None:
         for partition_id, partition in self.partitions.items():
-            with open(f"{MAPPER_DIR}/M{self.mapper_id}/partition_{partition_id+1}.txt", 'w') as f:
+            with open(f"{MAPPER_DIR}/M{self.mapper_id}/partition_{partition_id+1}.txt", write_mode) as f:
                 for centroid, point in partition:
                     f.write(f"{centroid}, ")
                     for p in point:

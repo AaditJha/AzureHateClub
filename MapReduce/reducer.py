@@ -10,7 +10,7 @@ class Reducer:
     def __init__(self, reducer_id, failure_prob) -> None:
         self.ip_port = REDUCER_IP_PORT[reducer_id]
         self.server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
-        reducer_pb2_grpc.add_ReducerServicer_to_server(ReducerServicer(failure_prob), self.server)
+        reducer_pb2_grpc.add_ReducerServicer_to_server(ReducerServicer(failure_prob, reducer_id), self.server)
         self.server.add_insecure_port(self.ip_port)
         print(f"Starting Reducer with IP/PORT {self.ip_port}")
         self.server.start()  
