@@ -1,3 +1,1 @@
-# RAFT Application
-
-This is a raft application.
+# Map Reduce
